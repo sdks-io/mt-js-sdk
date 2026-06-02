@@ -1,12 +1,12 @@
 # Incoming Payment Detail
 
 ```ts
-const incomingPaymentDetailApi = new IncomingPaymentDetailApi(client);
+const incomingPaymentDetailController = new IncomingPaymentDetailController(client);
 ```
 
 ## Class Name
 
-`IncomingPaymentDetailApi`
+`IncomingPaymentDetailController`
 
 ## Methods
 
@@ -64,7 +64,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await incomingPaymentDetailApi.listIncomingPaymentDetails();
+  const response = await incomingPaymentDetailController.listIncomingPaymentDetails();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -131,7 +131,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await incomingPaymentDetailApi.getIncomingPaymentDetail(id);
+  const response = await incomingPaymentDetailController.getIncomingPaymentDetail(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -200,7 +200,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await incomingPaymentDetailApi.updateIncomingPaymentDetail(id);
+  const response = await incomingPaymentDetailController.updateIncomingPaymentDetail(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -267,7 +267,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await incomingPaymentDetailApi.createAsyncIncomingPaymentDetail();
+  const response = await incomingPaymentDetailController.createAsyncIncomingPaymentDetail();
 
   // Extracting fully parsed response body.
   console.log(response.result);

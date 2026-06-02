@@ -1,12 +1,12 @@
 # Line Item
 
 ```ts
-const lineItemApi = new LineItemApi(client);
+const lineItemController = new LineItemController(client);
 ```
 
 ## Class Name
 
-`LineItemApi`
+`LineItemController`
 
 ## Methods
 
@@ -57,7 +57,7 @@ const itemizableId = 'itemizable_id4';
 const itemizableType = ItemizableType1.ExpectedPayments;
 
 try {
-  const response = await lineItemApi.listLineItems(
+  const response = await lineItemController.listLineItems(
     itemizableId,
     itemizableType
   );
@@ -126,7 +126,7 @@ const itemizableType = ItemizableType1.ExpectedPayments;
 const id = 'id0';
 
 try {
-  const response = await lineItemApi.getLineItem(
+  const response = await lineItemController.getLineItem(
     itemizableId,
     itemizableType,
     id
@@ -204,7 +204,7 @@ const body: LineItemUpdateRequest = {
 };
 
 try {
-  const response = await lineItemApi.updateLineItem(
+  const response = await lineItemController.updateLineItem(
     itemizableId,
     itemizableType,
     id,

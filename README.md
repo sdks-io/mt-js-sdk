@@ -10,25 +10,25 @@ The Modern Treasury REST API. Please see https://docs.moderntreasury.com for mor
 Run the following command from your project directory to install the package from npm:
 
 ```bash
-npm install mt-sdk-apimatic@0.0.2
+npm install mt-sdk-apimatic@0.0.4
 ```
 
-For additional package details, see the [Npm page for the mt-sdk-apimatic@0.0.2 npm](https://www.npmjs.com/package/mt-sdk-apimatic/v/0.0.2).
+For additional package details, see the [Npm page for the mt-sdk-apimatic@0.0.4 npm](https://www.npmjs.com/package/mt-sdk-apimatic/v/0.0.4).
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| environment | [`Environment`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/README.md#environments) | The API environment. <br> **Default: `Environment.Production`** |
+| environment | [`Environment`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/README.md#environments) | The API environment. <br> **Default: `Environment.Production`** |
 | timeout | `number` | Timeout for API calls.<br>*Default*: `30000` |
-| httpClientOptions | [`Partial<HttpClientOptions>`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/http-client-options.md) | Stable configurable http client options. |
+| httpClientOptions | [`Partial<HttpClientOptions>`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/http-client-options.md) | Stable configurable http client options. |
 | unstableHttpClientOptions | `any` | Unstable configurable http client options. |
-| logging | [`PartialLoggingOptions`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/partial-logging-options.md) | Logging Configuration to enable logging |
-| basicAuthCredentials | [`BasicAuthCredentials`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/auth/basic-authentication.md) | The credential object for basicAuth |
+| logging | [`PartialLoggingOptions`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/partial-logging-options.md) | Logging Configuration to enable logging |
+| basicAuthCredentials | [`BasicAuthCredentials`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/auth/basic-authentication.md) | The credential object for basicAuth |
 
 The API client can be initialized as follows:
 
@@ -73,7 +73,7 @@ const fileContent = fs.readFileSync(absolutePath, 'utf-8');
 const client = Client.fromJsonConfig(fileContent);
 ```
 
-See the [Configuration-Based Client Initialization](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/configuration-based-client-initialization.md) section for details.
+See the [Configuration-Based Client Initialization](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/configuration-based-client-initialization.md) section for details.
 
 ### Environment-Based Client Initialization
 
@@ -95,7 +95,7 @@ if (fs.existsSync(absolutePath)) {
 const client = Client.fromEnvironment(process.env);
 ```
 
-See the [Environment-Based Client Initialization](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/environment-based-client-initialization.md) section for details.
+See the [Environment-Based Client Initialization](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/environment-based-client-initialization.md) section for details.
 
 ## Environments
 
@@ -112,66 +112,66 @@ The SDK can be configured to use a different environment for making API calls. A
 
 This API uses the following authentication schemes.
 
-* [`basic_auth (Basic Authentication)`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/auth/basic-authentication.md)
+* [`basic_auth (Basic Authentication)`](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/auth/basic-authentication.md)
 
 ## List of APIs
 
-* [Account Detail](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/account-detail.md)
-* [Balance Report](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/balance-report.md)
-* [Connection](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/connection.md)
-* [Counterparty](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/counterparty.md)
-* [Document](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/document.md)
-* [Event](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/event.md)
-* [Expected Payment](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/expected-payment.md)
-* [External Account](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/external-account.md)
-* [Incoming Payment Detail](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/incoming-payment-detail.md)
-* [Internal Account](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/internal-account.md)
-* [Invoice Line Item](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/invoice-line-item.md)
-* [Invoice](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/invoice.md)
-* [Ledger Account Category](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ledger-account-category.md)
-* [Ledger Account Payout](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ledger-account-payout.md)
-* [Ledger Account Statement](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ledger-account-statement.md)
-* [Ledger Account](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ledger-account.md)
-* [Ledger Entry](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ledger-entry.md)
-* [Ledger Event Handler](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ledger-event-handler.md)
-* [Ledger Transaction](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ledger-transaction.md)
-* [Ledgerable Event](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ledgerable-event.md)
-* [Ledger](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ledger.md)
-* [Line Item](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/line-item.md)
-* [Paper Item](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/paper-item.md)
-* [Payment Order](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/payment-order.md)
-* [Payment Reference](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/payment-reference.md)
-* [Ping](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/ping.md)
-* [Return](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/return.md)
-* [Reversal](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/reversal.md)
-* [Routing Detail](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/routing-detail.md)
-* [Transaction Line Item](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/transaction-line-item.md)
-* [Transaction](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/transaction.md)
-* [Validation](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/validation.md)
-* [Virtual Account](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/virtual-account.md)
-* [Account Collection Flow](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/account-collection-flow.md)
-* [Payment Flow](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/controllers/payment-flow.md)
+* [Account Detail](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/account-detail.md)
+* [Balance Report](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/balance-report.md)
+* [Connection](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/connection.md)
+* [Counterparty](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/counterparty.md)
+* [Document](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/document.md)
+* [Event](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/event.md)
+* [Expected Payment](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/expected-payment.md)
+* [External Account](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/external-account.md)
+* [Incoming Payment Detail](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/incoming-payment-detail.md)
+* [Internal Account](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/internal-account.md)
+* [Invoice Line Item](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/invoice-line-item.md)
+* [Invoice](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/invoice.md)
+* [Ledger Account Category](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ledger-account-category.md)
+* [Ledger Account Payout](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ledger-account-payout.md)
+* [Ledger Account Statement](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ledger-account-statement.md)
+* [Ledger Account](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ledger-account.md)
+* [Ledger Entry](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ledger-entry.md)
+* [Ledger Event Handler](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ledger-event-handler.md)
+* [Ledger Transaction](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ledger-transaction.md)
+* [Ledgerable Event](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ledgerable-event.md)
+* [Ledger](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ledger.md)
+* [Line Item](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/line-item.md)
+* [Paper Item](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/paper-item.md)
+* [Payment Order](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/payment-order.md)
+* [Payment Reference](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/payment-reference.md)
+* [Ping](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/ping.md)
+* [Return](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/return.md)
+* [Reversal](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/reversal.md)
+* [Routing Detail](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/routing-detail.md)
+* [Transaction Line Item](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/transaction-line-item.md)
+* [Transaction](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/transaction.md)
+* [Validation](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/validation.md)
+* [Virtual Account](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/virtual-account.md)
+* [Account Collection Flow](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/account-collection-flow.md)
+* [Payment Flow](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/controllers/payment-flow.md)
 
 ## SDK Infrastructure
 
 ### Configuration
 
-* [HttpClientOptions](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/http-client-options.md)
-* [RetryConfiguration](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/retry-configuration.md)
-* [ProxySettings](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/proxy-settings.md)
-* [Configuration-Based Client Initialization](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/configuration-based-client-initialization.md)
-* [Environment-Based Client Initialization](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/environment-based-client-initialization.md)
-* [PartialLoggingOptions](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/partial-logging-options.md)
-* [PartialRequestLoggingOptions](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/partial-request-logging-options.md)
-* [PartialResponseLoggingOptions](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/partial-response-logging-options.md)
-* [LoggerInterface](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/logger-interface.md)
+* [HttpClientOptions](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/http-client-options.md)
+* [RetryConfiguration](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/retry-configuration.md)
+* [ProxySettings](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/proxy-settings.md)
+* [Configuration-Based Client Initialization](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/configuration-based-client-initialization.md)
+* [Environment-Based Client Initialization](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/environment-based-client-initialization.md)
+* [PartialLoggingOptions](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/partial-logging-options.md)
+* [PartialRequestLoggingOptions](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/partial-request-logging-options.md)
+* [PartialResponseLoggingOptions](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/partial-response-logging-options.md)
+* [LoggerInterface](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/logger-interface.md)
 
 ### HTTP
 
-* [HttpRequest](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/http-request.md)
+* [HttpRequest](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/http-request.md)
 
 ### Utilities
 
-* [ApiResponse](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/api-response.md)
-* [ApiError](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.2/doc/api-error.md)
+* [ApiResponse](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/api-response.md)
+* [ApiError](https://www.github.com/sdks-io/mt-js-sdk/tree/0.0.4/doc/api-error.md)
 

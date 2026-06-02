@@ -1,12 +1,12 @@
 # Expected Payment
 
 ```ts
-const expectedPaymentApi = new ExpectedPaymentApi(client);
+const expectedPaymentController = new ExpectedPaymentController(client);
 ```
 
 ## Class Name
 
-`ExpectedPaymentApi`
+`ExpectedPaymentController`
 
 ## Methods
 
@@ -65,7 +65,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await expectedPaymentApi.listExpectedPayments();
+  const response = await expectedPaymentController.listExpectedPayments();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -142,7 +142,7 @@ const body: ExpectedPaymentCreateRequest = {
 };
 
 try {
-  const response = await expectedPaymentApi.createExpectedPayment(
+  const response = await expectedPaymentController.createExpectedPayment(
     undefined,
     body
   );
@@ -210,7 +210,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await expectedPaymentApi.getExpectedPayment(id);
+  const response = await expectedPaymentController.getExpectedPayment(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -285,7 +285,7 @@ const body: ExpectedPaymentUpdateRequest = {
 };
 
 try {
-  const response = await expectedPaymentApi.updateExpectedPayment(
+  const response = await expectedPaymentController.updateExpectedPayment(
     id,
     body
   );
@@ -344,7 +344,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await expectedPaymentApi.deleteExpectedPayment(id);
+  const response = await expectedPaymentController.deleteExpectedPayment(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

@@ -1,12 +1,12 @@
 # Ledger Event Handler
 
 ```ts
-const ledgerEventHandlerApi = new LedgerEventHandlerApi(client);
+const ledgerEventHandlerController = new LedgerEventHandlerController(client);
 ```
 
 ## Class Name
 
-`LedgerEventHandlerApi`
+`LedgerEventHandlerController`
 
 ## Methods
 
@@ -56,7 +56,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerEventHandlerApi.listLedgerEventHandlers();
+  const response = await ledgerEventHandlerController.listLedgerEventHandlers();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -137,7 +137,7 @@ const body: LedgerEventHandlerCreateRequest = {
 };
 
 try {
-  const response = await ledgerEventHandlerApi.createLedgerEventHandler(
+  const response = await ledgerEventHandlerController.createLedgerEventHandler(
     undefined,
     body
   );
@@ -208,7 +208,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerEventHandlerApi.getLedgerEventHandler(id);
+  const response = await ledgerEventHandlerController.getLedgerEventHandler(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -275,7 +275,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerEventHandlerApi.deleteLedgerEventHandler(id);
+  const response = await ledgerEventHandlerController.deleteLedgerEventHandler(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

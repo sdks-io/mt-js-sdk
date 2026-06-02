@@ -1,12 +1,12 @@
 # Ping
 
 ```ts
-const pingApi = new PingApi(client);
+const pingController = new PingController(client);
 ```
 
 ## Class Name
 
-`PingApi`
+`PingController`
 
 
 # Ping API
@@ -39,7 +39,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await pingApi.pingApi();
+  const response = await pingController.pingApi();
 
   // Extracting fully parsed response body.
   console.log(response.result);

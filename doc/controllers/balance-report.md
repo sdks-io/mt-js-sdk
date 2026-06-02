@@ -1,12 +1,12 @@
 # Balance Report
 
 ```ts
-const balanceReportApi = new BalanceReportApi(client);
+const balanceReportController = new BalanceReportController(client);
 ```
 
 ## Class Name
 
-`BalanceReportApi`
+`BalanceReportController`
 
 ## Methods
 
@@ -56,7 +56,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const internalAccountId = 'internal_account_id4';
 
 try {
-  const response = await balanceReportApi.listBalanceReports(internalAccountId);
+  const response = await balanceReportController.listBalanceReports(internalAccountId);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -127,7 +127,7 @@ const internalAccountId = 'internal_account_id4';
 const id = 'id0';
 
 try {
-  const response = await balanceReportApi.getBalanceReport(
+  const response = await balanceReportController.getBalanceReport(
     internalAccountId,
     id
   );

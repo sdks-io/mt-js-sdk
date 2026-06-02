@@ -1,12 +1,12 @@
 # Document
 
 ```ts
-const documentApi = new DocumentApi(client);
+const documentController = new DocumentController(client);
 ```
 
 ## Class Name
 
-`DocumentApi`
+`DocumentController`
 
 ## Methods
 
@@ -58,7 +58,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await documentApi.listDocuments();
+  const response = await documentController.listDocuments();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -137,7 +137,7 @@ const documentableType = DocumentableType1.PaperItems;
 const file = new FileWrapper(fs.createReadStream('dummy_file'));
 
 try {
-  const response = await documentApi.createDocument(
+  const response = await documentController.createDocument(
     documentableId,
     documentableType,
     file
@@ -219,7 +219,7 @@ const documentableId = 'documentable_id0';
 const documentableType = DocumentableType2.PaperItems;
 
 try {
-  const response = await documentApi.listDocuments1(
+  const response = await documentController.listDocuments1(
     documentableId,
     documentableType
   );
@@ -292,7 +292,7 @@ const documentableType = DocumentableType2.PaperItems;
 const file = new FileWrapper(fs.createReadStream('dummy_file'));
 
 try {
-  const response = await documentApi.createDocument1(
+  const response = await documentController.createDocument1(
     documentableId,
     documentableType,
     file
@@ -372,7 +372,7 @@ const documentableType = DocumentableType2.PaperItems;
 const id = '00001770-0000-0000-0000-000000000000';
 
 try {
-  const response = await documentApi.getDocument(
+  const response = await documentController.getDocument(
     documentableId,
     documentableType,
     id
@@ -443,7 +443,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = '00001770-0000-0000-0000-000000000000';
 
 try {
-  const response = await documentApi.getDocument1(id);
+  const response = await documentController.getDocument1(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -518,7 +518,7 @@ const documentableType = DocumentableType2.PaperItems;
 const id = '00001770-0000-0000-0000-000000000000';
 
 try {
-  const response = await documentApi.downloadDocument(
+  const response = await documentController.downloadDocument(
     documentableId,
     documentableType,
     id
@@ -590,7 +590,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const id = '00001770-0000-0000-0000-000000000000';
 
 try {
-  const response = await documentApi.downloadDocument1(id);
+  const response = await documentController.downloadDocument1(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

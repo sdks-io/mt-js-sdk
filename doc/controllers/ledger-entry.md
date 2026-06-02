@@ -1,12 +1,12 @@
 # Ledger Entry
 
 ```ts
-const ledgerEntryApi = new LedgerEntryApi(client);
+const ledgerEntryController = new LedgerEntryController(client);
 ```
 
 ## Class Name
 
-`LedgerEntryApi`
+`LedgerEntryController`
 
 ## Methods
 
@@ -82,7 +82,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerEntryApi.listLedgerEntries();
+  const response = await ledgerEntryController.listLedgerEntries();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -151,7 +151,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerEntryApi.getLedgerEntry(id);
+  const response = await ledgerEntryController.getLedgerEntry(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

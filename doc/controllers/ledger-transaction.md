@@ -1,12 +1,12 @@
 # Ledger Transaction
 
 ```ts
-const ledgerTransactionApi = new LedgerTransactionApi(client);
+const ledgerTransactionController = new LedgerTransactionController(client);
 ```
 
 ## Class Name
 
-`LedgerTransactionApi`
+`LedgerTransactionController`
 
 ## Methods
 
@@ -63,7 +63,7 @@ const body: LedgerTransactionReversalCreateRequest = {
 };
 
 try {
-  const response = await ledgerTransactionApi.createLedgerTransactionReversal(
+  const response = await ledgerTransactionController.createLedgerTransactionReversal(
     id,
     body
   );
@@ -142,7 +142,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerTransactionApi.listLedgerTransactionVersions();
+  const response = await ledgerTransactionController.listLedgerTransactionVersions();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -241,7 +241,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerTransactionApi.listLedgerTransactions();
+  const response = await ledgerTransactionController.listLedgerTransactions();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -328,7 +328,7 @@ const body: LedgerTransactionCreateRequest = {
 };
 
 try {
-  const response = await ledgerTransactionApi.createLedgerTransaction(
+  const response = await ledgerTransactionController.createLedgerTransaction(
     undefined,
     body
   );
@@ -401,7 +401,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerTransactionApi.getLedgerTransaction(id);
+  const response = await ledgerTransactionController.getLedgerTransaction(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -478,7 +478,7 @@ const body: LedgerTransactionUpdateRequest = {
 };
 
 try {
-  const response = await ledgerTransactionApi.updateLedgerTransaction(
+  const response = await ledgerTransactionController.updateLedgerTransaction(
     id,
     body
   );
@@ -560,7 +560,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerTransactionApi.listLedgerTransactionVersions1(id);
+  const response = await ledgerTransactionController.listLedgerTransactionVersions1(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

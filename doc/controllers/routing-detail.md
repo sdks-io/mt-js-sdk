@@ -1,12 +1,12 @@
 # Routing Detail
 
 ```ts
-const routingDetailApi = new RoutingDetailApi(client);
+const routingDetailController = new RoutingDetailController(client);
 ```
 
 ## Class Name
 
-`RoutingDetailApi`
+`RoutingDetailController`
 
 ## Methods
 
@@ -58,7 +58,7 @@ const accountsType = AccountsType.ExternalAccounts;
 const accountId = 'account_id2';
 
 try {
-  const response = await routingDetailApi.listRoutingDetails(
+  const response = await routingDetailController.listRoutingDetails(
     accountsType,
     accountId
   );
@@ -127,7 +127,7 @@ const accountsType = AccountsType1.ExternalAccounts;
 const accountId = 'account_id2';
 
 try {
-  const response = await routingDetailApi.createRoutingDetail(
+  const response = await routingDetailController.createRoutingDetail(
     accountsType,
     accountId
   );
@@ -206,7 +206,7 @@ const accountId = 'account_id2';
 const id = 'id0';
 
 try {
-  const response = await routingDetailApi.getRoutingDetail(
+  const response = await routingDetailController.getRoutingDetail(
     accountsType,
     accountId,
     id
@@ -285,7 +285,7 @@ const accountId = 'account_id2';
 const id = 'id0';
 
 try {
-  const response = await routingDetailApi.deleteRoutingDetail(
+  const response = await routingDetailController.deleteRoutingDetail(
     accountsType,
     accountId,
     id

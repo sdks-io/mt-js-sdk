@@ -1,12 +1,12 @@
 # Payment Order
 
 ```ts
-const paymentOrderApi = new PaymentOrderApi(client);
+const paymentOrderController = new PaymentOrderController(client);
 ```
 
 ## Class Name
 
-`PaymentOrderApi`
+`PaymentOrderController`
 
 ## Methods
 
@@ -63,7 +63,7 @@ const body: PaymentOrderAsyncCreateRequest = {
 };
 
 try {
-  const response = await paymentOrderApi.createAsyncPaymentOrder(
+  const response = await paymentOrderController.createAsyncPaymentOrder(
     undefined,
     body
   );
@@ -155,7 +155,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await paymentOrderApi.listPaymentOrders();
+  const response = await paymentOrderController.listPaymentOrders();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -336,7 +336,7 @@ const documents: DocumentCreateRequest[] = [
 ];
 
 try {
-  const response = await paymentOrderApi.createPaymentOrder(
+  const response = await paymentOrderController.createPaymentOrder(
     type,
     amount,
     direction,
@@ -443,7 +443,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await paymentOrderApi.getPaymentOrder(id);
+  const response = await paymentOrderController.getPaymentOrder(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -520,7 +520,7 @@ const body: PaymentOrderUpdateRequest = {
 };
 
 try {
-  const response = await paymentOrderApi.updatePaymentOrder(
+  const response = await paymentOrderController.updatePaymentOrder(
     id,
     body
   );

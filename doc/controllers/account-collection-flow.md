@@ -1,12 +1,12 @@
 # Account Collection Flow
 
 ```ts
-const accountCollectionFlowApi = new AccountCollectionFlowApi(client);
+const accountCollectionFlowController = new AccountCollectionFlowController(client);
 ```
 
 ## Class Name
 
-`AccountCollectionFlowApi`
+`AccountCollectionFlowController`
 
 ## Methods
 
@@ -56,7 +56,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await accountCollectionFlowApi.listAccountCollectionFlows();
+  const response = await accountCollectionFlowController.listAccountCollectionFlows();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -112,7 +112,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await accountCollectionFlowApi.createAccountCollectionFlow();
+  const response = await accountCollectionFlowController.createAccountCollectionFlow();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -179,7 +179,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await accountCollectionFlowApi.getAccountCollectionFlow(id);
+  const response = await accountCollectionFlowController.getAccountCollectionFlow(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -243,7 +243,7 @@ const body: AccountCollectionFlowUpdateRequest = {
 };
 
 try {
-  const response = await accountCollectionFlowApi.updateAccountCollectionFlow(
+  const response = await accountCollectionFlowController.updateAccountCollectionFlow(
     id,
     undefined,
     body

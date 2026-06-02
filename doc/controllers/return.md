@@ -1,12 +1,12 @@
 # Return
 
 ```ts
-const returnApi = new ReturnApi(client);
+const returnController = new ReturnController(client);
 ```
 
 ## Class Name
 
-`ReturnApi`
+`ReturnController`
 
 ## Methods
 
@@ -57,7 +57,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await returnApi.listReturns();
+  const response = await returnController.listReturns();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -129,7 +129,7 @@ const body: ReturnCreateRequest = {
 };
 
 try {
-  const response = await returnApi.createReturn(
+  const response = await returnController.createReturn(
     undefined,
     body
   );
@@ -200,7 +200,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await returnApi.getReturn(id);
+  const response = await returnController.getReturn(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

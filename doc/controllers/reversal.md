@@ -1,12 +1,12 @@
 # Reversal
 
 ```ts
-const reversalApi = new ReversalApi(client);
+const reversalController = new ReversalController(client);
 ```
 
 ## Class Name
 
-`ReversalApi`
+`ReversalController`
 
 ## Methods
 
@@ -53,7 +53,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const paymentOrderId = 'payment_order_id6';
 
 try {
-  const response = await reversalApi.listReversals(paymentOrderId);
+  const response = await reversalController.listReversals(paymentOrderId);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -124,7 +124,7 @@ const body: ReversalCreateRequest = {
 };
 
 try {
-  const response = await reversalApi.createReversal(
+  const response = await reversalController.createReversal(
     paymentOrderId,
     undefined,
     body
@@ -200,7 +200,7 @@ const paymentOrderId = '0000176c-0000-0000-0000-000000000000';
 const reversalId = '00000f9e-0000-0000-0000-000000000000';
 
 try {
-  const response = await reversalApi.getReversal(
+  const response = await reversalController.getReversal(
     paymentOrderId,
     reversalId
   );

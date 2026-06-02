@@ -1,12 +1,12 @@
 # Paper Item
 
 ```ts
-const paperItemApi = new PaperItemApi(client);
+const paperItemController = new PaperItemController(client);
 ```
 
 ## Class Name
 
-`PaperItemApi`
+`PaperItemController`
 
 ## Methods
 
@@ -54,7 +54,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await paperItemApi.listPaperItems();
+  const response = await paperItemController.listPaperItems();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -112,7 +112,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await paperItemApi.getPaperItem(id);
+  const response = await paperItemController.getPaperItem(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

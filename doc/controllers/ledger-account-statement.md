@@ -1,12 +1,12 @@
 # Ledger Account Statement
 
 ```ts
-const ledgerAccountStatementApi = new LedgerAccountStatementApi(client);
+const ledgerAccountStatementController = new LedgerAccountStatementController(client);
 ```
 
 ## Class Name
 
-`LedgerAccountStatementApi`
+`LedgerAccountStatementController`
 
 ## Methods
 
@@ -59,7 +59,7 @@ const body: LedgerAccountStatementCreateRequest = {
 };
 
 try {
-  const response = await ledgerAccountStatementApi.createLedgerAccountStatement(
+  const response = await ledgerAccountStatementController.createLedgerAccountStatement(
     undefined,
     body
   );
@@ -130,7 +130,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerAccountStatementApi.getLedgerAccountStatement(id);
+  const response = await ledgerAccountStatementController.getLedgerAccountStatement(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

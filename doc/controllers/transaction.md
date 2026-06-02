@@ -1,12 +1,12 @@
 # Transaction
 
 ```ts
-const transactionApi = new TransactionApi(client);
+const transactionController = new TransactionController(client);
 ```
 
 ## Class Name
 
-`TransactionApi`
+`TransactionController`
 
 ## Methods
 
@@ -73,7 +73,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await transactionApi.listTransactions();
+  const response = await transactionController.listTransactions();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -131,7 +131,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await transactionApi.getTransaction(id);
+  const response = await transactionController.getTransaction(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -200,7 +200,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await transactionApi.updateTransaction(id);
+  const response = await transactionController.updateTransaction(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

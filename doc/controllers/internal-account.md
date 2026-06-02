@@ -1,12 +1,12 @@
 # Internal Account
 
 ```ts
-const internalAccountApi = new InternalAccountApi(client);
+const internalAccountController = new InternalAccountController(client);
 ```
 
 ## Class Name
 
-`InternalAccountApi`
+`InternalAccountController`
 
 ## Methods
 
@@ -58,7 +58,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await internalAccountApi.listInternalAccounts();
+  const response = await internalAccountController.listInternalAccounts();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -126,7 +126,7 @@ const body: InternalAccountCreateRequest = {
 };
 
 try {
-  const response = await internalAccountApi.createInternalAccount(
+  const response = await internalAccountController.createInternalAccount(
     undefined,
     body
   );
@@ -195,7 +195,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await internalAccountApi.getInternalAccount(id);
+  const response = await internalAccountController.getInternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -262,7 +262,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await internalAccountApi.updateInternalAccount(id);
+  const response = await internalAccountController.updateInternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

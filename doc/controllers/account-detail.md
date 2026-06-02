@@ -1,12 +1,12 @@
 # Account Detail
 
 ```ts
-const accountDetailApi = new AccountDetailApi(client);
+const accountDetailController = new AccountDetailController(client);
 ```
 
 ## Class Name
 
-`AccountDetailApi`
+`AccountDetailController`
 
 ## Methods
 
@@ -58,7 +58,7 @@ const accountsType = AccountsType.ExternalAccounts;
 const accountId = 'account_id2';
 
 try {
-  const response = await accountDetailApi.listAccountDetails(
+  const response = await accountDetailController.listAccountDetails(
     accountsType,
     accountId
   );
@@ -127,7 +127,7 @@ const accountsType = AccountsType1.ExternalAccounts;
 const accountId = 'account_id2';
 
 try {
-  const response = await accountDetailApi.createAccountDetail(
+  const response = await accountDetailController.createAccountDetail(
     accountsType,
     accountId
   );
@@ -206,7 +206,7 @@ const accountId = 'account_id2';
 const id = 'id0';
 
 try {
-  const response = await accountDetailApi.getAccountDetail(
+  const response = await accountDetailController.getAccountDetail(
     accountsType,
     accountId,
     id
@@ -285,7 +285,7 @@ const accountId = 'account_id2';
 const id = 'id0';
 
 try {
-  const response = await accountDetailApi.deleteAccountDetail(
+  const response = await accountDetailController.deleteAccountDetail(
     accountsType,
     accountId,
     id

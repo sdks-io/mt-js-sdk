@@ -1,12 +1,12 @@
 # Payment Reference
 
 ```ts
-const paymentReferenceApi = new PaymentReferenceApi(client);
+const paymentReferenceController = new PaymentReferenceController(client);
 ```
 
 ## Class Name
 
-`PaymentReferenceApi`
+`PaymentReferenceController`
 
 ## Methods
 
@@ -52,7 +52,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await paymentReferenceApi.listPaymentReferences();
+  const response = await paymentReferenceController.listPaymentReferences();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -108,7 +108,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await paymentReferenceApi.getPaymentReference(id);
+  const response = await paymentReferenceController.getPaymentReference(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

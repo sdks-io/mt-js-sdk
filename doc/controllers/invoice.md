@@ -1,12 +1,12 @@
 # Invoice
 
 ```ts
-const invoiceApi = new InvoiceApi(client);
+const invoiceController = new InvoiceController(client);
 ```
 
 ## Class Name
 
-`InvoiceApi`
+`InvoiceController`
 
 ## Methods
 
@@ -48,7 +48,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await invoiceApi.listInvoices();
+  const response = await invoiceController.listInvoices();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -104,7 +104,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await invoiceApi.createInvoice();
+  const response = await invoiceController.createInvoice();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -160,7 +160,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await invoiceApi.getInvoice(id);
+  const response = await invoiceController.getInvoice(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -218,7 +218,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await invoiceApi.updateInvoice(id);
+  const response = await invoiceController.updateInvoice(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
