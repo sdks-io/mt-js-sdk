@@ -9,26 +9,24 @@ import {
   dict,
   lazy,
   nullable,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
-import {
-  LedgerableType2Enum,
-  ledgerableType2EnumSchema,
-} from './ledgerableType2Enum.js';
+import { LedgerableType2, ledgerableType2Schema } from './ledgerableType2.js';
 import {
   LedgerEntryCreateRequest,
   ledgerEntryCreateRequestSchema,
 } from './ledgerEntryCreateRequest.js';
-import { Status11Enum, status11EnumSchema } from './status11Enum.js';
+import { Status11, status11Schema } from './status11.js';
 
 export interface LedgerTransactionCreateRequest {
   /** An optional description for internal use. */
   description?: string | null;
   /** To post a ledger transaction at creation, use `posted`. */
-  status?: Status11Enum;
+  status?: Status11;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata?: Record<string, string>;
   /** The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes. */
@@ -40,22 +38,30 @@ export interface LedgerTransactionCreateRequest {
   /** A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger. */
   externalId?: string;
   /** If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal. */
-  ledgerableType?: LedgerableType2Enum;
+  ledgerableType?: LedgerableType2;
   /** If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null. */
   ledgerableId?: string;
+  additionalProperties?: Record<string, unknown>;
 }
 
 export const ledgerTransactionCreateRequestSchema: Schema<LedgerTransactionCreateRequest> = lazy(
   () =>
-    object({
-      description: ['description', optional(nullable(string()))],
-      status: ['status', optional(status11EnumSchema)],
-      metadata: ['metadata', optional(dict(string()))],
-      effectiveAt: ['effective_at', optional(string())],
-      effectiveDate: ['effective_date', optional(string())],
-      ledgerEntries: ['ledger_entries', array(ledgerEntryCreateRequestSchema)],
-      externalId: ['external_id', optional(string())],
-      ledgerableType: ['ledgerable_type', optional(ledgerableType2EnumSchema)],
-      ledgerableId: ['ledgerable_id', optional(string())],
-    })
+    typedExpandoObject(
+      {
+        description: ['description', optional(nullable(string()))],
+        status: ['status', optional(status11Schema)],
+        metadata: ['metadata', optional(dict(string()))],
+        effectiveAt: ['effective_at', optional(string())],
+        effectiveDate: ['effective_date', optional(string())],
+        ledgerEntries: [
+          'ledger_entries',
+          array(ledgerEntryCreateRequestSchema),
+        ],
+        externalId: ['external_id', optional(string())],
+        ledgerableType: ['ledgerable_type', optional(ledgerableType2Schema)],
+        ledgerableId: ['ledgerable_id', optional(string())],
+      },
+      'additionalProperties',
+      optional(unknown())
+    )
 );

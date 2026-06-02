@@ -1,6 +1,8 @@
 
 # Payment Order Create Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `PaymentOrderCreateRequest`
@@ -9,25 +11,25 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | [`Type5Enum`](../../doc/models/type-5-enum.md) | Required | One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `signet`, `provexchange`. |
-| `subtype` | [`SubtypeEnum \| null \| undefined`](../../doc/models/subtype-enum.md) | Optional | An additional layer of classification for the type of payment order you are doing. This field is only used for `ach` payment orders currently. For `ach`  payment orders, the `subtype`  represents the SEC code. We currently support `CCD`, `PPD`, `IAT`, `CTX`, `WEB`, `CIE`, and `TEL`. |
+| `type` | [`Type5`](../../doc/models/type-5.md) | Required | One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `signet`, `provexchange`. |
+| `subtype` | [`Subtype \| null \| undefined`](../../doc/models/subtype.md) | Optional | An additional layer of classification for the type of payment order you are doing. This field is only used for `ach` payment orders currently. For `ach`  payment orders, the `subtype`  represents the SEC code. We currently support `CCD`, `PPD`, `IAT`, `CTX`, `WEB`, `CIE`, and `TEL`. |
 | `amount` | `number` | Required | Value in specified currency's smallest unit. e.g. $10 would be represented as 1000 (cents). For RTP, the maximum amount allowed by the network is $100,000. |
-| `direction` | [`Direction5Enum`](../../doc/models/direction-5-enum.md) | Required | One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`. |
-| `priority` | [`PriorityEnum \| undefined`](../../doc/models/priority-enum.md) | Optional | Either `normal` or `high`. For ACH and EFT payments, `high` represents a same-day ACH or EFT transfer, respectively. For check payments, `high` can mean an overnight check rather than standard mail. |
+| `direction` | [`Direction5`](../../doc/models/direction-5.md) | Required | One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`. |
+| `priority` | [`Priority \| undefined`](../../doc/models/priority.md) | Optional | Either `normal` or `high`. For ACH and EFT payments, `high` represents a same-day ACH or EFT transfer, respectively. For check payments, `high` can mean an overnight check rather than standard mail. |
 | `originatingAccountId` | `string` | Required | The ID of one of your organization's internal accounts. |
 | `receivingAccountId` | `string \| undefined` | Optional | Either `receiving_account` or `receiving_account_id` must be present. When using `receiving_account_id`, you may pass the id of an external account or an internal account. |
 | `accounting` | [`Accounting \| undefined`](../../doc/models/accounting.md) | Optional | - |
 | `accountingCategoryId` | `string \| null \| undefined` | Optional | The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected. |
 | `accountingLedgerClassId` | `string \| null \| undefined` | Optional | The ID of one of your accounting ledger classes. Note that these will only be accessible if your accounting system has been connected. |
-| `currency` | [`CurrencyEnum \| undefined`](../../doc/models/currency-enum.md) | Optional | Three-letter ISO currency code. |
+| `currency` | [`Currency \| undefined`](../../doc/models/currency.md) | Optional | Three-letter ISO currency code. |
 | `effectiveDate` | `string \| undefined` | Optional | Date transactions are to be posted to the participants' account. Defaults to the current business day or the next business day if the current day is a bank holiday or weekend. Format: yyyy-mm-dd. |
 | `description` | `string \| null \| undefined` | Optional | An optional description for internal use. |
 | `statementDescriptor` | `string \| null \| undefined` | Optional | An optional descriptor which will appear in the receiver's statement. For `check` payments this field will be used as the memo line. For `ach` the maximum length is 10 characters. Note that for ACH payments, the name on your bank account will be included automatically by the bank, so you can use the characters for other useful information. For `eft` the maximum length is 15 characters. |
 | `remittanceInformation` | `string \| null \| undefined` | Optional | For `ach`, this field will be passed through on an addenda record. For `wire` payments the field will be passed through as the "Originator to Beneficiary Information", also known as OBI or Fedwire tag 6000. |
 | `purpose` | `string \| null \| undefined` | Optional | For `wire`, this is usually the purpose which is transmitted via the "InstrForDbtrAgt" field in the ISO20022 file. If you are using Currencycloud, this is the `payment.purpose_code` field. For `eft`, this field is the 3 digit CPA Code that will be attached to the payment. |
 | `metadata` | `Record<string, string> \| undefined` | Optional | Additional data represented as key-value pairs. Both the key and value must be strings. |
-| `chargeBearer` | [`ChargeBearerEnum \| null \| undefined`](../../doc/models/charge-bearer-enum.md) | Optional | The party that will pay the fees for the payment order. Only applies to wire payment orders. Can be one of shared, sender, or receiver, which correspond respectively with the SWIFT 71A values `SHA`, `OUR`, `BEN`. |
-| `foreignExchangeIndicator` | [`ForeignExchangeIndicatorEnum \| null \| undefined`](../../doc/models/foreign-exchange-indicator-enum.md) | Optional | Indicates the type of FX transfer to initiate, can be either `variable_to_fixed`, `fixed_to_variable`, or `null` if the payment order currency matches the originating account currency. |
+| `chargeBearer` | [`ChargeBearer \| null \| undefined`](../../doc/models/charge-bearer.md) | Optional | The party that will pay the fees for the payment order. Only applies to wire payment orders. Can be one of shared, sender, or receiver, which correspond respectively with the SWIFT 71A values `SHA`, `OUR`, `BEN`. |
+| `foreignExchangeIndicator` | [`ForeignExchangeIndicator \| null \| undefined`](../../doc/models/foreign-exchange-indicator.md) | Optional | Indicates the type of FX transfer to initiate, can be either `variable_to_fixed`, `fixed_to_variable`, or `null` if the payment order currency matches the originating account currency. |
 | `foreignExchangeContract` | `string \| null \| undefined` | Optional | If present, indicates a specific foreign exchange contract number that has been generated by your financial institution. |
 | `nsfProtected` | `boolean \| undefined` | Optional | A boolean to determine if NSF Protection is enabled for this payment order. Note that this setting must also be turned on in your organization settings page. |
 | `originatingPartyName` | `string \| null \| undefined` | Optional | If present, this will replace your default company name on receiver's bank statement. This field can only be used for ACH payments currently. For ACH, only the first 16 characters of this string will be used. Any additional characters will be truncated. |
@@ -37,12 +39,13 @@
 | `ultimateReceivingPartyIdentifier` | `string \| null \| undefined` | Optional | Identifier of the ultimate funds recipient. |
 | `sendRemittanceAdvice` | `boolean \| null \| undefined` | Optional | Send an email to the counterparty when the payment order is sent to the bank. If `null`, `send_remittance_advice` on the Counterparty is used. |
 | `expiresAt` | `string \| null \| undefined` | Optional | RFP payments require an expires_at. This value must be past the effective_date. |
-| `fallbackType` | [`FallbackTypeEnum \| undefined`](../../doc/models/fallback-type-enum.md) | Optional | A payment type to fallback to if the original type is not valid for the receiving account. Currently, this only supports falling back from RTP to ACH (type=rtp and fallback_type=ach) |
+| `fallbackType` | [`FallbackType \| undefined`](../../doc/models/fallback-type.md) | Optional | A payment type to fallback to if the original type is not valid for the receiving account. Currently, this only supports falling back from RTP to ACH (type=rtp and fallback_type=ach) |
 | `receivingAccount` | [`ReceivingAccount1 \| undefined`](../../doc/models/receiving-account-1.md) | Optional | Either `receiving_account` or `receiving_account_id` must be present. When using `receiving_account_id`, you may pass the id of an external account or an internal account. |
 | `ledgerTransaction` | [`LedgerTransactionCreateRequest \| undefined`](../../doc/models/ledger-transaction-create-request.md) | Optional | - |
 | `lineItems` | [`LineItemRequest[] \| undefined`](../../doc/models/line-item-request.md) | Optional | An array of line items that must sum up to the amount of the payment order. |
 | `transactionMonitoringEnabled` | `boolean \| undefined` | Optional | A flag that determines whether a payment order should go through transaction monitoring. |
 | `documents` | [`DocumentCreateRequest[] \| undefined`](../../doc/models/document-create-request.md) | Optional | An array of documents to be attached to the payment order. Note that if you attach documents, the request's content type must be `multipart/form-data`. |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -62,9 +65,17 @@
   "receiving_account_id": "0000218a-0000-0000-0000-000000000000",
   "accounting": {
     "account_id": "0000183c-0000-0000-0000-000000000000",
-    "class_id": "00001c78-0000-0000-0000-000000000000"
+    "class_id": "00001c78-0000-0000-0000-000000000000",
+    "exampleAdditionalProperty": {
+      "key1": "val1",
+      "key2": "val2"
+    }
   },
-  "accounting_category_id": "00001a8e-0000-0000-0000-000000000000"
+  "accounting_category_id": "00001a8e-0000-0000-0000-000000000000",
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

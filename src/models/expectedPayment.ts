@@ -15,14 +15,14 @@ import {
   string,
   unknown,
 } from '../schema.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
-import { Direction1Enum, direction1EnumSchema } from './direction1Enum.js';
+import { Currency, currencySchema } from './currency.js';
+import { Direction1, direction1Schema } from './direction1.js';
 import {
-  ReconciliationMethodEnum,
-  reconciliationMethodEnumSchema,
-} from './reconciliationMethodEnum.js';
-import { Status1Enum, status1EnumSchema } from './status1Enum.js';
-import { Type1Enum, type1EnumSchema } from './type1Enum.js';
+  ReconciliationMethod,
+  reconciliationMethodSchema,
+} from './reconciliationMethod.js';
+import { Status1, status1Schema } from './status1.js';
+import { Type1, type1Schema } from './type1.js';
 
 export interface ExpectedPayment {
   id: string;
@@ -36,13 +36,13 @@ export interface ExpectedPayment {
   /** The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. */
   amountLowerBound: number;
   /** One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit. */
-  direction: Direction1Enum;
+  direction: Direction1;
   /** The ID of the Internal Account for the expected payment. */
   internalAccountId: string;
   /** One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet, wire. */
-  type: Type1Enum | null;
+  type: Type1 | null;
   /** Three-letter ISO currency code. */
-  currency: CurrencyEnum;
+  currency: Currency;
   /** The latest date the payment may come in. Format: yyyy-mm-dd */
   dateUpperBound: string | null;
   /** The earliest date the payment may come in. Format: yyyy-mm-dd */
@@ -66,9 +66,9 @@ export interface ExpectedPayment {
   /** The ID of the Transaction Line Item this expected payment has been matched to. */
   transactionLineItemId: string | null;
   /** One of unreconciled, reconciled, or archived. */
-  status: Status1Enum;
+  status: Status1;
   /** One of manual if this expected payment was manually reconciled in the dashboard, automatic if it was automatically reconciled by Modern Treasury, or null if it is unreconciled. */
-  reconciliationMethod: ReconciliationMethodEnum | null;
+  reconciliationMethod: ReconciliationMethod | null;
   /** The ID of the ledger transaction linked to the expected payment. */
   ledgerTransactionId: string | null;
 }
@@ -81,10 +81,10 @@ export const expectedPaymentSchema: Schema<ExpectedPayment> = object({
   updatedAt: ['updated_at', string()],
   amountUpperBound: ['amount_upper_bound', number()],
   amountLowerBound: ['amount_lower_bound', number()],
-  direction: ['direction', direction1EnumSchema],
+  direction: ['direction', direction1Schema],
   internalAccountId: ['internal_account_id', string()],
-  type: ['type', nullable(type1EnumSchema)],
-  currency: ['currency', currencyEnumSchema],
+  type: ['type', nullable(type1Schema)],
+  currency: ['currency', currencySchema],
   dateUpperBound: ['date_upper_bound', nullable(string())],
   dateLowerBound: ['date_lower_bound', nullable(string())],
   description: ['description', nullable(string())],
@@ -102,10 +102,10 @@ export const expectedPaymentSchema: Schema<ExpectedPayment> = object({
   ],
   transactionId: ['transaction_id', nullable(string())],
   transactionLineItemId: ['transaction_line_item_id', nullable(string())],
-  status: ['status', status1EnumSchema],
+  status: ['status', status1Schema],
   reconciliationMethod: [
     'reconciliation_method',
-    nullable(reconciliationMethodEnumSchema),
+    nullable(reconciliationMethodSchema),
   ],
   ledgerTransactionId: ['ledger_transaction_id', nullable(string())],
 });

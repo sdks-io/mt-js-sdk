@@ -5,8 +5,8 @@
  */
 
 import { boolean, dict, nullable, object, Schema, string } from '../schema.js';
-import { ReasonEnum, reasonEnumSchema } from './reasonEnum.js';
-import { Status19Enum, status19EnumSchema } from './status19Enum.js';
+import { Reason, reasonSchema } from './reason.js';
+import { Status19, status19Schema } from './status19.js';
 
 export interface Reversal {
   id: string;
@@ -16,13 +16,13 @@ export interface Reversal {
   createdAt: string;
   updatedAt: string;
   /** The current status of the reversal. */
-  status: Status19Enum;
+  status: Status19;
   /** The ID of the relevant Payment Order. */
   paymentOrderId: string | null;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata: Record<string, string>;
   /** The reason for the reversal. */
-  reason: ReasonEnum;
+  reason: Reason;
 }
 
 export const reversalSchema: Schema<Reversal> = object({
@@ -31,8 +31,8 @@ export const reversalSchema: Schema<Reversal> = object({
   liveMode: ['live_mode', boolean()],
   createdAt: ['created_at', string()],
   updatedAt: ['updated_at', string()],
-  status: ['status', status19EnumSchema],
+  status: ['status', status19Schema],
   paymentOrderId: ['payment_order_id', nullable(string())],
   metadata: ['metadata', dict(string())],
-  reason: ['reason', reasonEnumSchema],
+  reason: ['reason', reasonSchema],
 });

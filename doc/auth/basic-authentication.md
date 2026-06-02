@@ -23,7 +23,7 @@ Documentation for accessing and setting credentials for basic_auth.
 You must provide credentials in the client as shown in the following code snippet.
 
 ```ts
-import { Client } from 'mt-sdk';
+import { Client } from 'mt-sdk-apimatic';
 
 const client = new Client({
   basicAuthCredentials: {

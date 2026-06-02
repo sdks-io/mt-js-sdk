@@ -1,12 +1,12 @@
 # Ledger Account Payout
 
 ```ts
-const ledgerAccountPayoutController = new LedgerAccountPayoutController(client);
+const ledgerAccountPayoutApi = new LedgerAccountPayoutApi(client);
 ```
 
 ## Class Name
 
-`LedgerAccountPayoutController`
+`LedgerAccountPayoutApi`
 
 ## Methods
 
@@ -60,7 +60,7 @@ const body: LedgerAccountPayoutCreateRequest = {
 };
 
 try {
-  const response = await ledgerAccountPayoutController.createLedgerAccountPayout(
+  const response = await ledgerAccountPayoutApi.createLedgerAccountPayout(
     undefined,
     body
   );
@@ -135,7 +135,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerAccountPayoutController.listLedgerAccountPayouts();
+  const response = await ledgerAccountPayoutApi.listLedgerAccountPayouts();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -193,7 +193,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerAccountPayoutController.getLedgerAccountPayout(id);
+  const response = await ledgerAccountPayoutApi.getLedgerAccountPayout(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -270,7 +270,7 @@ const body: LedgerAccountPayoutUpdateRequest = {
 };
 
 try {
-  const response = await ledgerAccountPayoutController.updateLedgerAccountPayout(
+  const response = await ledgerAccountPayoutApi.updateLedgerAccountPayout(
     id,
     body
   );

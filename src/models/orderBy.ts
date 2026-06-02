@@ -5,15 +5,15 @@
  */
 
 import { object, optional, Schema } from '../schema.js';
-import { CreatedAtEnum, createdAtEnumSchema } from './createdAtEnum.js';
-import { EffectiveAtEnum, effectiveAtEnumSchema } from './effectiveAtEnum.js';
+import { CreatedAt, createdAtSchema } from './createdAt.js';
+import { EffectiveAt, effectiveAtSchema } from './effectiveAt.js';
 
 export interface OrderBy {
-  createdAt?: CreatedAtEnum;
-  effectiveAt?: EffectiveAtEnum;
+  createdAt?: CreatedAt;
+  effectiveAt?: EffectiveAt;
 }
 
 export const orderBySchema: Schema<OrderBy> = object({
-  createdAt: ['created_at', optional(createdAtEnumSchema)],
-  effectiveAt: ['effective_at', optional(effectiveAtEnumSchema)],
+  createdAt: ['created_at', optional(createdAtSchema)],
+  effectiveAt: ['effective_at', optional(effectiveAtSchema)],
 });

@@ -15,9 +15,9 @@ import {
 } from '../schema.js';
 import { Balance, balanceSchema } from './balance.js';
 import {
-  BalanceReportTypeEnum,
-  balanceReportTypeEnumSchema,
-} from './balanceReportTypeEnum.js';
+  BalanceReportType,
+  balanceReportTypeSchema,
+} from './balanceReportType.js';
 
 export interface BalanceReport {
   id: string;
@@ -27,7 +27,7 @@ export interface BalanceReport {
   createdAt: string;
   updatedAt: string;
   /** The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`. */
-  balanceReportType: BalanceReportTypeEnum;
+  balanceReportType: BalanceReportType;
   /** The date of the balance report in local time. */
   asOfDate: string;
   /** The time (24-hour clock) of the balance report in local time. */
@@ -45,7 +45,7 @@ export const balanceReportSchema: Schema<BalanceReport> = lazy(() =>
     liveMode: ['live_mode', boolean()],
     createdAt: ['created_at', string()],
     updatedAt: ['updated_at', string()],
-    balanceReportType: ['balance_report_type', balanceReportTypeEnumSchema],
+    balanceReportType: ['balance_report_type', balanceReportTypeSchema],
     asOfDate: ['as_of_date', string()],
     asOfTime: ['as_of_time', nullable(string())],
     balances: ['balances', array(balanceSchema)],

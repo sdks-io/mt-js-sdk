@@ -1,12 +1,12 @@
 # Expected Payment
 
 ```ts
-const expectedPaymentController = new ExpectedPaymentController(client);
+const expectedPaymentApi = new ExpectedPaymentApi(client);
 ```
 
 ## Class Name
 
-`ExpectedPaymentController`
+`ExpectedPaymentApi`
 
 ## Methods
 
@@ -23,10 +23,10 @@ const expectedPaymentController = new ExpectedPaymentController(client);
 async listExpectedPayments(
   afterCursor?: string | null,
   perPage?: number,
-  status?: Status20Enum,
+  status?: Status20,
   internalAccountId?: string,
-  direction?: Direction15Enum,
-  type?: Type13Enum,
+  direction?: Direction15,
+  type?: Type13,
   counterpartyId?: string,
   metadata?: Record<string, string>,
   createdAtLowerBound?: string,
@@ -45,10 +45,10 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
 | `perPage` | `number \| undefined` | Query, Optional | - |
-| `status` | [`Status20Enum \| undefined`](../../doc/models/status-20-enum.md) | Query, Optional | One of unreconciled, reconciled, or archived. |
+| `status` | [`Status20 \| undefined`](../../doc/models/status-20.md) | Query, Optional | One of unreconciled, reconciled, or archived. |
 | `internalAccountId` | `string \| undefined` | Query, Optional | Specify internal_account_id to see expected_payments for a specific account. |
-| `direction` | [`Direction15Enum \| undefined`](../../doc/models/direction-15-enum.md) | Query, Optional | One of credit, debit |
-| `type` | [`Type13Enum \| undefined`](../../doc/models/type-13-enum.md) | Query, Optional | One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp,sen, sepa, signet, wire |
+| `direction` | [`Direction15 \| undefined`](../../doc/models/direction-15.md) | Query, Optional | One of credit, debit |
+| `type` | [`Type13 \| undefined`](../../doc/models/type-13.md) | Query, Optional | One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp,sen, sepa, signet, wire |
 | `counterpartyId` | `string \| undefined` | Query, Optional | Specify counterparty_id to see expected_payments for a specific account. |
 | `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
 | `createdAtLowerBound` | `string \| undefined` | Query, Optional | Used to return expected payments created after some datetime |
@@ -65,7 +65,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await expectedPaymentController.listExpectedPayments();
+  const response = await expectedPaymentApi.listExpectedPayments();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -132,7 +132,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const body: ExpectedPaymentCreateRequest = {
   amountUpperBound: 80,
   amountLowerBound: 142,
-  direction: Direction1Enum.Credit,
+  direction: Direction1.Credit,
   internalAccountId: '0000118a-0000-0000-0000-000000000000',
   metadata: {
     'key': 'value',
@@ -142,7 +142,7 @@ const body: ExpectedPaymentCreateRequest = {
 };
 
 try {
-  const response = await expectedPaymentController.createExpectedPayment(
+  const response = await expectedPaymentApi.createExpectedPayment(
     undefined,
     body
   );
@@ -210,7 +210,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await expectedPaymentController.getExpectedPayment(id);
+  const response = await expectedPaymentApi.getExpectedPayment(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -285,7 +285,7 @@ const body: ExpectedPaymentUpdateRequest = {
 };
 
 try {
-  const response = await expectedPaymentController.updateExpectedPayment(
+  const response = await expectedPaymentApi.updateExpectedPayment(
     id,
     body
   );
@@ -344,7 +344,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await expectedPaymentController.deleteExpectedPayment(id);
+  const response = await expectedPaymentApi.deleteExpectedPayment(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

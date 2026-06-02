@@ -16,7 +16,7 @@
 | `updatedAt` | `string` | Required | - |
 | `discardedAt` | `string \| null` | Required | - |
 | `contactIdentifier` | `string` | Required | - |
-| `contactIdentifierType` | [`ContactIdentifierTypeEnum`](../../doc/models/contact-identifier-type-enum.md) | Required | - |
+| `contactIdentifierType` | [`ContactIdentifierType`](../../doc/models/contact-identifier-type.md) | Required | - |
 
 ## Example (as JSON)
 

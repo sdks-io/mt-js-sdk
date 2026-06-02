@@ -1,12 +1,12 @@
 # Internal Account
 
 ```ts
-const internalAccountController = new InternalAccountController(client);
+const internalAccountApi = new InternalAccountApi(client);
 ```
 
 ## Class Name
 
-`InternalAccountController`
+`InternalAccountApi`
 
 ## Methods
 
@@ -22,10 +22,10 @@ const internalAccountController = new InternalAccountController(client);
 async listInternalAccounts(
   afterCursor?: string | null,
   perPage?: number,
-  currency?: CurrencyEnum,
+  currency?: Currency,
   counterpartyId?: string,
-  paymentType?: PaymentType13Enum,
-  paymentDirection?: PaymentDirectionEnum,
+  paymentType?: PaymentType13,
+  paymentDirection?: PaymentDirection,
   metadata?: Record<string, string>,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<InternalAccount[]>>
@@ -41,10 +41,10 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
 | `perPage` | `number \| undefined` | Query, Optional | - |
-| `currency` | [`CurrencyEnum \| undefined`](../../doc/models/currency-enum.md) | Query, Optional | The currency associated with the internal account. |
+| `currency` | [`Currency \| undefined`](../../doc/models/currency.md) | Query, Optional | The currency associated with the internal account. |
 | `counterpartyId` | `string \| undefined` | Query, Optional | The counterparty associated with the internal account. |
-| `paymentType` | [`PaymentType13Enum \| undefined`](../../doc/models/payment-type-13-enum.md) | Query, Optional | The type of payment that can be made by the internal account. |
-| `paymentDirection` | [`PaymentDirectionEnum \| undefined`](../../doc/models/payment-direction-enum.md) | Query, Optional | The direction of payments that can be made by internal account. |
+| `paymentType` | [`PaymentType13 \| undefined`](../../doc/models/payment-type-13.md) | Query, Optional | The type of payment that can be made by the internal account. |
+| `paymentDirection` | [`PaymentDirection \| undefined`](../../doc/models/payment-direction.md) | Query, Optional | The direction of payments that can be made by internal account. |
 | `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -58,7 +58,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await internalAccountController.listInternalAccounts();
+  const response = await internalAccountApi.listInternalAccounts();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -117,7 +117,7 @@ const body: InternalAccountCreateRequest = {
   connectionId: 'connection_id6',
   name: 'name6',
   partyName: 'party_name8',
-  currency: Currency1Enum.USD,
+  currency: Currency1.Usd,
   vendorAttributes: {
     'key': 'value',
     'foo': 'bar',
@@ -126,7 +126,7 @@ const body: InternalAccountCreateRequest = {
 };
 
 try {
-  const response = await internalAccountController.createInternalAccount(
+  const response = await internalAccountApi.createInternalAccount(
     undefined,
     body
   );
@@ -195,7 +195,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await internalAccountController.getInternalAccount(id);
+  const response = await internalAccountApi.getInternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -262,7 +262,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await internalAccountController.updateInternalAccount(id);
+  const response = await internalAccountApi.updateInternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

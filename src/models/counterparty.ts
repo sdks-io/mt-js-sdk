@@ -16,9 +16,9 @@ import {
 } from '../schema.js';
 import { Account, accountSchema } from './account.js';
 import {
-  VerificationStatus1Enum,
-  verificationStatus1EnumSchema,
-} from './verificationStatus1Enum.js';
+  VerificationStatus1,
+  verificationStatus1Schema,
+} from './verificationStatus1.js';
 
 export interface Counterparty {
   id: string;
@@ -39,7 +39,7 @@ export interface Counterparty {
   /** Send an email to the counterparty whenever an associated payment order is sent to the bank. */
   sendRemittanceAdvice: boolean;
   /** The verification status of the counterparty. */
-  verificationStatus: VerificationStatus1Enum;
+  verificationStatus: VerificationStatus1;
 }
 
 export const counterpartySchema: Schema<Counterparty> = lazy(() =>
@@ -55,6 +55,6 @@ export const counterpartySchema: Schema<Counterparty> = lazy(() =>
     email: ['email', nullable(string())],
     metadata: ['metadata', dict(string())],
     sendRemittanceAdvice: ['send_remittance_advice', boolean()],
-    verificationStatus: ['verification_status', verificationStatus1EnumSchema],
+    verificationStatus: ['verification_status', verificationStatus1Schema],
   })
 );

@@ -8,10 +8,10 @@ import {
   dict,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
   unknown,
 } from '../schema.js';
 
@@ -32,9 +32,10 @@ export interface LedgerableEventCreateRequest {
   customData?: unknown | null;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata?: Record<string, string>;
+  additionalProperties?: Record<string, unknown>;
 }
 
-export const ledgerableEventCreateRequestSchema: Schema<LedgerableEventCreateRequest> = object(
+export const ledgerableEventCreateRequestSchema: Schema<LedgerableEventCreateRequest> = typedExpandoObject(
   {
     name: ['name', string()],
     description: ['description', optional(nullable(string()))],
@@ -44,5 +45,7 @@ export const ledgerableEventCreateRequestSchema: Schema<LedgerableEventCreateReq
     currencyExponent: ['currency_exponent', optional(nullable(number()))],
     customData: ['custom_data', optional(nullable(unknown()))],
     metadata: ['metadata', optional(dict(string()))],
-  }
+  },
+  'additionalProperties',
+  optional(unknown())
 );

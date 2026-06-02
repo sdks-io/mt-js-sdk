@@ -1,6 +1,8 @@
 
 # Ledger Account Payout Update Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `LedgerAccountPayoutUpdateRequest`
@@ -10,8 +12,9 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `description` | `string \| null \| undefined` | Optional | The description of the ledger account payout. |
-| `status` | [`Status8Enum \| undefined`](../../doc/models/status-8-enum.md) | Optional | To post a pending ledger account payout, use `posted`. To archive a pending ledger transaction, use `archived`. |
+| `status` | [`Status8 \| undefined`](../../doc/models/status-8.md) | Optional | To post a pending ledger account payout, use `posted`. To archive a pending ledger transaction, use `archived`. |
 | `metadata` | `Record<string, string> \| undefined` | Optional | Additional data represented as key-value pairs. Both the key and value must be strings. |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -23,7 +26,11 @@
     "modern": "treasury"
   },
   "description": "description6",
-  "status": "posted"
+  "status": "posted",
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

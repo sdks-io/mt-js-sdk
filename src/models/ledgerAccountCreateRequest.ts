@@ -8,19 +8,14 @@ import {
   dict,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
-import {
-  LedgerableTypeEnum,
-  ledgerableTypeEnumSchema,
-} from './ledgerableTypeEnum.js';
-import {
-  NormalBalanceEnum,
-  normalBalanceEnumSchema,
-} from './normalBalanceEnum.js';
+import { LedgerableType, ledgerableTypeSchema } from './ledgerableType.js';
+import { NormalBalance, normalBalanceSchema } from './normalBalance.js';
 
 export interface LedgerAccountCreateRequest {
   /** The name of the ledger account. */
@@ -28,7 +23,7 @@ export interface LedgerAccountCreateRequest {
   /** The description of the ledger account. */
   description?: string | null;
   /** The normal balance of the ledger account. */
-  normalBalance: NormalBalanceEnum;
+  normalBalance: NormalBalance;
   /** The id of the ledger that this account belongs to. */
   ledgerId: string;
   /** The currency of the ledger account. */
@@ -38,21 +33,24 @@ export interface LedgerAccountCreateRequest {
   /** If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null. */
   ledgerableId?: string;
   /** If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account. */
-  ledgerableType?: LedgerableTypeEnum;
+  ledgerableType?: LedgerableType;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata?: Record<string, string>;
+  additionalProperties?: Record<string, unknown>;
 }
 
-export const ledgerAccountCreateRequestSchema: Schema<LedgerAccountCreateRequest> = object(
+export const ledgerAccountCreateRequestSchema: Schema<LedgerAccountCreateRequest> = typedExpandoObject(
   {
     name: ['name', string()],
     description: ['description', optional(nullable(string()))],
-    normalBalance: ['normal_balance', normalBalanceEnumSchema],
+    normalBalance: ['normal_balance', normalBalanceSchema],
     ledgerId: ['ledger_id', string()],
     currency: ['currency', string()],
     currencyExponent: ['currency_exponent', optional(nullable(number()))],
     ledgerableId: ['ledgerable_id', optional(string())],
-    ledgerableType: ['ledgerable_type', optional(ledgerableTypeEnumSchema)],
+    ledgerableType: ['ledgerable_type', optional(ledgerableTypeSchema)],
     metadata: ['metadata', optional(dict(string()))],
-  }
+  },
+  'additionalProperties',
+  optional(unknown())
 );

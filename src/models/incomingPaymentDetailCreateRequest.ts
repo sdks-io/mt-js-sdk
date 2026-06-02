@@ -7,24 +7,25 @@
 import {
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
-import { Direction14Enum, direction14EnumSchema } from './direction14Enum.js';
-import { Type10Enum, type10EnumSchema } from './type10Enum.js';
+import { Currency, currencySchema } from './currency.js';
+import { Direction14, direction14Schema } from './direction14.js';
+import { Type10, type10Schema } from './type10.js';
 
 export interface IncomingPaymentDetailCreateRequest {
   /** One of `ach`, `wire`, `check`. */
-  type?: Type10Enum;
+  type?: Type10;
   /** One of `credit`, `debit`. */
-  direction?: Direction14Enum;
+  direction?: Direction14;
   /** Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. */
   amount?: number;
   /** Three-letter ISO currency code. */
-  currency?: CurrencyEnum;
+  currency?: Currency;
   /** The ID of one of your internal accounts. */
   internalAccountId?: string;
   /** An optional parameter to associate the incoming payment detail to a virtual account. */
@@ -33,17 +34,20 @@ export interface IncomingPaymentDetailCreateRequest {
   asOfDate?: string | null;
   /** Defaults to a random description. */
   description?: string | null;
+  additionalProperties?: Record<string, unknown>;
 }
 
-export const incomingPaymentDetailCreateRequestSchema: Schema<IncomingPaymentDetailCreateRequest> = object(
+export const incomingPaymentDetailCreateRequestSchema: Schema<IncomingPaymentDetailCreateRequest> = typedExpandoObject(
   {
-    type: ['type', optional(type10EnumSchema)],
-    direction: ['direction', optional(direction14EnumSchema)],
+    type: ['type', optional(type10Schema)],
+    direction: ['direction', optional(direction14Schema)],
     amount: ['amount', optional(number())],
-    currency: ['currency', optional(currencyEnumSchema)],
+    currency: ['currency', optional(currencySchema)],
     internalAccountId: ['internal_account_id', optional(string())],
     virtualAccountId: ['virtual_account_id', optional(nullable(string()))],
     asOfDate: ['as_of_date', optional(nullable(string()))],
     description: ['description', optional(nullable(string()))],
-  }
+  },
+  'additionalProperties',
+  optional(unknown())
 );

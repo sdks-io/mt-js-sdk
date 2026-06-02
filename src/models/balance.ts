@@ -12,12 +12,9 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import { BalanceTypeEnum, balanceTypeEnumSchema } from './balanceTypeEnum.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
-import {
-  VendorCodeTypeEnum,
-  vendorCodeTypeEnumSchema,
-} from './vendorCodeTypeEnum.js';
+import { BalanceType, balanceTypeSchema } from './balanceType.js';
+import { Currency, currencySchema } from './currency.js';
+import { VendorCodeType, vendorCodeTypeSchema } from './vendorCodeType.js';
 
 export interface Balance {
   id: string;
@@ -29,13 +26,13 @@ export interface Balance {
   /** The balance amount. */
   amount: number;
   /** Three-letter ISO currency code. */
-  currency: CurrencyEnum;
+  currency: Currency;
   /** The specific type of balance reported. One of `opening_ledger`, `closing_ledger`, `current_ledger`, `opening_available`, `opening_available_next_business_day`, `closing_available`, `current_available`, or `other`. */
-  balanceType: BalanceTypeEnum;
+  balanceType: BalanceType;
   /** The code used by the bank when reporting this specific balance. */
   vendorCode: string;
   /** The code used by the bank when reporting this specific balance. */
-  vendorCodeType: VendorCodeTypeEnum | null;
+  vendorCodeType: VendorCodeType | null;
 }
 
 export const balanceSchema: Schema<Balance> = object({
@@ -45,8 +42,8 @@ export const balanceSchema: Schema<Balance> = object({
   createdAt: ['created_at', string()],
   updatedAt: ['updated_at', string()],
   amount: ['amount', number()],
-  currency: ['currency', currencyEnumSchema],
-  balanceType: ['balance_type', balanceTypeEnumSchema],
+  currency: ['currency', currencySchema],
+  balanceType: ['balance_type', balanceTypeSchema],
   vendorCode: ['vendor_code', string()],
-  vendorCodeType: ['vendor_code_type', nullable(vendorCodeTypeEnumSchema)],
+  vendorCodeType: ['vendor_code_type', nullable(vendorCodeTypeSchema)],
 });

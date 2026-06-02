@@ -8,10 +8,11 @@ import {
   array,
   dict,
   lazy,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
 import {
   AccountDetailCreateRequest,
@@ -41,25 +42,30 @@ export interface VirtualAccountCreateRequest {
   creditLedgerAccountId?: string;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata?: Record<string, string>;
+  additionalProperties?: Record<string, unknown>;
 }
 
 export const virtualAccountCreateRequestSchema: Schema<VirtualAccountCreateRequest> = lazy(
   () =>
-    object({
-      name: ['name', string()],
-      description: ['description', optional(string())],
-      counterpartyId: ['counterparty_id', optional(string())],
-      internalAccountId: ['internal_account_id', string()],
-      accountDetails: [
-        'account_details',
-        optional(array(accountDetailCreateRequestSchema)),
-      ],
-      routingDetails: [
-        'routing_details',
-        optional(array(routingDetailCreateRequestSchema)),
-      ],
-      debitLedgerAccountId: ['debit_ledger_account_id', optional(string())],
-      creditLedgerAccountId: ['credit_ledger_account_id', optional(string())],
-      metadata: ['metadata', optional(dict(string()))],
-    })
+    typedExpandoObject(
+      {
+        name: ['name', string()],
+        description: ['description', optional(string())],
+        counterpartyId: ['counterparty_id', optional(string())],
+        internalAccountId: ['internal_account_id', string()],
+        accountDetails: [
+          'account_details',
+          optional(array(accountDetailCreateRequestSchema)),
+        ],
+        routingDetails: [
+          'routing_details',
+          optional(array(routingDetailCreateRequestSchema)),
+        ],
+        debitLedgerAccountId: ['debit_ledger_account_id', optional(string())],
+        creditLedgerAccountId: ['credit_ledger_account_id', optional(string())],
+        metadata: ['metadata', optional(dict(string()))],
+      },
+      'additionalProperties',
+      optional(unknown())
+    )
 );

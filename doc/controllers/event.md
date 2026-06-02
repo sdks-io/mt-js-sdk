@@ -1,12 +1,12 @@
 # Event
 
 ```ts
-const eventController = new EventController(client);
+const eventApi = new EventApi(client);
 ```
 
 ## Class Name
 
-`EventController`
+`EventApi`
 
 ## Methods
 
@@ -56,7 +56,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await eventController.listEvents();
+  const response = await eventApi.listEvents();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -112,7 +112,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await eventController.getEvent(id);
+  const response = await eventApi.getEvent(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

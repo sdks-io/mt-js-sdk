@@ -1,6 +1,8 @@
 
 # Address Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `AddressRequest`
@@ -15,6 +17,7 @@
 | `region` | `string \| null \| undefined` | Optional | Region or State. |
 | `postalCode` | `string \| null \| undefined` | Optional | The postal code of the address. |
 | `country` | `string \| null \| undefined` | Optional | Country code conforms to [ISO 3166-1 alpha-2] |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -24,7 +27,11 @@
   "line2": "line22",
   "locality": "locality2",
   "region": "region4",
-  "postal_code": "postal_code0"
+  "postal_code": "postal_code0",
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

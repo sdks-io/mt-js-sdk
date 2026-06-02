@@ -14,12 +14,9 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import {
-  LedgerableType2Enum,
-  ledgerableType2EnumSchema,
-} from './ledgerableType2Enum.js';
+import { LedgerableType2, ledgerableType2Schema } from './ledgerableType2.js';
 import { LedgerEntry, ledgerEntrySchema } from './ledgerEntry.js';
-import { Status11Enum, status11EnumSchema } from './status11Enum.js';
+import { Status11, status11Schema } from './status11.js';
 
 export interface LedgerTransaction {
   id: string;
@@ -31,7 +28,7 @@ export interface LedgerTransaction {
   /** An optional description for internal use. */
   description: string | null;
   /** To post a ledger transaction at creation, use `posted`. */
-  status: Status11Enum;
+  status: Status11;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata: Record<string, string>;
   /** The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes. */
@@ -45,7 +42,7 @@ export interface LedgerTransaction {
   /** The ID of the ledger this ledger transaction belongs to. */
   ledgerId: string;
   /** If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal. */
-  ledgerableType: LedgerableType2Enum | null;
+  ledgerableType: LedgerableType2 | null;
   /** If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null. */
   ledgerableId: string | null;
   /** A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger. */
@@ -62,14 +59,14 @@ export const ledgerTransactionSchema: Schema<LedgerTransaction> = lazy(() =>
     createdAt: ['created_at', string()],
     updatedAt: ['updated_at', string()],
     description: ['description', nullable(string())],
-    status: ['status', status11EnumSchema],
+    status: ['status', status11Schema],
     metadata: ['metadata', dict(string())],
     effectiveAt: ['effective_at', string()],
     effectiveDate: ['effective_date', string()],
     ledgerEntries: ['ledger_entries', array(ledgerEntrySchema)],
     postedAt: ['posted_at', nullable(string())],
     ledgerId: ['ledger_id', string()],
-    ledgerableType: ['ledgerable_type', nullable(ledgerableType2EnumSchema)],
+    ledgerableType: ['ledgerable_type', nullable(ledgerableType2Schema)],
     ledgerableId: ['ledgerable_id', nullable(string())],
     externalId: ['external_id', nullable(string())],
     reversesLedgerTransactionId: [

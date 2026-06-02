@@ -41,9 +41,9 @@ const value: PaymentOrderReceivingAccount = {
   liveMode: false,
   createdAt: '2016-03-13T12:52:32.123Z',
   updatedAt: '2016-03-13T12:52:32.123Z',
-  accountType: AccountType5Enum.Savings,
+  accountType: AccountType5.Savings,
   partyName: 'party_name0',
-  partyType: PartyType5Enum.Business,
+  partyType: PartyType5.Business,
   partyAddress: {
     id: '00000cb8-0000-0000-0000-000000000000',
     object: 'object6',
@@ -66,7 +66,7 @@ const value: PaymentOrderReceivingAccount = {
       createdAt: '2016-03-13T12:52:32.123Z',
       updatedAt: '2016-03-13T12:52:32.123Z',
       discardedAt: '2016-03-13T12:52:32.123Z',
-      accountNumberType: AccountNumberTypeEnum.Other,
+      accountNumberType: AccountNumberType.Other,
       accountNumberSafe: 'account_number_safe6',
     }
   ],
@@ -79,8 +79,8 @@ const value: PaymentOrderReceivingAccount = {
       updatedAt: '2016-03-13T12:52:32.123Z',
       discardedAt: '2016-03-13T12:52:32.123Z',
       routingNumber: 'routing_number6',
-      routingNumberType: RoutingNumberTypeEnum.GbSortCode,
-      paymentType: PaymentType1Enum.Eft,
+      routingNumberType: RoutingNumberType.GbSortCode,
+      paymentType: PaymentType1.Eft,
       bankName: 'bank_name2',
       bankAddress: {
         id: '000004a8-0000-0000-0000-000000000000',
@@ -108,7 +108,7 @@ const value: PaymentOrderReceivingAccount = {
     vendorCustomerId: '0000080c-0000-0000-0000-000000000000',
     vendorName: 'vendor_name0',
   },
-  currency: CurrencyEnum.EGP,
+  currency: Currency.Egp,
   metadata: {
     'key': 'value',
     'foo': 'bar',

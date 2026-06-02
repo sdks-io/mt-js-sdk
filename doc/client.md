@@ -6,9 +6,10 @@ The following parameters are configurable for the API Client:
 | Parameter | Type | Description |
 |  --- | --- | --- |
 | environment | [`Environment`](../README.md#environments) | The API environment. <br> **Default: `Environment.Production`** |
-| timeout | `number` | Timeout for API calls.<br>*Default*: `0` |
+| timeout | `number` | Timeout for API calls.<br>*Default*: `30000` |
 | httpClientOptions | [`Partial<HttpClientOptions>`](../doc/http-client-options.md) | Stable configurable http client options. |
 | unstableHttpClientOptions | `any` | Unstable configurable http client options. |
+| logging | [`PartialLoggingOptions`](../doc/partial-logging-options.md) | Logging Configuration to enable logging |
 | basicAuthCredentials | [`BasicAuthCredentials`](auth/basic-authentication.md) | The credential object for basicAuth |
 
 The API client can be initialized as follows:
@@ -16,15 +17,24 @@ The API client can be initialized as follows:
 ## Code-Based Client Initialization
 
 ```ts
-import { Client, Environment } from 'mt-sdk';
+import { Client, Environment, LogLevel } from 'mt-sdk-apimatic';
 
 const client = new Client({
   basicAuthCredentials: {
     username: 'BasicAuthUserName',
     password: 'BasicAuthPassword'
   },
-  timeout: 0,
+  timeout: 30000,
   environment: Environment.Production,
+  logging: {
+    logLevel: LogLevel.Info,
+    logRequest: {
+      logBody: true
+    },
+    logResponse: {
+      logHeaders: true
+    }
+  },
 });
 ```
 
@@ -33,7 +43,7 @@ const client = new Client({
 ```ts
 import * as path from 'path';
 import * as fs from 'fs';
-import { Client } from 'mt-sdk';
+import { Client } from 'mt-sdk-apimatic';
 
 // Provide absolute path for the configuration file
 const absolutePath = path.resolve('./config.json');
@@ -53,7 +63,7 @@ See the [Configuration-Based Client Initialization](../doc/configuration-based-c
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 import * as fs from 'fs';
-import { Client } from 'mt-sdk';
+import { Client } from 'mt-sdk-apimatic';
 
 // Optional - Provide absolute path for the .env file
 const absolutePath = path.resolve('./.env');

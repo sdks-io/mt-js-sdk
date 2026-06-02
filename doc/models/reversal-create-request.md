@@ -1,6 +1,8 @@
 
 # Reversal Create Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `ReversalCreateRequest`
@@ -9,9 +11,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `reason` | [`Reason1Enum`](../../doc/models/reason-1-enum.md) | Required | The reason for the reversal. Must be one of `duplicate`, `incorrect_amount`, `incorrect_receiving_account`, `date_earlier_than_intended`, `date_later_than_intended`. |
+| `reason` | [`Reason1`](../../doc/models/reason-1.md) | Required | The reason for the reversal. Must be one of `duplicate`, `incorrect_amount`, `incorrect_receiving_account`, `date_earlier_than_intended`, `date_later_than_intended`. |
 | `metadata` | `Record<string, string> \| undefined` | Optional | Additional data represented as key-value pairs. Both the key and value must be strings. |
 | `ledgerTransaction` | [`LedgerTransactionCreateRequest \| undefined`](../../doc/models/ledger-transaction-create-request.md) | Optional | - |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -53,7 +56,11 @@
           "key1": 188,
           "key2": 189
         },
-        "show_resulting_ledger_account_balances": false
+        "show_resulting_ledger_account_balances": false,
+        "exampleAdditionalProperty": {
+          "key1": "val1",
+          "key2": "val2"
+        }
       },
       {
         "amount": 60,
@@ -74,9 +81,21 @@
           "key1": 188,
           "key2": 189
         },
-        "show_resulting_ledger_account_balances": false
+        "show_resulting_ledger_account_balances": false,
+        "exampleAdditionalProperty": {
+          "key1": "val1",
+          "key2": "val2"
+        }
       }
-    ]
+    ],
+    "exampleAdditionalProperty": {
+      "key1": "val1",
+      "key2": "val2"
+    }
+  },
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
   }
 }
 ```

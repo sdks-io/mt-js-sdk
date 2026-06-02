@@ -1,12 +1,12 @@
 # Transaction Line Item
 
 ```ts
-const transactionLineItemController = new TransactionLineItemController(client);
+const transactionLineItemApi = new TransactionLineItemApi(client);
 ```
 
 ## Class Name
 
-`TransactionLineItemController`
+`TransactionLineItemApi`
 
 
 # List Transaction Line Items
@@ -15,7 +15,7 @@ const transactionLineItemController = new TransactionLineItemController(client);
 async listTransactionLineItems(
   transactionId: string,
   afterCursor?: string | null,
-  type?: Type16Enum | null,
+  type?: Type16 | null,
   perPage?: number,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<TransactionLineItem[]>>
@@ -31,7 +31,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `transactionId` | `string` | Template, Required | transaction_id |
 | `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
-| `type` | [`Type16Enum \| null \| undefined`](../../doc/models/type-16-enum.md) | Query, Optional | - |
+| `type` | [`Type16 \| null \| undefined`](../../doc/models/type-16.md) | Query, Optional | - |
 | `perPage` | `number \| undefined` | Query, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -47,7 +47,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const transactionId = 'transaction_id8';
 
 try {
-  const response = await transactionLineItemController.listTransactionLineItems(transactionId);
+  const response = await transactionLineItemApi.listTransactionLineItems(transactionId);
 
   // Extracting fully parsed response body.
   console.log(response.result);

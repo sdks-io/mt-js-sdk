@@ -10,16 +10,16 @@ import {
   lazy,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
   unknown,
 } from '../schema.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
-import { Direction1Enum, direction1EnumSchema } from './direction1Enum.js';
+import { Currency, currencySchema } from './currency.js';
+import { Direction1, direction1Schema } from './direction1.js';
 import { LineItemRequest, lineItemRequestSchema } from './lineItemRequest.js';
-import { Type1Enum, type1EnumSchema } from './type1Enum.js';
+import { Type1, type1Schema } from './type1.js';
 
 export interface ExpectedPaymentCreateRequest {
   /** The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. */
@@ -27,13 +27,13 @@ export interface ExpectedPaymentCreateRequest {
   /** The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. */
   amountLowerBound: number;
   /** One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit. */
-  direction: Direction1Enum;
+  direction: Direction1;
   /** The ID of the Internal Account for the expected payment. */
   internalAccountId: string;
   /** One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet, wire. */
-  type?: Type1Enum | null;
+  type?: Type1 | null;
   /** Three-letter ISO currency code. */
-  currency?: CurrencyEnum;
+  currency?: Currency;
   /** The latest date the payment may come in. Format: yyyy-mm-dd */
   dateUpperBound?: string | null;
   /** The earliest date the payment may come in. Format: yyyy-mm-dd */
@@ -53,38 +53,43 @@ export interface ExpectedPaymentCreateRequest {
   /** The reconciliation filters you have for this payment. */
   reconciliationFilters?: unknown | null;
   lineItems?: LineItemRequest[];
+  additionalProperties?: Record<string, unknown>;
 }
 
 export const expectedPaymentCreateRequestSchema: Schema<ExpectedPaymentCreateRequest> = lazy(
   () =>
-    object({
-      amountUpperBound: ['amount_upper_bound', number()],
-      amountLowerBound: ['amount_lower_bound', number()],
-      direction: ['direction', direction1EnumSchema],
-      internalAccountId: ['internal_account_id', string()],
-      type: ['type', optional(nullable(type1EnumSchema))],
-      currency: ['currency', optional(currencyEnumSchema)],
-      dateUpperBound: ['date_upper_bound', optional(nullable(string()))],
-      dateLowerBound: ['date_lower_bound', optional(nullable(string()))],
-      description: ['description', optional(nullable(string()))],
-      statementDescriptor: [
-        'statement_descriptor',
-        optional(nullable(string())),
-      ],
-      metadata: ['metadata', optional(dict(string()))],
-      counterpartyId: ['counterparty_id', optional(nullable(string()))],
-      remittanceInformation: [
-        'remittance_information',
-        optional(nullable(string())),
-      ],
-      reconciliationGroups: [
-        'reconciliation_groups',
-        optional(nullable(unknown())),
-      ],
-      reconciliationFilters: [
-        'reconciliation_filters',
-        optional(nullable(unknown())),
-      ],
-      lineItems: ['line_items', optional(array(lineItemRequestSchema))],
-    })
+    typedExpandoObject(
+      {
+        amountUpperBound: ['amount_upper_bound', number()],
+        amountLowerBound: ['amount_lower_bound', number()],
+        direction: ['direction', direction1Schema],
+        internalAccountId: ['internal_account_id', string()],
+        type: ['type', optional(nullable(type1Schema))],
+        currency: ['currency', optional(currencySchema)],
+        dateUpperBound: ['date_upper_bound', optional(nullable(string()))],
+        dateLowerBound: ['date_lower_bound', optional(nullable(string()))],
+        description: ['description', optional(nullable(string()))],
+        statementDescriptor: [
+          'statement_descriptor',
+          optional(nullable(string())),
+        ],
+        metadata: ['metadata', optional(dict(string()))],
+        counterpartyId: ['counterparty_id', optional(nullable(string()))],
+        remittanceInformation: [
+          'remittance_information',
+          optional(nullable(string())),
+        ],
+        reconciliationGroups: [
+          'reconciliation_groups',
+          optional(nullable(unknown())),
+        ],
+        reconciliationFilters: [
+          'reconciliation_filters',
+          optional(nullable(unknown())),
+        ],
+        lineItems: ['line_items', optional(array(lineItemRequestSchema))],
+      },
+      'additionalProperties',
+      optional(unknown())
+    )
 );

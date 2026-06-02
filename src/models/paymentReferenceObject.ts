@@ -6,13 +6,13 @@
 
 import { boolean, object, Schema, string } from '../schema.js';
 import {
-  ReferenceableTypeEnum,
-  referenceableTypeEnumSchema,
-} from './referenceableTypeEnum.js';
+  ReferenceableType,
+  referenceableTypeSchema,
+} from './referenceableType.js';
 import {
-  ReferenceNumberType1Enum,
-  referenceNumberType1EnumSchema,
-} from './referenceNumberType1Enum.js';
+  ReferenceNumberType1,
+  referenceNumberType1Schema,
+} from './referenceNumberType1.js';
 
 export interface PaymentReferenceObject {
   id: string;
@@ -24,11 +24,11 @@ export interface PaymentReferenceObject {
   /** The id of the referenceable to search for. Must be accompanied by the referenceable_type or will return an error. */
   referenceableId: string;
   /** One of the referenceable types. This must be accompanied by the id of the referenceable or will return an error. */
-  referenceableType: ReferenceableTypeEnum;
+  referenceableType: ReferenceableType;
   /** The actual reference number assigned by the bank. */
   referenceNumber: string;
   /** The type of reference number. */
-  referenceNumberType: ReferenceNumberType1Enum;
+  referenceNumberType: ReferenceNumberType1;
 }
 
 export const paymentReferenceObjectSchema: Schema<PaymentReferenceObject> = object(
@@ -39,11 +39,8 @@ export const paymentReferenceObjectSchema: Schema<PaymentReferenceObject> = obje
     createdAt: ['created_at', string()],
     updatedAt: ['updated_at', string()],
     referenceableId: ['referenceable_id', string()],
-    referenceableType: ['referenceable_type', referenceableTypeEnumSchema],
+    referenceableType: ['referenceable_type', referenceableTypeSchema],
     referenceNumber: ['reference_number', string()],
-    referenceNumberType: [
-      'reference_number_type',
-      referenceNumberType1EnumSchema,
-    ],
+    referenceNumberType: ['reference_number_type', referenceNumberType1Schema],
   }
 );

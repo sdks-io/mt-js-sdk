@@ -15,10 +15,7 @@ import {
   string,
 } from '../schema.js';
 import { Accounting, accountingSchema } from './accounting.js';
-import {
-  ItemizableTypeEnum,
-  itemizableTypeEnumSchema,
-} from './itemizableTypeEnum.js';
+import { ItemizableType, itemizableTypeSchema } from './itemizableType.js';
 
 export interface LineItem {
   id: string;
@@ -30,7 +27,7 @@ export interface LineItem {
   /** The ID of the payment order or expected payment. */
   itemizableId: string;
   /** One of `payment_orders` or `expected_payments`. */
-  itemizableType: ItemizableTypeEnum;
+  itemizableType: ItemizableType;
   /** Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. */
   amount: number;
   /** A free-form description of the line item. */
@@ -52,7 +49,7 @@ export const lineItemSchema: Schema<LineItem> = lazy(() =>
     createdAt: ['created_at', string()],
     updatedAt: ['updated_at', string()],
     itemizableId: ['itemizable_id', string()],
-    itemizableType: ['itemizable_type', itemizableTypeEnumSchema],
+    itemizableType: ['itemizable_type', itemizableTypeSchema],
     amount: ['amount', number()],
     description: ['description', nullable(string())],
     metadata: ['metadata', dict(string())],

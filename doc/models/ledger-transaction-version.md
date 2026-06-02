@@ -15,14 +15,14 @@
 | `createdAt` | `string` | Required | - |
 | `ledgerTransactionId` | `string` | Required | The ID of the ledger transaction |
 | `description` | `string \| null` | Required | An optional description for internal use. |
-| `status` | [`Status12Enum`](../../doc/models/status-12-enum.md) | Required | One of `pending`, `posted`, or `archived` |
+| `status` | [`Status12`](../../doc/models/status-12.md) | Required | One of `pending`, `posted`, or `archived` |
 | `metadata` | `Record<string, string>` | Required | Additional data represented as key-value pairs. Both the key and value must be strings. |
 | `effectiveAt` | `string` | Required | The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes. |
 | `effectiveDate` | `string` | Required | The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes. |
 | `ledgerEntries` | [`LedgerEntryOfTransactionVersion[]`](../../doc/models/ledger-entry-of-transaction-version.md) | Required | An array of ledger entry objects. |
 | `postedAt` | `string \| null` | Required | The time on which the ledger transaction posted. This is null if the ledger transaction is pending. |
 | `ledgerId` | `string` | Required | The ID of the ledger this ledger transaction belongs to. |
-| `ledgerableType` | [`LedgerableType2Enum \| null`](../../doc/models/ledgerable-type-2-enum.md) | Required | If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal. |
+| `ledgerableType` | [`LedgerableType2 \| null`](../../doc/models/ledgerable-type-2.md) | Required | If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal. |
 | `ledgerableId` | `string \| null` | Required | If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null. |
 | `externalId` | `string \| null` | Required | A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger. |
 | `version` | `number` | Required | Version number of the ledger transaction. |

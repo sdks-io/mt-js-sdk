@@ -1,6 +1,8 @@
 
 # Expected Payment Create Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `ExpectedPaymentCreateRequest`
@@ -11,10 +13,10 @@
 |  --- | --- | --- | --- |
 | `amountUpperBound` | `number` | Required | The highest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. |
 | `amountLowerBound` | `number` | Required | The lowest amount this expected payment may be equal to. Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. |
-| `direction` | [`Direction1Enum`](../../doc/models/direction-1-enum.md) | Required | One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit. |
+| `direction` | [`Direction1`](../../doc/models/direction-1.md) | Required | One of credit or debit. When you are receiving money, use credit. When you are being charged, use debit. |
 | `internalAccountId` | `string` | Required | The ID of the Internal Account for the expected payment. |
-| `type` | [`Type1Enum \| null \| undefined`](../../doc/models/type-1-enum.md) | Optional | One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet, wire. |
-| `currency` | [`CurrencyEnum \| undefined`](../../doc/models/currency-enum.md) | Optional | Three-letter ISO currency code. |
+| `type` | [`Type1 \| null \| undefined`](../../doc/models/type-1.md) | Optional | One of: ach, au_becs, bacs, book, check, eft, interac, provxchange, rtp, sen, sepa, signet, wire. |
+| `currency` | [`Currency \| undefined`](../../doc/models/currency.md) | Optional | Three-letter ISO currency code. |
 | `dateUpperBound` | `string \| null \| undefined` | Optional | The latest date the payment may come in. Format: yyyy-mm-dd |
 | `dateLowerBound` | `string \| null \| undefined` | Optional | The earliest date the payment may come in. Format: yyyy-mm-dd |
 | `description` | `string \| null \| undefined` | Optional | An optional description for internal use. |
@@ -25,6 +27,7 @@
 | `reconciliationGroups` | `unknown \| null \| undefined` | Optional | The reconciliation groups you have for this payment. |
 | `reconciliationFilters` | `unknown \| null \| undefined` | Optional | The reconciliation filters you have for this payment. |
 | `lineItems` | [`LineItemRequest[] \| undefined`](../../doc/models/line-item-request.md) | Optional | - |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -43,7 +46,11 @@
   "currency": "SYP",
   "date_upper_bound": "2016-03-13T12:52:32.123Z",
   "date_lower_bound": "2016-03-13T12:52:32.123Z",
-  "description": "description0"
+  "description": "description0",
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

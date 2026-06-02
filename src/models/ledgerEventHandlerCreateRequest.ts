@@ -8,10 +8,11 @@ import {
   dict,
   lazy,
   nullable,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
 import {
   LedgerEventHandlerConditions,
@@ -33,19 +34,27 @@ export interface LedgerEventHandlerCreateRequest {
   conditions?: LedgerEventHandlerConditions;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata?: Record<string, string> | null;
+  additionalProperties?: Record<string, unknown>;
 }
 
 export const ledgerEventHandlerCreateRequestSchema: Schema<LedgerEventHandlerCreateRequest> = lazy(
   () =>
-    object({
-      name: ['name', string()],
-      description: ['description', optional(nullable(string()))],
-      ledgerId: ['ledger_id', optional(string())],
-      ledgerTransactionTemplate: [
-        'ledger_transaction_template',
-        ledgerEventHandlerLedgerTransactionTemplateSchema,
-      ],
-      conditions: ['conditions', optional(ledgerEventHandlerConditionsSchema)],
-      metadata: ['metadata', optional(nullable(dict(string())))],
-    })
+    typedExpandoObject(
+      {
+        name: ['name', string()],
+        description: ['description', optional(nullable(string()))],
+        ledgerId: ['ledger_id', optional(string())],
+        ledgerTransactionTemplate: [
+          'ledger_transaction_template',
+          ledgerEventHandlerLedgerTransactionTemplateSchema,
+        ],
+        conditions: [
+          'conditions',
+          optional(ledgerEventHandlerConditionsSchema),
+        ],
+        metadata: ['metadata', optional(nullable(dict(string())))],
+      },
+      'additionalProperties',
+      optional(unknown())
+    )
 );

@@ -13,9 +13,9 @@ import {
   string,
 } from '../schema.js';
 import {
-  AccountNumberTypeEnum,
-  accountNumberTypeEnumSchema,
-} from './accountNumberTypeEnum.js';
+  AccountNumberType,
+  accountNumberTypeSchema,
+} from './accountNumberType.js';
 
 export interface AccountDetail {
   id: string;
@@ -28,7 +28,7 @@ export interface AccountDetail {
   /** The account number for the bank account. */
   accountNumber?: string;
   /** One of `iban`, `clabe`, `wallet_address`, or `other`. Use `other` if the bank account number is in a generic format. */
-  accountNumberType: AccountNumberTypeEnum;
+  accountNumberType: AccountNumberType;
   /** The last 4 digits of the account_number. */
   accountNumberSafe: string;
 }
@@ -41,6 +41,6 @@ export const accountDetailSchema: Schema<AccountDetail> = object({
   updatedAt: ['updated_at', string()],
   discardedAt: ['discarded_at', nullable(string())],
   accountNumber: ['account_number', optional(string())],
-  accountNumberType: ['account_number_type', accountNumberTypeEnumSchema],
+  accountNumberType: ['account_number_type', accountNumberTypeSchema],
   accountNumberSafe: ['account_number_safe', string()],
 });

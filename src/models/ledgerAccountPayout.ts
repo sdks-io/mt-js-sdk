@@ -13,7 +13,7 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import { Status6Enum, status6EnumSchema } from './status6Enum.js';
+import { Status6, status6Schema } from './status6.js';
 
 export interface LedgerAccountPayout {
   id: string;
@@ -27,7 +27,7 @@ export interface LedgerAccountPayout {
   /** The description of the ledger account payout. */
   description: string | null;
   /** The status of the ledger account payout. One of `processing`, `pending`, `posted`, `archiving` or `archived`. */
-  status: Status6Enum;
+  status: Status6;
   /** The id of the payout ledger account whose ledger entries are queried against, and its balance is reduced as a result. */
   payoutLedgerAccountId: string;
   /** The id of the funding ledger account that sends to or receives funds from the payout ledger account. */
@@ -54,7 +54,7 @@ export const ledgerAccountPayoutSchema: Schema<LedgerAccountPayout> = object({
   updatedAt: ['updated_at', string()],
   ledgerId: ['ledger_id', string()],
   description: ['description', nullable(string())],
-  status: ['status', status6EnumSchema],
+  status: ['status', status6Schema],
   payoutLedgerAccountId: ['payout_ledger_account_id', string()],
   fundingLedgerAccountId: ['funding_ledger_account_id', string()],
   effectiveAtUpperBound: ['effective_at_upper_bound', string()],

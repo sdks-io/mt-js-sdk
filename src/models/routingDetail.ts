@@ -6,14 +6,11 @@
 
 import { boolean, lazy, nullable, object, Schema, string } from '../schema.js';
 import { Address, addressSchema } from './address.js';
+import { PaymentType1, paymentType1Schema } from './paymentType1.js';
 import {
-  PaymentType1Enum,
-  paymentType1EnumSchema,
-} from './paymentType1Enum.js';
-import {
-  RoutingNumberTypeEnum,
-  routingNumberTypeEnumSchema,
-} from './routingNumberTypeEnum.js';
+  RoutingNumberType,
+  routingNumberTypeSchema,
+} from './routingNumberType.js';
 
 export interface RoutingDetail {
   id: string;
@@ -26,9 +23,9 @@ export interface RoutingDetail {
   /** The routing number of the bank. */
   routingNumber: string;
   /** One of `aba`, `swift`, `ca_cpa`, `au_bsb`, `gb_sort_code`, `in_ifsc`, `cnaps`. */
-  routingNumberType: RoutingNumberTypeEnum;
+  routingNumberType: RoutingNumberType;
   /** If the routing detail is to be used for a specific payment type this field will be populated, otherwise null. */
-  paymentType: PaymentType1Enum | null;
+  paymentType: PaymentType1 | null;
   /** The name of the bank. */
   bankName: string;
   bankAddress: Address | null;
@@ -43,8 +40,8 @@ export const routingDetailSchema: Schema<RoutingDetail> = lazy(() =>
     updatedAt: ['updated_at', string()],
     discardedAt: ['discarded_at', nullable(string())],
     routingNumber: ['routing_number', string()],
-    routingNumberType: ['routing_number_type', routingNumberTypeEnumSchema],
-    paymentType: ['payment_type', nullable(paymentType1EnumSchema)],
+    routingNumberType: ['routing_number_type', routingNumberTypeSchema],
+    paymentType: ['payment_type', nullable(paymentType1Schema)],
     bankName: ['bank_name', string()],
     bankAddress: ['bank_address', nullable(addressSchema)],
   })

@@ -1,6 +1,8 @@
 
 # Counterparty Update Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `CounterpartyUpdateRequest`
@@ -14,6 +16,7 @@
 | `metadata` | `Record<string, string> \| undefined` | Optional | Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value. |
 | `sendRemittanceAdvice` | `boolean \| undefined` | Optional | If this is `true`, Modern Treasury will send an email to the counterparty whenever an associated payment order is sent to the bank. |
 | `taxpayerIdentifier` | `string \| undefined` | Optional | Either a valid SSN or EIN. |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -27,7 +30,11 @@
     "key2": "metadata3"
   },
   "send_remittance_advice": false,
-  "taxpayer_identifier": "taxpayer_identifier6"
+  "taxpayer_identifier": "taxpayer_identifier6",
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

@@ -1,6 +1,8 @@
 
 # Ledger Event Handler Create Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `LedgerEventHandlerCreateRequest`
@@ -15,6 +17,7 @@
 | `ledgerTransactionTemplate` | [`LedgerEventHandlerLedgerTransactionTemplate`](../../doc/models/ledger-event-handler-ledger-transaction-template.md) | Required | - |
 | `conditions` | [`LedgerEventHandlerConditions \| undefined`](../../doc/models/ledger-event-handler-conditions.md) | Optional | - |
 | `metadata` | `Record<string, string> \| null \| undefined` | Optional | Additional data represented as key-value pairs. Both the key and value must be strings. |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -48,6 +51,10 @@
     "field": "field6",
     "operator": "operator8",
     "value": "value4"
+  },
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
   }
 }
 ```

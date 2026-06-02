@@ -1,12 +1,12 @@
 # Ledger Account
 
 ```ts
-const ledgerAccountController = new LedgerAccountController(client);
+const ledgerAccountApi = new LedgerAccountApi(client);
 ```
 
 ## Class Name
 
-`LedgerAccountController`
+`LedgerAccountApi`
 
 ## Methods
 
@@ -69,7 +69,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerAccountController.listLedgerAccounts();
+  const response = await ledgerAccountApi.listLedgerAccounts();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -137,7 +137,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const body: LedgerAccountCreateRequest = {
   name: 'name6',
-  normalBalance: NormalBalanceEnum.Credit,
+  normalBalance: NormalBalance.Credit,
   ledgerId: '00002576-0000-0000-0000-000000000000',
   currency: 'currency6',
   metadata: {
@@ -148,7 +148,7 @@ const body: LedgerAccountCreateRequest = {
 };
 
 try {
-  const response = await ledgerAccountController.createLedgerAccount(
+  const response = await ledgerAccountApi.createLedgerAccount(
     undefined,
     body
   );
@@ -221,7 +221,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerAccountController.getLedgerAccount(id);
+  const response = await ledgerAccountApi.getLedgerAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -299,7 +299,7 @@ const body: LedgerAccountUpdateRequest = {
 };
 
 try {
-  const response = await ledgerAccountController.updateLedgerAccount(
+  const response = await ledgerAccountApi.updateLedgerAccount(
     id,
     body
   );
@@ -371,7 +371,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerAccountController.deleteLedgerAccount(id);
+  const response = await ledgerAccountApi.deleteLedgerAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

@@ -1,12 +1,12 @@
 # Routing Detail
 
 ```ts
-const routingDetailController = new RoutingDetailController(client);
+const routingDetailApi = new RoutingDetailApi(client);
 ```
 
 ## Class Name
 
-`RoutingDetailController`
+`RoutingDetailApi`
 
 ## Methods
 
@@ -22,7 +22,7 @@ Get a list of routing details for a single internal or external account.
 
 ```ts
 async listRoutingDetails(
-  accountsType: AccountsTypeEnum,
+  accountsType: AccountsType,
   accountId: string,
   afterCursor?: string | null,
   perPage?: number,
@@ -38,7 +38,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountsType` | [`AccountsTypeEnum`](../../doc/models/accounts-type-enum.md) | Template, Required | - |
+| `accountsType` | [`AccountsType`](../../doc/models/accounts-type.md) | Template, Required | - |
 | `accountId` | `string` | Template, Required | The ID of the account. |
 | `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
 | `perPage` | `number \| undefined` | Query, Optional | - |
@@ -53,12 +53,12 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```ts
-const accountsType = AccountsTypeEnum.ExternalAccounts;
+const accountsType = AccountsType.ExternalAccounts;
 
 const accountId = 'account_id2';
 
 try {
-  const response = await routingDetailController.listRoutingDetails(
+  const response = await routingDetailApi.listRoutingDetails(
     accountsType,
     accountId
   );
@@ -91,7 +91,7 @@ Create a routing detail for a single external account.
 
 ```ts
 async createRoutingDetail(
-  accountsType: AccountsType1Enum,
+  accountsType: AccountsType1,
   accountId: string,
   idempotencyKey?: string,
   body?: RoutingDetailCreateRequest,
@@ -107,7 +107,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountsType` | [`AccountsType1Enum`](../../doc/models/accounts-type-1-enum.md) | Template, Required | - |
+| `accountsType` | [`AccountsType1`](../../doc/models/accounts-type-1.md) | Template, Required | - |
 | `accountId` | `string` | Template, Required | The ID of the account. |
 | `idempotencyKey` | `string \| undefined` | Header, Optional | This key should be something unique, preferably something like an UUID. |
 | `body` | [`RoutingDetailCreateRequest \| undefined`](../../doc/models/routing-detail-create-request.md) | Body, Optional | - |
@@ -122,12 +122,12 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```ts
-const accountsType = AccountsType1Enum.ExternalAccounts;
+const accountsType = AccountsType1.ExternalAccounts;
 
 const accountId = 'account_id2';
 
 try {
-  const response = await routingDetailController.createRoutingDetail(
+  const response = await routingDetailApi.createRoutingDetail(
     accountsType,
     accountId
   );
@@ -170,7 +170,7 @@ Get a single routing detail for a single internal or external account.
 
 ```ts
 async getRoutingDetail(
-  accountsType: AccountsTypeEnum,
+  accountsType: AccountsType,
   accountId: string,
   id: string,
   requestOptions?: RequestOptions
@@ -185,7 +185,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountsType` | [`AccountsTypeEnum`](../../doc/models/accounts-type-enum.md) | Template, Required | - |
+| `accountsType` | [`AccountsType`](../../doc/models/accounts-type.md) | Template, Required | - |
 | `accountId` | `string` | Template, Required | The ID of the account. |
 | `id` | `string` | Template, Required | The ID of the routing detail. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -199,14 +199,14 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ## Example Usage
 
 ```ts
-const accountsType = AccountsTypeEnum.ExternalAccounts;
+const accountsType = AccountsType.ExternalAccounts;
 
 const accountId = 'account_id2';
 
 const id = 'id0';
 
 try {
-  const response = await routingDetailController.getRoutingDetail(
+  const response = await routingDetailApi.getRoutingDetail(
     accountsType,
     accountId,
     id
@@ -249,7 +249,7 @@ Delete a routing detail for a single external account.
 
 ```ts
 async deleteRoutingDetail(
-  accountsType: AccountsType1Enum,
+  accountsType: AccountsType1,
   accountId: string,
   id: string,
   requestOptions?: RequestOptions
@@ -264,7 +264,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountsType` | [`AccountsType1Enum`](../../doc/models/accounts-type-1-enum.md) | Template, Required | - |
+| `accountsType` | [`AccountsType1`](../../doc/models/accounts-type-1.md) | Template, Required | - |
 | `accountId` | `string` | Template, Required | The ID of the account. |
 | `id` | `string` | Template, Required | The ID of the routing detail. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -278,14 +278,14 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 ## Example Usage
 
 ```ts
-const accountsType = AccountsType1Enum.ExternalAccounts;
+const accountsType = AccountsType1.ExternalAccounts;
 
 const accountId = 'account_id2';
 
 const id = 'id0';
 
 try {
-  const response = await routingDetailController.deleteRoutingDetail(
+  const response = await routingDetailApi.deleteRoutingDetail(
     accountsType,
     accountId,
     id

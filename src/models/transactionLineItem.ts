@@ -13,10 +13,10 @@ import {
   string,
 } from '../schema.js';
 import {
-  TransactableTypeEnum,
-  transactableTypeEnumSchema,
-} from './transactableTypeEnum.js';
-import { Type12Enum, type12EnumSchema } from './type12Enum.js';
+  TransactableType,
+  transactableTypeSchema,
+} from './transactableType.js';
+import { Type12, type12Schema } from './type12.js';
 
 export interface TransactionLineItem {
   id: string;
@@ -27,9 +27,9 @@ export interface TransactionLineItem {
   updatedAt: string;
   discardedAt: string | null;
   /** Indicates whether the line item is `originating` or `receiving` (see https://www.moderntreasury.com/journal/beginners-guide-to-ach for more). */
-  type: Type12Enum;
+  type: Type12;
   /** If a matching object exists in Modern Treasury, the type will be populated here, otherwise `null`. */
-  transactableType: TransactableTypeEnum | null;
+  transactableType: TransactableType | null;
   /** If a matching object exists in Modern Treasury, the ID will be populated here, otherwise `null`. */
   transactableId: string | null;
   /** If a matching object exists in Modern Treasury, `amount` will be populated. Value in specified currency's smallest unit (taken from parent Transaction). */
@@ -49,8 +49,8 @@ export const transactionLineItemSchema: Schema<TransactionLineItem> = object({
   createdAt: ['created_at', string()],
   updatedAt: ['updated_at', string()],
   discardedAt: ['discarded_at', nullable(string())],
-  type: ['type', type12EnumSchema],
-  transactableType: ['transactable_type', nullable(transactableTypeEnumSchema)],
+  type: ['type', type12Schema],
+  transactableType: ['transactable_type', nullable(transactableTypeSchema)],
   transactableId: ['transactable_id', nullable(string())],
   amount: ['amount', number()],
   description: ['description', string()],

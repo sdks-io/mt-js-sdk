@@ -14,7 +14,7 @@
 | `liveMode` | `boolean` | Required | This field will be true if this object exists in the live environment or false if it exists in the test environment. |
 | `createdAt` | `string` | Required | - |
 | `updatedAt` | `string` | Required | - |
-| `balanceReportType` | [`BalanceReportTypeEnum`](../../doc/models/balance-report-type-enum.md) | Required | The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`. |
+| `balanceReportType` | [`BalanceReportType`](../../doc/models/balance-report-type.md) | Required | The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`. |
 | `asOfDate` | `string` | Required | The date of the balance report in local time. |
 | `asOfTime` | `string \| null` | Required | The time (24-hour clock) of the balance report in local time. |
 | `balances` | [`Balance[]`](../../doc/models/balance.md) | Required | An array of `Balance` objects. |

@@ -9,40 +9,46 @@ import {
   dict,
   lazy,
   nullable,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
 import {
   LedgerEntryCreateRequest,
   ledgerEntryCreateRequestSchema,
 } from './ledgerEntryCreateRequest.js';
-import { Status11Enum, status11EnumSchema } from './status11Enum.js';
+import { Status11, status11Schema } from './status11.js';
 
 export interface LedgerTransactionUpdateRequest {
   /** An optional description for internal use. */
   description?: string | null;
   /** To post a ledger transaction at creation, use `posted`. */
-  status?: Status11Enum;
+  status?: Status11;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata?: Record<string, string>;
   /** The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes. */
   effectiveAt?: string;
   /** An array of ledger entry objects. */
   ledgerEntries?: LedgerEntryCreateRequest[];
+  additionalProperties?: Record<string, unknown>;
 }
 
 export const ledgerTransactionUpdateRequestSchema: Schema<LedgerTransactionUpdateRequest> = lazy(
   () =>
-    object({
-      description: ['description', optional(nullable(string()))],
-      status: ['status', optional(status11EnumSchema)],
-      metadata: ['metadata', optional(dict(string()))],
-      effectiveAt: ['effective_at', optional(string())],
-      ledgerEntries: [
-        'ledger_entries',
-        optional(array(ledgerEntryCreateRequestSchema)),
-      ],
-    })
+    typedExpandoObject(
+      {
+        description: ['description', optional(nullable(string()))],
+        status: ['status', optional(status11Schema)],
+        metadata: ['metadata', optional(dict(string()))],
+        effectiveAt: ['effective_at', optional(string())],
+        ledgerEntries: [
+          'ledger_entries',
+          optional(array(ledgerEntryCreateRequestSchema)),
+        ],
+      },
+      'additionalProperties',
+      optional(unknown())
+    )
 );

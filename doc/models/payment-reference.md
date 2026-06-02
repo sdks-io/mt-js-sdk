@@ -15,7 +15,7 @@
 | `createdAt` | `string` | Required | - |
 | `updatedAt` | `string` | Required | - |
 | `referenceNumber` | `string` | Required | The vendor reference number. |
-| `referenceNumberType` | [`ReferenceNumberTypeEnum`](../../doc/models/reference-number-type-enum.md) | Required | The type of the reference number. Referring to the vendor payment id. |
+| `referenceNumberType` | [`ReferenceNumberType`](../../doc/models/reference-number-type.md) | Required | The type of the reference number. Referring to the vendor payment id. |
 
 ## Example (as JSON)
 

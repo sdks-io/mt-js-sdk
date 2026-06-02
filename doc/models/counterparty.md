@@ -20,7 +20,7 @@
 | `email` | `string \| null` | Required | The counterparty's email. |
 | `metadata` | `Record<string, string>` | Required | Additional data represented as key-value pairs. Both the key and value must be strings. |
 | `sendRemittanceAdvice` | `boolean` | Required | Send an email to the counterparty whenever an associated payment order is sent to the bank. |
-| `verificationStatus` | [`VerificationStatus1Enum`](../../doc/models/verification-status-1-enum.md) | Required | The verification status of the counterparty. |
+| `verificationStatus` | [`VerificationStatus1`](../../doc/models/verification-status-1.md) | Required | The verification status of the counterparty. |
 
 ## Example (as JSON)
 

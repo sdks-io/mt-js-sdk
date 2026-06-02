@@ -8,10 +8,11 @@ import {
   array,
   lazy,
   nullable,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
 import { ContactDetail, contactDetailSchema } from './contactDetail.js';
 import {
@@ -22,16 +23,10 @@ import {
   CounterpartyShippingAddress,
   counterpartyShippingAddressSchema,
 } from './counterpartyShippingAddress.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
+import { Currency, currencySchema } from './currency.js';
 import { InvoicerAddress, invoicerAddressSchema } from './invoicerAddress.js';
-import {
-  PaymentMethod1Enum,
-  paymentMethod1EnumSchema,
-} from './paymentMethod1Enum.js';
-import {
-  PaymentType6Enum,
-  paymentType6EnumSchema,
-} from './paymentType6Enum.js';
+import { PaymentMethod1, paymentMethod1Schema } from './paymentMethod1.js';
+import { PaymentType6, paymentType6Schema } from './paymentType6.js';
 
 export interface InvoiceCreateRequest {
   /** The invoicer's contact details displayed at the top of the invoice. */
@@ -43,7 +38,7 @@ export interface InvoiceCreateRequest {
   /** The counterparty's shipping address where physical goods should be delivered. */
   counterpartyShippingAddress?: CounterpartyShippingAddress | null;
   /** Three-letter ISO currency code. */
-  currency?: CurrencyEnum;
+  currency?: Currency;
   /** A free-form description of the invoice. */
   description?: string;
   /** A future date by when the invoice needs to be paid. */
@@ -57,35 +52,43 @@ export interface InvoiceCreateRequest {
   /** Date transactions are to be posted to the participants' account. Defaults to the current business day or the next business day if the current day is a bank holiday or weekend. Format: yyyy-mm-dd. */
   paymentEffectiveDate?: string;
   /** One of `ach`, `eft`, `wire`, `check`, `sen`, `book`, `rtp`, `sepa`, `bacs`, `au_becs`, `interac`, `signet`, `provexchange`. */
-  paymentType?: PaymentType6Enum;
+  paymentType?: PaymentType6;
   /** The method by which the invoice can be paid. `ui` will show the embedded payment collection flow. `automatic` will automatically initiate payment based upon the account details of the receiving_account id.\nIf the invoice amount is positive, the automatically initiated payment order's direction will be debit. If the invoice amount is negative, the automatically initiated payment order's direction will be credit. One of `manual`, `ui`, or `automatic`. */
-  paymentMethod?: PaymentMethod1Enum;
+  paymentMethod?: PaymentMethod1;
+  additionalProperties?: Record<string, unknown>;
 }
 
 export const invoiceCreateRequestSchema: Schema<InvoiceCreateRequest> = lazy(
   () =>
-    object({
-      contactDetails: ['contact_details', optional(array(contactDetailSchema))],
-      counterpartyId: ['counterparty_id', string()],
-      counterpartyBillingAddress: [
-        'counterparty_billing_address',
-        optional(nullable(counterpartyBillingAddressSchema)),
-      ],
-      counterpartyShippingAddress: [
-        'counterparty_shipping_address',
-        optional(nullable(counterpartyShippingAddressSchema)),
-      ],
-      currency: ['currency', optional(currencyEnumSchema)],
-      description: ['description', optional(string())],
-      dueDate: ['due_date', string()],
-      invoicerAddress: [
-        'invoicer_address',
-        optional(nullable(invoicerAddressSchema)),
-      ],
-      originatingAccountId: ['originating_account_id', string()],
-      receivingAccountId: ['receiving_account_id', optional(string())],
-      paymentEffectiveDate: ['payment_effective_date', optional(string())],
-      paymentType: ['payment_type', optional(paymentType6EnumSchema)],
-      paymentMethod: ['payment_method', optional(paymentMethod1EnumSchema)],
-    })
+    typedExpandoObject(
+      {
+        contactDetails: [
+          'contact_details',
+          optional(array(contactDetailSchema)),
+        ],
+        counterpartyId: ['counterparty_id', string()],
+        counterpartyBillingAddress: [
+          'counterparty_billing_address',
+          optional(nullable(counterpartyBillingAddressSchema)),
+        ],
+        counterpartyShippingAddress: [
+          'counterparty_shipping_address',
+          optional(nullable(counterpartyShippingAddressSchema)),
+        ],
+        currency: ['currency', optional(currencySchema)],
+        description: ['description', optional(string())],
+        dueDate: ['due_date', string()],
+        invoicerAddress: [
+          'invoicer_address',
+          optional(nullable(invoicerAddressSchema)),
+        ],
+        originatingAccountId: ['originating_account_id', string()],
+        receivingAccountId: ['receiving_account_id', optional(string())],
+        paymentEffectiveDate: ['payment_effective_date', optional(string())],
+        paymentType: ['payment_type', optional(paymentType6Schema)],
+        paymentMethod: ['payment_method', optional(paymentMethod1Schema)],
+      },
+      'additionalProperties',
+      optional(unknown())
+    )
 );

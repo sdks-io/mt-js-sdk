@@ -14,15 +14,15 @@
 | `liveMode` | `boolean` | Required | This field will be true if this object exists in the live environment or false if it exists in the test environment. |
 | `createdAt` | `string` | Required | - |
 | `updatedAt` | `string` | Required | - |
-| `accountType` | [`AccountType5Enum \| null`](../../doc/models/account-type-5-enum.md) | Required | Can be checking, savings or other. |
+| `accountType` | [`AccountType5 \| null`](../../doc/models/account-type-5.md) | Required | Can be checking, savings or other. |
 | `partyName` | `string` | Required | The legal name of the entity which owns the account. |
-| `partyType` | [`PartyType5Enum \| null`](../../doc/models/party-type-5-enum.md) | Required | Either individual or business. |
+| `partyType` | [`PartyType5 \| null`](../../doc/models/party-type-5.md) | Required | Either individual or business. |
 | `partyAddress` | [`Address \| null`](../../doc/models/address.md) | Required | - |
 | `name` | `string \| null` | Required | A nickname for the account. |
 | `accountDetails` | [`AccountDetail[]`](../../doc/models/account-detail.md) | Required | An array of account detail objects. |
 | `routingDetails` | [`RoutingDetail[]`](../../doc/models/routing-detail.md) | Required | An array of routing detail objects. |
 | `connection` | [`Connection`](../../doc/models/connection.md) | Required | - |
-| `currency` | [`CurrencyEnum`](../../doc/models/currency-enum.md) | Required | Three-letter ISO currency code. |
+| `currency` | [`Currency`](../../doc/models/currency.md) | Required | Three-letter ISO currency code. |
 | `metadata` | `Record<string, string>` | Required | Additional data represented as key-value pairs. Both the key and value must be strings. |
 | `parentAccountId` | `string \| null` | Required | The parent InternalAccount of this account. |
 | `counterpartyId` | `string \| null` | Required | The Counterparty associated to this account. |

@@ -13,8 +13,8 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import { PaymentTypeEnum, paymentTypeEnumSchema } from './paymentTypeEnum.js';
-import { StatusEnum, statusEnumSchema } from './statusEnum.js';
+import { PaymentType, paymentTypeSchema } from './paymentType.js';
+import { Status, statusSchema } from './status.js';
 
 export interface AccountCollectionFlow {
   id?: string;
@@ -26,12 +26,12 @@ export interface AccountCollectionFlow {
   /** The client token of the account collection flow.  This token can be used to embed account collection in your client-side application. */
   clientToken?: string;
   /** The current status of the account collection flow. One of `pending`, `completed`, `expired`, or `cancelled`. */
-  status?: StatusEnum;
+  status?: Status;
   /** The ID of a counterparty. An external account created with this flow will be associated with this counterparty. */
   counterpartyId: string;
   /** If present, the ID of the external account created using this flow. */
   externalAccountId?: string | null;
-  paymentTypes: PaymentTypeEnum[];
+  paymentTypes: PaymentType[];
 }
 
 export const accountCollectionFlowSchema: Schema<AccountCollectionFlow> = object(
@@ -42,9 +42,9 @@ export const accountCollectionFlowSchema: Schema<AccountCollectionFlow> = object
     createdAt: ['created_at', optional(string())],
     updatedAt: ['updated_at', optional(string())],
     clientToken: ['client_token', optional(string())],
-    status: ['status', optional(statusEnumSchema)],
+    status: ['status', optional(statusSchema)],
     counterpartyId: ['counterparty_id', string()],
     externalAccountId: ['external_account_id', optional(nullable(string()))],
-    paymentTypes: ['payment_types', array(paymentTypeEnumSchema)],
+    paymentTypes: ['payment_types', array(paymentTypeSchema)],
   }
 );

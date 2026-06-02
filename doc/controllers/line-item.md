@@ -1,12 +1,12 @@
 # Line Item
 
 ```ts
-const lineItemController = new LineItemController(client);
+const lineItemApi = new LineItemApi(client);
 ```
 
 ## Class Name
 
-`LineItemController`
+`LineItemApi`
 
 ## Methods
 
@@ -22,7 +22,7 @@ Get a list of line items
 ```ts
 async listLineItems(
   itemizableId: string,
-  itemizableType: ItemizableType1Enum,
+  itemizableType: ItemizableType1,
   afterCursor?: string | null,
   perPage?: number,
   requestOptions?: RequestOptions
@@ -38,7 +38,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `itemizableId` | `string` | Template, Required | The ID of the payment order or expected payment. |
-| `itemizableType` | [`ItemizableType1Enum`](../../doc/models/itemizable-type-1-enum.md) | Template, Required | One of `payment_orders` or `expected_payments`. |
+| `itemizableType` | [`ItemizableType1`](../../doc/models/itemizable-type-1.md) | Template, Required | One of `payment_orders` or `expected_payments`. |
 | `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
 | `perPage` | `number \| undefined` | Query, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -54,10 +54,10 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const itemizableId = 'itemizable_id4';
 
-const itemizableType = ItemizableType1Enum.ExpectedPayments;
+const itemizableType = ItemizableType1.ExpectedPayments;
 
 try {
-  const response = await lineItemController.listLineItems(
+  const response = await lineItemApi.listLineItems(
     itemizableId,
     itemizableType
   );
@@ -91,7 +91,7 @@ Get a single line item
 ```ts
 async getLineItem(
   itemizableId: string,
-  itemizableType: ItemizableType1Enum,
+  itemizableType: ItemizableType1,
   id: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<LineItem>>
@@ -106,7 +106,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `itemizableId` | `string` | Template, Required | The ID of the payment order or expected payment. |
-| `itemizableType` | [`ItemizableType1Enum`](../../doc/models/itemizable-type-1-enum.md) | Template, Required | One of `payment_orders` or `expected_payments`. |
+| `itemizableType` | [`ItemizableType1`](../../doc/models/itemizable-type-1.md) | Template, Required | One of `payment_orders` or `expected_payments`. |
 | `id` | `string` | Template, Required | The ID of the line item. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -121,12 +121,12 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const itemizableId = 'itemizable_id4';
 
-const itemizableType = ItemizableType1Enum.ExpectedPayments;
+const itemizableType = ItemizableType1.ExpectedPayments;
 
 const id = 'id0';
 
 try {
-  const response = await lineItemController.getLineItem(
+  const response = await lineItemApi.getLineItem(
     itemizableId,
     itemizableType,
     id
@@ -159,7 +159,7 @@ try {
 ```ts
 async updateLineItem(
   itemizableId: string,
-  itemizableType: ItemizableType1Enum,
+  itemizableType: ItemizableType1,
   id: string,
   body?: LineItemUpdateRequest,
   requestOptions?: RequestOptions
@@ -175,7 +175,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `itemizableId` | `string` | Template, Required | The ID of the payment order or expected payment. |
-| `itemizableType` | [`ItemizableType1Enum`](../../doc/models/itemizable-type-1-enum.md) | Template, Required | One of `payment_orders` or `expected_payments`. |
+| `itemizableType` | [`ItemizableType1`](../../doc/models/itemizable-type-1.md) | Template, Required | One of `payment_orders` or `expected_payments`. |
 | `id` | `string` | Template, Required | The ID of the line item. |
 | `body` | [`LineItemUpdateRequest \| undefined`](../../doc/models/line-item-update-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -191,7 +191,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const itemizableId = 'itemizable_id4';
 
-const itemizableType = ItemizableType1Enum.ExpectedPayments;
+const itemizableType = ItemizableType1.ExpectedPayments;
 
 const id = 'id0';
 
@@ -204,7 +204,7 @@ const body: LineItemUpdateRequest = {
 };
 
 try {
-  const response = await lineItemController.updateLineItem(
+  const response = await lineItemApi.updateLineItem(
     itemizableId,
     itemizableType,
     id,

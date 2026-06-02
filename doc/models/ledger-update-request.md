@@ -1,6 +1,8 @@
 
 # Ledger Update Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `LedgerUpdateRequest`
@@ -12,6 +14,7 @@
 | `name` | `string \| undefined` | Optional | The name of the ledger. |
 | `description` | `string \| null \| undefined` | Optional | An optional free-form description for internal use. |
 | `metadata` | `Record<string, string> \| undefined` | Optional | Additional data represented as key-value pairs. Both the key and value must be strings. |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -23,7 +26,11 @@
     "modern": "treasury"
   },
   "name": "name2",
-  "description": "description8"
+  "description": "description8",
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

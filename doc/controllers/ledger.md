@@ -1,12 +1,12 @@
 # Ledger
 
 ```ts
-const ledgerController = new LedgerController(client);
+const ledgerApi = new LedgerApi(client);
 ```
 
 ## Class Name
 
-`LedgerController`
+`LedgerApi`
 
 ## Methods
 
@@ -55,7 +55,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerController.listLedgers();
+  const response = await ledgerApi.listLedgers();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -122,7 +122,7 @@ const body: LedgerCreateRequest = {
 };
 
 try {
-  const response = await ledgerController.createLedger(
+  const response = await ledgerApi.createLedger(
     undefined,
     body
   );
@@ -193,7 +193,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerController.getLedger(id);
+  const response = await ledgerApi.getLedger(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -270,7 +270,7 @@ const body: LedgerUpdateRequest = {
 };
 
 try {
-  const response = await ledgerController.updateLedger(
+  const response = await ledgerApi.updateLedger(
     id,
     body
   );
@@ -342,7 +342,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerController.deleteLedger(id);
+  const response = await ledgerApi.deleteLedger(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

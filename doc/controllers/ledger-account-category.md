@@ -1,12 +1,12 @@
 # Ledger Account Category
 
 ```ts
-const ledgerAccountCategoryController = new LedgerAccountCategoryController(client);
+const ledgerAccountCategoryApi = new LedgerAccountCategoryApi(client);
 ```
 
 ## Class Name
 
-`LedgerAccountCategoryController`
+`LedgerAccountCategoryApi`
 
 ## Methods
 
@@ -67,7 +67,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerAccountCategoryController.listLedgerAccountCategories();
+  const response = await ledgerAccountCategoryApi.listLedgerAccountCategories();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -128,7 +128,7 @@ const body: LedgerAccountCategoryCreateRequest = {
   name: 'name6',
   currency: 'currency6',
   ledgerId: '00002576-0000-0000-0000-000000000000',
-  normalBalance: NormalBalance2Enum.Credit,
+  normalBalance: NormalBalance2.Credit,
   metadata: {
     'key': 'value',
     'foo': 'bar',
@@ -137,7 +137,7 @@ const body: LedgerAccountCategoryCreateRequest = {
 };
 
 try {
-  const response = await ledgerAccountCategoryController.createLedgerAccountCategory(
+  const response = await ledgerAccountCategoryApi.createLedgerAccountCategory(
     undefined,
     body
   );
@@ -210,7 +210,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerAccountCategoryController.getLedgerAccountCategory(id);
+  const response = await ledgerAccountCategoryApi.getLedgerAccountCategory(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -288,7 +288,7 @@ const body: LedgerAccountCategoryUpdateRequest = {
 };
 
 try {
-  const response = await ledgerAccountCategoryController.updateLedgerAccountCategory(
+  const response = await ledgerAccountCategoryApi.updateLedgerAccountCategory(
     id,
     body
   );
@@ -360,7 +360,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerAccountCategoryController.deleteLedgerAccountCategory(id);
+  const response = await ledgerAccountCategoryApi.deleteLedgerAccountCategory(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -432,7 +432,7 @@ const id = 'id0';
 const ledgerAccountId = 'ledger_account_id4';
 
 try {
-  const response = await ledgerAccountCategoryController.addLedgerAccountToLedgerAccountCategory(
+  const response = await ledgerAccountCategoryApi.addLedgerAccountToLedgerAccountCategory(
     id,
     ledgerAccountId
   );
@@ -508,7 +508,7 @@ const id = 'id0';
 const ledgerAccountId = 'ledger_account_id4';
 
 try {
-  const response = await ledgerAccountCategoryController.removeLedgerAccountFromLedgerAccountCategory(
+  const response = await ledgerAccountCategoryApi.removeLedgerAccountFromLedgerAccountCategory(
     id,
     ledgerAccountId
   );
@@ -584,7 +584,7 @@ const id = 'id0';
 const subCategoryId = 'sub_category_id0';
 
 try {
-  const response = await ledgerAccountCategoryController.addLedgerAccountCategoryToLedgerAccountCategory(
+  const response = await ledgerAccountCategoryApi.addLedgerAccountCategoryToLedgerAccountCategory(
     id,
     subCategoryId
   );
@@ -660,7 +660,7 @@ const id = 'id0';
 const subCategoryId = 'sub_category_id0';
 
 try {
-  const response = await ledgerAccountCategoryController.deleteLedgerAccountCategoryFromLedgerAccountCategory(
+  const response = await ledgerAccountCategoryApi.deleteLedgerAccountCategoryFromLedgerAccountCategory(
     id,
     subCategoryId
   );

@@ -23,18 +23,12 @@ import {
   CounterpartyShippingAddress,
   counterpartyShippingAddressSchema,
 } from './counterpartyShippingAddress.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
+import { Currency, currencySchema } from './currency.js';
 import { InvoicerAddress, invoicerAddressSchema } from './invoicerAddress.js';
-import {
-  PaymentMethodEnum,
-  paymentMethodEnumSchema,
-} from './paymentMethodEnum.js';
+import { PaymentMethod, paymentMethodSchema } from './paymentMethod.js';
 import { PaymentOrder, paymentOrderSchema } from './paymentOrder.js';
-import {
-  PaymentType5Enum,
-  paymentType5EnumSchema,
-} from './paymentType5Enum.js';
-import { Status5Enum, status5EnumSchema } from './status5Enum.js';
+import { PaymentType5, paymentType5Schema } from './paymentType5.js';
+import { Status5, status5Schema } from './status5.js';
 
 export interface Invoice {
   id: string;
@@ -52,7 +46,7 @@ export interface Invoice {
   /** The counterparty's shipping address where physical goods should be delivered. */
   counterpartyShippingAddress: CounterpartyShippingAddress | null;
   /** Three-letter ISO currency code. */
-  currency: CurrencyEnum;
+  currency: Currency;
   /** A free-form description of the invoice. */
   description: string;
   /** A future date by when the invoice needs to be paid. */
@@ -66,9 +60,9 @@ export interface Invoice {
   /** Date transactions are to be posted to the participants' account. Defaults to the current business day or the next business day if the current day is a bank holiday or weekend. Format: yyyy-mm-dd. */
   paymentEffectiveDate: string | null;
   /** One of `ach` or `eft` */
-  paymentType: PaymentType5Enum | null;
+  paymentType: PaymentType5 | null;
   /** When opening an invoice, whether to show the embedded payment UI , automatically debit the recipient, or rely on manual payment from the recipient. */
-  paymentMethod: PaymentMethodEnum | null;
+  paymentMethod: PaymentMethod | null;
   /** The URL of the hosted web UI where the invoice can be viewed. */
   hostedUrl: string;
   /** A unique record number assigned to each invoice that is issued. */
@@ -78,7 +72,7 @@ export interface Invoice {
   /** The URL where the invoice PDF can be downloaded. */
   pdfUrl: string | null;
   /** The status of the invoice. */
-  status: Status5Enum;
+  status: Status5;
   /** Total amount due in specified currency's smallest unit, e.g., $10 USD would be represented as 1000. */
   totalAmount: number;
 }
@@ -100,20 +94,20 @@ export const invoiceSchema: Schema<Invoice> = lazy(() =>
       'counterparty_shipping_address',
       nullable(counterpartyShippingAddressSchema),
     ],
-    currency: ['currency', currencyEnumSchema],
+    currency: ['currency', currencySchema],
     description: ['description', string()],
     dueDate: ['due_date', string()],
     invoicerAddress: ['invoicer_address', nullable(invoicerAddressSchema)],
     originatingAccountId: ['originating_account_id', string()],
     receivingAccountId: ['receiving_account_id', nullable(string())],
     paymentEffectiveDate: ['payment_effective_date', nullable(string())],
-    paymentType: ['payment_type', nullable(paymentType5EnumSchema)],
-    paymentMethod: ['payment_method', nullable(paymentMethodEnumSchema)],
+    paymentType: ['payment_type', nullable(paymentType5Schema)],
+    paymentMethod: ['payment_method', nullable(paymentMethodSchema)],
     hostedUrl: ['hosted_url', string()],
     number: ['number', string()],
     paymentOrders: ['payment_orders', array(paymentOrderSchema)],
     pdfUrl: ['pdf_url', nullable(string())],
-    status: ['status', status5EnumSchema],
+    status: ['status', status5Schema],
     totalAmount: ['total_amount', number()],
   })
 );

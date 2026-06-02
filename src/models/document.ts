@@ -14,9 +14,9 @@ import {
   string,
 } from '../schema.js';
 import {
-  DocumentableTypeEnum,
-  documentableTypeEnumSchema,
-} from './documentableTypeEnum.js';
+  DocumentableType,
+  documentableTypeSchema,
+} from './documentableType.js';
 import { DocumentDetail, documentDetailSchema } from './documentDetail.js';
 import { File, fileSchema } from './file.js';
 
@@ -35,7 +35,7 @@ export interface Document {
   /** The unique identifier for the associated object. */
   documentableId: string;
   /** The type of the associated object. Currently can be one of `payment_order`, `transaction`, `paper_item`, `expected_payment`, `counterparty`, `organization`, `case`, `internal_account`, `decision`, or `external_account`. */
-  documentableType: DocumentableTypeEnum;
+  documentableType: DocumentableType;
   documentDetails: DocumentDetail[];
   file: File;
 }
@@ -51,7 +51,7 @@ export const documentSchema: Schema<Document> = lazy(() =>
     documentType: ['document_type', nullable(string())],
     source: ['source', string()],
     documentableId: ['documentable_id', string()],
-    documentableType: ['documentable_type', documentableTypeEnumSchema],
+    documentableType: ['documentable_type', documentableTypeSchema],
     documentDetails: ['document_details', array(documentDetailSchema)],
     file: ['file', fileSchema],
   })

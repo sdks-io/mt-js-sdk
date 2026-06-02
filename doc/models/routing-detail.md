@@ -16,8 +16,8 @@
 | `updatedAt` | `string` | Required | - |
 | `discardedAt` | `string \| null` | Required | - |
 | `routingNumber` | `string` | Required | The routing number of the bank. |
-| `routingNumberType` | [`RoutingNumberTypeEnum`](../../doc/models/routing-number-type-enum.md) | Required | One of `aba`, `swift`, `ca_cpa`, `au_bsb`, `gb_sort_code`, `in_ifsc`, `cnaps`. |
-| `paymentType` | [`PaymentType1Enum \| null`](../../doc/models/payment-type-1-enum.md) | Required | If the routing detail is to be used for a specific payment type this field will be populated, otherwise null. |
+| `routingNumberType` | [`RoutingNumberType`](../../doc/models/routing-number-type.md) | Required | One of `aba`, `swift`, `ca_cpa`, `au_bsb`, `gb_sort_code`, `in_ifsc`, `cnaps`. |
+| `paymentType` | [`PaymentType1 \| null`](../../doc/models/payment-type-1.md) | Required | If the routing detail is to be used for a specific payment type this field will be populated, otherwise null. |
 | `bankName` | `string` | Required | The name of the bank. |
 | `bankAddress` | [`Address \| null`](../../doc/models/address.md) | Required | - |
 

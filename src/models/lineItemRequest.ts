@@ -8,10 +8,11 @@ import {
   dict,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
 
 export interface LineItemRequest {
@@ -23,14 +24,19 @@ export interface LineItemRequest {
   description?: string | null;
   /** The ID of one of your accounting categories. Note that these will only be accessible if your accounting system has been connected. */
   accountingCategoryId?: string | null;
+  additionalProperties?: Record<string, unknown>;
 }
 
-export const lineItemRequestSchema: Schema<LineItemRequest> = object({
-  amount: ['amount', number()],
-  metadata: ['metadata', optional(dict(string()))],
-  description: ['description', optional(nullable(string()))],
-  accountingCategoryId: [
-    'accounting_category_id',
-    optional(nullable(string())),
-  ],
-});
+export const lineItemRequestSchema: Schema<LineItemRequest> = typedExpandoObject(
+  {
+    amount: ['amount', number()],
+    metadata: ['metadata', optional(dict(string()))],
+    description: ['description', optional(nullable(string()))],
+    accountingCategoryId: [
+      'accounting_category_id',
+      optional(nullable(string())),
+    ],
+  },
+  'additionalProperties',
+  optional(unknown())
+);

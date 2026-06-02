@@ -16,18 +16,18 @@ import {
   string,
   unknown,
 } from '../schema.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
-import { Direction4Enum, direction4EnumSchema } from './direction4Enum.js';
+import { Currency, currencySchema } from './currency.js';
+import { Direction4, direction4Schema } from './direction4.js';
 import {
-  OriginatingAccountNumberTypeEnum,
-  originatingAccountNumberTypeEnumSchema,
-} from './originatingAccountNumberTypeEnum.js';
+  OriginatingAccountNumberType,
+  originatingAccountNumberTypeSchema,
+} from './originatingAccountNumberType.js';
 import {
-  OriginatingRoutingNumberTypeEnum,
-  originatingRoutingNumberTypeEnumSchema,
-} from './originatingRoutingNumberTypeEnum.js';
-import { Status2Enum, status2EnumSchema } from './status2Enum.js';
-import { Type4Enum, type4EnumSchema } from './type4Enum.js';
+  OriginatingRoutingNumberType,
+  originatingRoutingNumberTypeSchema,
+} from './originatingRoutingNumberType.js';
+import { Status2, status2Schema } from './status2.js';
+import { Type4, type4Schema } from './type4.js';
 import { VirtualAccount, virtualAccountSchema } from './virtualAccount.js';
 
 export interface IncomingPaymentDetail {
@@ -49,17 +49,17 @@ export interface IncomingPaymentDetail {
   /** The ID of the ledger transaction linked to the incoming payment detail or `null`. */
   ledgerTransactionId: string | null;
   /** One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`, `signet`, or `wire`. */
-  type: Type4Enum;
+  type: Type4;
   /** The raw data from the payment pre-notification file that we get from the bank. */
   data?: unknown;
   /** Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. */
   amount: number;
   /** Three-letter ISO currency code. */
-  currency: CurrencyEnum;
+  currency: Currency;
   /** One of `credit` or `debit`. */
-  direction: Direction4Enum;
+  direction: Direction4;
   /** The current status of the incoming payment order. One of `pending`, `completed`, or `returned`. */
-  status: Status2Enum;
+  status: Status2;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata: Record<string, string>;
   /** The date on which the corresponding transaction will occur. */
@@ -69,13 +69,13 @@ export interface IncomingPaymentDetail {
   /** The routing number of the originating account for the incoming payment detail. */
   originatingRoutingNumber: string | null;
   /** The type of the originating routing number for the incoming payment detail. */
-  originatingRoutingNumberType: OriginatingRoutingNumberTypeEnum | null;
+  originatingRoutingNumberType: OriginatingRoutingNumberType | null;
   /** The account number of the originating account for the incoming payment detail. */
   originatingAccountNumber?: string | null;
   /** The last 4 digits of the originating account_number for the incoming payment detail. */
   originatingAccountNumberSafe: string | null;
   /** The type of the originating account number for the incoming payment detail. */
-  originatingAccountNumberType: OriginatingAccountNumberTypeEnum | null;
+  originatingAccountNumberType: OriginatingAccountNumberType | null;
 }
 
 export const incomingPaymentDetailSchema: Schema<IncomingPaymentDetail> = lazy(
@@ -92,12 +92,12 @@ export const incomingPaymentDetailSchema: Schema<IncomingPaymentDetail> = lazy(
       transactionLineItemId: ['transaction_line_item_id', nullable(string())],
       transactionId: ['transaction_id', nullable(string())],
       ledgerTransactionId: ['ledger_transaction_id', nullable(string())],
-      type: ['type', type4EnumSchema],
+      type: ['type', type4Schema],
       data: ['data', optional(unknown())],
       amount: ['amount', number()],
-      currency: ['currency', currencyEnumSchema],
-      direction: ['direction', direction4EnumSchema],
-      status: ['status', status2EnumSchema],
+      currency: ['currency', currencySchema],
+      direction: ['direction', direction4Schema],
+      status: ['status', status2Schema],
       metadata: ['metadata', dict(string())],
       asOfDate: ['as_of_date', string()],
       vendorId: ['vendor_id', nullable(string())],
@@ -107,7 +107,7 @@ export const incomingPaymentDetailSchema: Schema<IncomingPaymentDetail> = lazy(
       ],
       originatingRoutingNumberType: [
         'originating_routing_number_type',
-        nullable(originatingRoutingNumberTypeEnumSchema),
+        nullable(originatingRoutingNumberTypeSchema),
       ],
       originatingAccountNumber: [
         'originating_account_number',
@@ -119,7 +119,7 @@ export const incomingPaymentDetailSchema: Schema<IncomingPaymentDetail> = lazy(
       ],
       originatingAccountNumberType: [
         'originating_account_number_type',
-        nullable(originatingAccountNumberTypeEnumSchema),
+        nullable(originatingAccountNumberTypeSchema),
       ],
     })
 );

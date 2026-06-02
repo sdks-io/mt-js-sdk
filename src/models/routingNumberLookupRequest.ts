@@ -15,21 +15,21 @@ import {
 } from '../schema.js';
 import { AddressRequest, addressRequestSchema } from './addressRequest.js';
 import {
-  RoutingNumberType7Enum,
-  routingNumberType7EnumSchema,
-} from './routingNumberType7Enum.js';
+  RoutingNumberType7,
+  routingNumberType7Schema,
+} from './routingNumberType7.js';
 import {
-  SupportedPaymentTypeEnum,
-  supportedPaymentTypeEnumSchema,
-} from './supportedPaymentTypeEnum.js';
+  SupportedPaymentType,
+  supportedPaymentTypeSchema,
+} from './supportedPaymentType.js';
 
 export interface RoutingNumberLookupRequest {
   /** The routing number of the bank. */
   routingNumber?: string;
   /** One of `aba`, `au_bsb`, `br_codigo`, `ca_cpa`, `cnaps`, `gb_sort_code`, `in_ifsc`, `my_branch_code`, or `swift`. In sandbox mode we currently only support `aba` and `swift` with routing numbers '123456789' and 'GRINUST0XXX' respectively. */
-  routingNumberType?: RoutingNumberType7Enum;
+  routingNumberType?: RoutingNumberType7;
   /** An array of payment types that are supported for this routing number. This can include `ach`, `wire`, `rtp`, `sepa`, `bacs`, `au_becs` currently. */
-  supportedPaymentTypes?: SupportedPaymentTypeEnum[];
+  supportedPaymentTypes?: SupportedPaymentType[];
   /** The name of the bank. */
   bankName?: string;
   bankAddress?: AddressRequest;
@@ -43,11 +43,11 @@ export const routingNumberLookupRequestSchema: Schema<RoutingNumberLookupRequest
       routingNumber: ['routing_number', optional(string())],
       routingNumberType: [
         'routing_number_type',
-        optional(routingNumberType7EnumSchema),
+        optional(routingNumberType7Schema),
       ],
       supportedPaymentTypes: [
         'supported_payment_types',
-        optional(array(supportedPaymentTypeEnumSchema)),
+        optional(array(supportedPaymentTypeSchema)),
       ],
       bankName: ['bank_name', optional(string())],
       bankAddress: ['bank_address', optional(addressRequestSchema)],

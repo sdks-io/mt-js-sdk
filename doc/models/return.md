@@ -15,20 +15,20 @@
 | `createdAt` | `string` | Required | - |
 | `updatedAt` | `string` | Required | - |
 | `returnableId` | `string \| null` | Required | The ID of the object being returned or `null`. |
-| `returnableType` | [`ReturnableTypeEnum \| null`](../../doc/models/returnable-type-enum.md) | Required | The type of object being returned or `null`. |
-| `code` | [`Code1Enum \| null`](../../doc/models/code-1-enum.md) | Required | The return code. For ACH returns, this is the required ACH return code. |
+| `returnableType` | [`ReturnableType \| null`](../../doc/models/returnable-type.md) | Required | The type of object being returned or `null`. |
+| `code` | [`Code1 \| null`](../../doc/models/code-1.md) | Required | The return code. For ACH returns, this is the required ACH return code. |
 | `reason` | `string \| null` | Required | Often the bank will provide an explanation for the return, which is a short human readable string. |
 | `dateOfDeath` | `string \| null` | Required | If the return code is `R14` or `R15` this is the date the deceased counterparty passed away. |
 | `additionalInformation` | `string \| null` | Required | Some returns may include additional information from the bank. In these cases, this string will be present. |
-| `status` | [`Status4Enum`](../../doc/models/status-4-enum.md) | Required | The current status of the return. |
+| `status` | [`Status4`](../../doc/models/status-4.md) | Required | The current status of the return. |
 | `transactionLineItemId` | `string \| null` | Required | The ID of the relevant Transaction Line Item or `null`. |
 | `transactionId` | `string \| null` | Required | The ID of the relevant Transaction or `null`. |
 | `internalAccountId` | `string \| null` | Required | The ID of the relevant Internal Account. |
-| `type` | [`Type6Enum`](../../doc/models/type-6-enum.md) | Required | The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`, `bacs`, `eft`, `interac`, `manual`, `paper_item`, `wire`. |
+| `type` | [`Type6`](../../doc/models/type-6.md) | Required | The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`, `bacs`, `eft`, `interac`, `manual`, `paper_item`, `wire`. |
 | `amount` | `number` | Required | Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. |
-| `currency` | [`CurrencyEnum`](../../doc/models/currency-enum.md) | Required | Three-letter ISO currency code. |
+| `currency` | [`Currency`](../../doc/models/currency.md) | Required | Three-letter ISO currency code. |
 | `failureReason` | `string \| null` | Required | If an originating return failed to be processed by the bank, a description of the failure reason will be available. |
-| `role` | [`RoleEnum`](../../doc/models/role-enum.md) | Required | The role of the return, can be `originating` or `receiving`. |
+| `role` | [`Role`](../../doc/models/role.md) | Required | The role of the return, can be `originating` or `receiving`. |
 | `currentReturn` | [`Return`](../../doc/models/return.md) | Required | - |
 | `referenceNumbers` | [`PaymentReference[]`](../../doc/models/payment-reference.md) | Required | An array of Payment Reference objects. |
 | `ledgerTransactionId` | `string \| null` | Required | The ID of the ledger transaction linked to the return. |

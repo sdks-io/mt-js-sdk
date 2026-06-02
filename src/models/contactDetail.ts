@@ -6,9 +6,9 @@
 
 import { boolean, nullable, object, Schema, string } from '../schema.js';
 import {
-  ContactIdentifierTypeEnum,
-  contactIdentifierTypeEnumSchema,
-} from './contactIdentifierTypeEnum.js';
+  ContactIdentifierType,
+  contactIdentifierTypeSchema,
+} from './contactIdentifierType.js';
 
 export interface ContactDetail {
   id: string;
@@ -19,7 +19,7 @@ export interface ContactDetail {
   updatedAt: string;
   discardedAt: string | null;
   contactIdentifier: string;
-  contactIdentifierType: ContactIdentifierTypeEnum;
+  contactIdentifierType: ContactIdentifierType;
 }
 
 export const contactDetailSchema: Schema<ContactDetail> = object({
@@ -32,6 +32,6 @@ export const contactDetailSchema: Schema<ContactDetail> = object({
   contactIdentifier: ['contact_identifier', string()],
   contactIdentifierType: [
     'contact_identifier_type',
-    contactIdentifierTypeEnumSchema,
+    contactIdentifierTypeSchema,
   ],
 });

@@ -15,7 +15,7 @@
 | `createdAt` | `string` | Required | - |
 | `updatedAt` | `string` | Required | - |
 | `itemizableId` | `string` | Required | The ID of the payment order or expected payment. |
-| `itemizableType` | [`ItemizableTypeEnum`](../../doc/models/itemizable-type-enum.md) | Required | One of `payment_orders` or `expected_payments`. |
+| `itemizableType` | [`ItemizableType`](../../doc/models/itemizable-type.md) | Required | One of `payment_orders` or `expected_payments`. |
 | `amount` | `number` | Required | Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. |
 | `description` | `string \| null` | Required | A free-form description of the line item. |
 | `metadata` | `Record<string, string>` | Required | Additional data represented as key-value pairs. Both the key and value must be strings. |
@@ -43,7 +43,11 @@
   },
   "accounting": {
     "account_id": "0000183c-0000-0000-0000-000000000000",
-    "class_id": "00001c78-0000-0000-0000-000000000000"
+    "class_id": "00001c78-0000-0000-0000-000000000000",
+    "exampleAdditionalProperty": {
+      "key1": "val1",
+      "key2": "val2"
+    }
   },
   "accounting_category_id": "0000117c-0000-0000-0000-000000000000",
   "accounting_ledger_class_id": "00001fbe-0000-0000-0000-000000000000"

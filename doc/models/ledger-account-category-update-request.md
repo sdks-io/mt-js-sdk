@@ -1,6 +1,8 @@
 
 # Ledger Account Category Update Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `LedgerAccountCategoryUpdateRequest`
@@ -12,6 +14,7 @@
 | `name` | `string \| undefined` | Optional | The name of the ledger account category. |
 | `description` | `string \| null \| undefined` | Optional | The description of the ledger account category. |
 | `metadata` | `Record<string, string> \| undefined` | Optional | Additional data represented as key-value pairs. Both the key and value must be strings. |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -23,7 +26,11 @@
     "modern": "treasury"
   },
   "name": "name4",
-  "description": "description4"
+  "description": "description4",
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

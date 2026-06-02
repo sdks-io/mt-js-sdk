@@ -12,6 +12,7 @@ import { Errors } from '../models/errors.js';
  */
 interface ErrorMessage {
   errors: Errors;
+  additionalProperties?: Record<string, unknown>;
 }
 
 export class ErrorMessageError extends ApiError<ErrorMessage> {}

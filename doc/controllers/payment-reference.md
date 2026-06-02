@@ -1,12 +1,12 @@
 # Payment Reference
 
 ```ts
-const paymentReferenceController = new PaymentReferenceController(client);
+const paymentReferenceApi = new PaymentReferenceApi(client);
 ```
 
 ## Class Name
 
-`PaymentReferenceController`
+`PaymentReferenceApi`
 
 ## Methods
 
@@ -21,7 +21,7 @@ async listPaymentReferences(
   afterCursor?: string | null,
   perPage?: number,
   referenceableId?: string,
-  referenceableType?: ReferenceableType1Enum,
+  referenceableType?: ReferenceableType1,
   referenceNumber?: string,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PaymentReferenceObject[]>>
@@ -38,7 +38,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 | `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
 | `perPage` | `number \| undefined` | Query, Optional | - |
 | `referenceableId` | `string \| undefined` | Query, Optional | The id of the referenceable to search for. Must be accompanied by the referenceable_type or will return an error. |
-| `referenceableType` | [`ReferenceableType1Enum \| undefined`](../../doc/models/referenceable-type-1-enum.md) | Query, Optional | One of the referenceable types. This must be accompanied by the id of the referenceable or will return an error. |
+| `referenceableType` | [`ReferenceableType1 \| undefined`](../../doc/models/referenceable-type-1.md) | Query, Optional | One of the referenceable types. This must be accompanied by the id of the referenceable or will return an error. |
 | `referenceNumber` | `string \| undefined` | Query, Optional | The actual reference number assigned by the bank. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -52,7 +52,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await paymentReferenceController.listPaymentReferences();
+  const response = await paymentReferenceApi.listPaymentReferences();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -108,7 +108,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await paymentReferenceController.getPaymentReference(id);
+  const response = await paymentReferenceApi.getPaymentReference(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

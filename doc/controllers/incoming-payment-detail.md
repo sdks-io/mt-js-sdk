@@ -1,12 +1,12 @@
 # Incoming Payment Detail
 
 ```ts
-const incomingPaymentDetailController = new IncomingPaymentDetailController(client);
+const incomingPaymentDetailApi = new IncomingPaymentDetailApi(client);
 ```
 
 ## Class Name
 
-`IncomingPaymentDetailController`
+`IncomingPaymentDetailApi`
 
 ## Methods
 
@@ -24,9 +24,9 @@ Get a list of Incoming Payment Details.
 async listIncomingPaymentDetails(
   afterCursor?: string | null,
   perPage?: number,
-  direction?: Direction15Enum,
-  status?: Status21Enum,
-  type?: Type14Enum,
+  direction?: Direction15,
+  status?: Status21,
+  type?: Type14,
   asOfDateStart?: string,
   asOfDateEnd?: string,
   metadata?: Record<string, string>,
@@ -45,9 +45,9 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
 | `perPage` | `number \| undefined` | Query, Optional | - |
-| `direction` | [`Direction15Enum \| undefined`](../../doc/models/direction-15-enum.md) | Query, Optional | One of `credit` or `debit`. |
-| `status` | [`Status21Enum \| undefined`](../../doc/models/status-21-enum.md) | Query, Optional | The current status of the incoming payment order. One of `pending`, `completed`, or `returned`. |
-| `type` | [`Type14Enum \| undefined`](../../doc/models/type-14-enum.md) | Query, Optional | One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`, `signet`, or `wire`. |
+| `direction` | [`Direction15 \| undefined`](../../doc/models/direction-15.md) | Query, Optional | One of `credit` or `debit`. |
+| `status` | [`Status21 \| undefined`](../../doc/models/status-21.md) | Query, Optional | The current status of the incoming payment order. One of `pending`, `completed`, or `returned`. |
+| `type` | [`Type14 \| undefined`](../../doc/models/type-14.md) | Query, Optional | One of: `ach`, `book`, `check`, `eft`, `interac`, `rtp`, `sepa`, `signet`, or `wire`. |
 | `asOfDateStart` | `string \| undefined` | Query, Optional | Filters incoming payment details with an as_of_date starting on or after the specified date (YYYY-MM-DD). |
 | `asOfDateEnd` | `string \| undefined` | Query, Optional | Filters incoming payment details with an as_of_date starting on or before the specified date (YYYY-MM-DD). |
 | `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
@@ -64,7 +64,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await incomingPaymentDetailController.listIncomingPaymentDetails();
+  const response = await incomingPaymentDetailApi.listIncomingPaymentDetails();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -131,7 +131,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await incomingPaymentDetailController.getIncomingPaymentDetail(id);
+  const response = await incomingPaymentDetailApi.getIncomingPaymentDetail(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -200,7 +200,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await incomingPaymentDetailController.updateIncomingPaymentDetail(id);
+  const response = await incomingPaymentDetailApi.updateIncomingPaymentDetail(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -267,7 +267,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await incomingPaymentDetailController.createAsyncIncomingPaymentDetail();
+  const response = await incomingPaymentDetailApi.createAsyncIncomingPaymentDetail();
 
   // Extracting fully parsed response body.
   console.log(response.result);

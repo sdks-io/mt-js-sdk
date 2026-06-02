@@ -8,15 +8,13 @@ import {
   dict,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
-import {
-  NormalBalance2Enum,
-  normalBalance2EnumSchema,
-} from './normalBalance2Enum.js';
+import { NormalBalance2, normalBalance2Schema } from './normalBalance2.js';
 
 export interface LedgerAccountCategoryCreateRequest {
   /** The name of the ledger account category. */
@@ -32,10 +30,11 @@ export interface LedgerAccountCategoryCreateRequest {
   /** The id of the ledger that this account category belongs to. */
   ledgerId: string;
   /** The normal balance of the ledger account category. */
-  normalBalance: NormalBalance2Enum;
+  normalBalance: NormalBalance2;
+  additionalProperties?: Record<string, unknown>;
 }
 
-export const ledgerAccountCategoryCreateRequestSchema: Schema<LedgerAccountCategoryCreateRequest> = object(
+export const ledgerAccountCategoryCreateRequestSchema: Schema<LedgerAccountCategoryCreateRequest> = typedExpandoObject(
   {
     name: ['name', string()],
     description: ['description', optional(nullable(string()))],
@@ -43,6 +42,8 @@ export const ledgerAccountCategoryCreateRequestSchema: Schema<LedgerAccountCateg
     currency: ['currency', string()],
     currencyExponent: ['currency_exponent', optional(nullable(number()))],
     ledgerId: ['ledger_id', string()],
-    normalBalance: ['normal_balance', normalBalance2EnumSchema],
-  }
+    normalBalance: ['normal_balance', normalBalance2Schema],
+  },
+  'additionalProperties',
+  optional(unknown())
 );

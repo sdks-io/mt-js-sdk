@@ -15,14 +15,11 @@ import {
   string,
 } from '../schema.js';
 import { AccountDetail, accountDetailSchema } from './accountDetail.js';
-import {
-  AccountType5Enum,
-  accountType5EnumSchema,
-} from './accountType5Enum.js';
+import { AccountType5, accountType5Schema } from './accountType5.js';
 import { Address, addressSchema } from './address.js';
 import { Connection, connectionSchema } from './connection.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
-import { PartyType5Enum, partyType5EnumSchema } from './partyType5Enum.js';
+import { Currency, currencySchema } from './currency.js';
+import { PartyType5, partyType5Schema } from './partyType5.js';
 import { RoutingDetail, routingDetailSchema } from './routingDetail.js';
 
 export interface InternalAccount {
@@ -33,11 +30,11 @@ export interface InternalAccount {
   createdAt: string;
   updatedAt: string;
   /** Can be checking, savings or other. */
-  accountType: AccountType5Enum | null;
+  accountType: AccountType5 | null;
   /** The legal name of the entity which owns the account. */
   partyName: string;
   /** Either individual or business. */
-  partyType: PartyType5Enum | null;
+  partyType: PartyType5 | null;
   partyAddress: Address | null;
   /** A nickname for the account. */
   name: string | null;
@@ -47,7 +44,7 @@ export interface InternalAccount {
   routingDetails: RoutingDetail[];
   connection: Connection;
   /** Three-letter ISO currency code. */
-  currency: CurrencyEnum;
+  currency: Currency;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata: Record<string, string>;
   /** The parent InternalAccount of this account. */
@@ -65,15 +62,15 @@ export const internalAccountSchema: Schema<InternalAccount> = lazy(() =>
     liveMode: ['live_mode', boolean()],
     createdAt: ['created_at', string()],
     updatedAt: ['updated_at', string()],
-    accountType: ['account_type', nullable(accountType5EnumSchema)],
+    accountType: ['account_type', nullable(accountType5Schema)],
     partyName: ['party_name', string()],
-    partyType: ['party_type', nullable(partyType5EnumSchema)],
+    partyType: ['party_type', nullable(partyType5Schema)],
     partyAddress: ['party_address', nullable(addressSchema)],
     name: ['name', nullable(string())],
     accountDetails: ['account_details', array(accountDetailSchema)],
     routingDetails: ['routing_details', array(routingDetailSchema)],
     connection: ['connection', connectionSchema],
-    currency: ['currency', currencyEnumSchema],
+    currency: ['currency', currencySchema],
     metadata: ['metadata', dict(string())],
     parentAccountId: ['parent_account_id', nullable(string())],
     counterpartyId: ['counterparty_id', nullable(string())],

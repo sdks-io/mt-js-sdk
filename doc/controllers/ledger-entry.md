@@ -1,12 +1,12 @@
 # Ledger Entry
 
 ```ts
-const ledgerEntryController = new LedgerEntryController(client);
+const ledgerEntryApi = new LedgerEntryApi(client);
 ```
 
 ## Class Name
 
-`LedgerEntryController`
+`LedgerEntryApi`
 
 ## Methods
 
@@ -34,8 +34,8 @@ async listLedgerEntries(
   ledgerAccountCategoryId?: string,
   ledgerAccountStatementId?: string,
   showDeleted?: boolean,
-  direction?: Direction15Enum,
-  status?: Status22Enum,
+  direction?: Direction15,
+  status?: Status22,
   orderBy?: OrderBy,
   showBalances?: boolean,
   metadata?: Record<string, string>,
@@ -65,8 +65,8 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 | `ledgerAccountCategoryId` | `string \| undefined` | Query, Optional | Get all ledger entries that match the direction specified. One of `credit`, `debit`. |
 | `ledgerAccountStatementId` | `string \| undefined` | Query, Optional | Get all ledger entries that are included in the ledger account statement. |
 | `showDeleted` | `boolean \| undefined` | Query, Optional | If true, response will include ledger entries that were deleted. When you update a ledger transaction to specify a new set of entries, the previous entries are deleted. |
-| `direction` | [`Direction15Enum \| undefined`](../../doc/models/direction-15-enum.md) | Query, Optional | If true, response will include ledger entries that were deleted. When you update a ledger transaction to specify a new set of entries, the previous entries are deleted. |
-| `status` | [`Status22Enum \| undefined`](../../doc/models/status-22-enum.md) | Query, Optional | Get all ledger entries that match the status specified. One of `pending`, `posted`, or `archived`. |
+| `direction` | [`Direction15 \| undefined`](../../doc/models/direction-15.md) | Query, Optional | If true, response will include ledger entries that were deleted. When you update a ledger transaction to specify a new set of entries, the previous entries are deleted. |
+| `status` | [`Status22 \| undefined`](../../doc/models/status-22.md) | Query, Optional | Get all ledger entries that match the status specified. One of `pending`, `posted`, or `archived`. |
 | `orderBy` | [`OrderBy \| undefined`](../../doc/models/order-by.md) | Query, Optional | Order by `created_at` or `effective_at` in `asc` or `desc` order. For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`. Ordering by only one field at a time is supported. |
 | `showBalances` | `boolean \| undefined` | Query, Optional | If true, response will include the balances attached to the ledger entry. If there is no balance available, null will be returned instead. |
 | `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
@@ -82,7 +82,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerEntryController.listLedgerEntries();
+  const response = await ledgerEntryApi.listLedgerEntries();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -151,7 +151,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerEntryController.getLedgerEntry(id);
+  const response = await ledgerEntryApi.getLedgerEntry(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

@@ -15,9 +15,9 @@ import {
   string,
 } from '../schema.js';
 import {
-  LedgerAccountNormalBalanceEnum,
-  ledgerAccountNormalBalanceEnumSchema,
-} from './ledgerAccountNormalBalanceEnum.js';
+  LedgerAccountNormalBalance,
+  ledgerAccountNormalBalanceSchema,
+} from './ledgerAccountNormalBalance.js';
 import { LedgerBalances, ledgerBalancesSchema } from './ledgerBalances.js';
 
 export interface LedgerAccountStatement {
@@ -36,7 +36,7 @@ export interface LedgerAccountStatement {
   /** Lock version of the ledger account at the time of statement generation. */
   ledgerAccountLockVersion: number;
   /** The normal balance of the ledger account. */
-  ledgerAccountNormalBalance: LedgerAccountNormalBalanceEnum;
+  ledgerAccountNormalBalance: LedgerAccountNormalBalance;
   /** The inclusive lower bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement. */
   effectiveAtLowerBound: string;
   /** The exclusive upper bound of the effective_at timestamp of the ledger entries to be included in the ledger account statement. */
@@ -61,7 +61,7 @@ export const ledgerAccountStatementSchema: Schema<LedgerAccountStatement> = lazy
       ledgerAccountLockVersion: ['ledger_account_lock_version', number()],
       ledgerAccountNormalBalance: [
         'ledger_account_normal_balance',
-        ledgerAccountNormalBalanceEnumSchema,
+        ledgerAccountNormalBalanceSchema,
       ],
       effectiveAtLowerBound: ['effective_at_lower_bound', string()],
       effectiveAtUpperBound: ['effective_at_upper_bound', string()],

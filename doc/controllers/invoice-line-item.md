@@ -1,12 +1,12 @@
 # Invoice Line Item
 
 ```ts
-const invoiceLineItemController = new InvoiceLineItemController(client);
+const invoiceLineItemApi = new InvoiceLineItemApi(client);
 ```
 
 ## Class Name
 
-`InvoiceLineItemController`
+`InvoiceLineItemApi`
 
 ## Methods
 
@@ -53,7 +53,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const invoiceId = 'invoice_id0';
 
 try {
-  const response = await invoiceLineItemController.listInvoiceLineItems(invoiceId);
+  const response = await invoiceLineItemApi.listInvoiceLineItems(invoiceId);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -113,7 +113,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const invoiceId = 'invoice_id0';
 
 try {
-  const response = await invoiceLineItemController.createInvoiceLineItem(invoiceId);
+  const response = await invoiceLineItemApi.createInvoiceLineItem(invoiceId);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -173,7 +173,7 @@ const invoiceId = 'invoice_id0';
 const id = 'id0';
 
 try {
-  const response = await invoiceLineItemController.getInvoiceLineItem(
+  const response = await invoiceLineItemApi.getInvoiceLineItem(
     invoiceId,
     id
   );
@@ -238,7 +238,7 @@ const invoiceId = 'invoice_id0';
 const id = 'id0';
 
 try {
-  const response = await invoiceLineItemController.updateInvoiceLineItem(
+  const response = await invoiceLineItemApi.updateInvoiceLineItem(
     invoiceId,
     id
   );
@@ -301,7 +301,7 @@ const invoiceId = 'invoice_id0';
 const id = 'id0';
 
 try {
-  const response = await invoiceLineItemController.deleteInvoiceLineItem(
+  const response = await invoiceLineItemApi.deleteInvoiceLineItem(
     invoiceId,
     id
   );

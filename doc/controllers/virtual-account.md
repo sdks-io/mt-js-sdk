@@ -1,12 +1,12 @@
 # Virtual Account
 
 ```ts
-const virtualAccountController = new VirtualAccountController(client);
+const virtualAccountApi = new VirtualAccountApi(client);
 ```
 
 ## Class Name
 
-`VirtualAccountController`
+`VirtualAccountApi`
 
 ## Methods
 
@@ -57,7 +57,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await virtualAccountController.listVirtualAccounts();
+  const response = await virtualAccountApi.listVirtualAccounts();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -122,7 +122,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await virtualAccountController.createVirtualAccount();
+  const response = await virtualAccountApi.createVirtualAccount();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -188,7 +188,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await virtualAccountController.getVirtualAccount(id);
+  const response = await virtualAccountApi.getVirtualAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -255,7 +255,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await virtualAccountController.updateVirtualAccount(id);
+  const response = await virtualAccountApi.updateVirtualAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -311,7 +311,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await virtualAccountController.deleteVirtualAccount(id);
+  const response = await virtualAccountApi.deleteVirtualAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

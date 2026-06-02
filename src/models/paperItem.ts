@@ -12,8 +12,8 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
-import { Status16Enum, status16EnumSchema } from './status16Enum.js';
+import { Currency, currencySchema } from './currency.js';
+import { Status16, status16Schema } from './status16.js';
 
 export interface PaperItem {
   id: string;
@@ -27,7 +27,7 @@ export interface PaperItem {
   /** The ID of the reconciled Transaction or `null`. */
   transactionId: string | null;
   /** The current status of the paper item. One of `pending`, `completed`, or `returned`. */
-  status: Status16Enum;
+  status: Status16;
   /** The identifier for the lockbox assigned by the bank. */
   lockboxNumber: string;
   /** The date the paper item was deposited into your organization's bank account. */
@@ -35,7 +35,7 @@ export interface PaperItem {
   /** The amount of the paper item. */
   amount: number;
   /** Three-letter ISO currency code. */
-  currency: CurrencyEnum;
+  currency: Currency;
   /** The account number on the paper item. */
   accountNumber: string | null;
   /** The last 4 digits of the account_number. */
@@ -58,11 +58,11 @@ export const paperItemSchema: Schema<PaperItem> = object({
   updatedAt: ['updated_at', string()],
   transactionLineItemId: ['transaction_line_item_id', nullable(string())],
   transactionId: ['transaction_id', nullable(string())],
-  status: ['status', status16EnumSchema],
+  status: ['status', status16Schema],
   lockboxNumber: ['lockbox_number', string()],
   depositDate: ['deposit_date', string()],
   amount: ['amount', number()],
-  currency: ['currency', currencyEnumSchema],
+  currency: ['currency', currencySchema],
   accountNumber: ['account_number', nullable(string())],
   accountNumberSafe: ['account_number_safe', nullable(string())],
   routingNumber: ['routing_number', nullable(string())],

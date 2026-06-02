@@ -9,13 +9,14 @@ import {
   dict,
   lazy,
   nullable,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
 import { AccountDetail1, accountDetail1Schema } from './accountDetail1.js';
-import { AccountTypeEnum, accountTypeEnumSchema } from './accountTypeEnum.js';
+import { AccountType, accountTypeSchema } from './accountType.js';
 import { AddressRequest, addressRequestSchema } from './addressRequest.js';
 import {
   ContactDetailCreateRequest,
@@ -25,14 +26,14 @@ import {
   LedgerAccountCreateRequest,
   ledgerAccountCreateRequestSchema,
 } from './ledgerAccountCreateRequest.js';
-import { PartyTypeEnum, partyTypeEnumSchema } from './partyTypeEnum.js';
+import { PartyType, partyTypeSchema } from './partyType.js';
 import { RoutingDetail1, routingDetail1Schema } from './routingDetail1.js';
 
 export interface ExternalAccountCreateRequest {
   /** Can be `checking`, `savings` or `other`. */
-  accountType?: AccountTypeEnum;
+  accountType?: AccountType;
   /** Either `individual` or `business`. */
-  partyType?: PartyTypeEnum | null;
+  partyType?: PartyType | null;
   partyAddress?: AddressRequest;
   /** A nickname for the external account. This is only for internal usage and won't affect any payments */
   name?: string | null;
@@ -48,35 +49,40 @@ export interface ExternalAccountCreateRequest {
   /** If you've enabled the Modern Treasury + Plaid integration in your Plaid account, you can pass the processor token in this field. */
   plaidProcessorToken?: string;
   contactDetails?: ContactDetailCreateRequest[];
+  additionalProperties?: Record<string, unknown>;
 }
 
 export const externalAccountCreateRequestSchema: Schema<ExternalAccountCreateRequest> = lazy(
   () =>
-    object({
-      accountType: ['account_type', optional(accountTypeEnumSchema)],
-      partyType: ['party_type', optional(nullable(partyTypeEnumSchema))],
-      partyAddress: ['party_address', optional(addressRequestSchema)],
-      name: ['name', optional(nullable(string()))],
-      counterpartyId: ['counterparty_id', nullable(string())],
-      accountDetails: [
-        'account_details',
-        optional(array(accountDetail1Schema)),
-      ],
-      routingDetails: [
-        'routing_details',
-        optional(array(routingDetail1Schema)),
-      ],
-      metadata: ['metadata', optional(dict(string()))],
-      partyName: ['party_name', optional(string())],
-      partyIdentifier: ['party_identifier', optional(string())],
-      ledgerAccount: [
-        'ledger_account',
-        optional(ledgerAccountCreateRequestSchema),
-      ],
-      plaidProcessorToken: ['plaid_processor_token', optional(string())],
-      contactDetails: [
-        'contact_details',
-        optional(array(contactDetailCreateRequestSchema)),
-      ],
-    })
+    typedExpandoObject(
+      {
+        accountType: ['account_type', optional(accountTypeSchema)],
+        partyType: ['party_type', optional(nullable(partyTypeSchema))],
+        partyAddress: ['party_address', optional(addressRequestSchema)],
+        name: ['name', optional(nullable(string()))],
+        counterpartyId: ['counterparty_id', nullable(string())],
+        accountDetails: [
+          'account_details',
+          optional(array(accountDetail1Schema)),
+        ],
+        routingDetails: [
+          'routing_details',
+          optional(array(routingDetail1Schema)),
+        ],
+        metadata: ['metadata', optional(dict(string()))],
+        partyName: ['party_name', optional(string())],
+        partyIdentifier: ['party_identifier', optional(string())],
+        ledgerAccount: [
+          'ledger_account',
+          optional(ledgerAccountCreateRequestSchema),
+        ],
+        plaidProcessorToken: ['plaid_processor_token', optional(string())],
+        contactDetails: [
+          'contact_details',
+          optional(array(contactDetailCreateRequestSchema)),
+        ],
+      },
+      'additionalProperties',
+      optional(unknown())
+    )
 );

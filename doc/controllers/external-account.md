@@ -1,12 +1,12 @@
 # External Account
 
 ```ts
-const externalAccountController = new ExternalAccountController(client);
+const externalAccountApi = new ExternalAccountApi(client);
 ```
 
 ## Class Name
 
-`ExternalAccountController`
+`ExternalAccountApi`
 
 ## Methods
 
@@ -55,7 +55,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await externalAccountController.verifyExternalAccount(id);
+  const response = await externalAccountApi.verifyExternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -131,7 +131,7 @@ const body: ExternalAccountCompleteVerificationRequest = {
 };
 
 try {
-  const response = await externalAccountController.completeVerificationExternalAccount(
+  const response = await externalAccountApi.completeVerificationExternalAccount(
     id,
     undefined,
     body
@@ -206,7 +206,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await externalAccountController.listExternalAccounts();
+  const response = await externalAccountApi.listExternalAccounts();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -280,7 +280,7 @@ const body: ExternalAccountCreateRequest = {
 };
 
 try {
-  const response = await externalAccountController.createExternalAccount(
+  const response = await externalAccountApi.createExternalAccount(
     undefined,
     body
   );
@@ -348,7 +348,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await externalAccountController.getExternalAccount(id);
+  const response = await externalAccountApi.getExternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -415,7 +415,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await externalAccountController.updateExternalAccount(id);
+  const response = await externalAccountApi.updateExternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -480,7 +480,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const id = 'id0';
 
 try {
-  const response = await externalAccountController.deleteExternalAccount(id);
+  const response = await externalAccountApi.deleteExternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

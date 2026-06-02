@@ -1,12 +1,12 @@
 # Validation
 
 ```ts
-const validationController = new ValidationController(client);
+const validationApi = new ValidationApi(client);
 ```
 
 ## Class Name
 
-`ValidationController`
+`ValidationApi`
 
 
 # Validate Routing Number
@@ -16,7 +16,7 @@ Validates the routing number information supplied without creating a routing det
 ```ts
 async validateRoutingNumber(
   routingNumber: string,
-  routingNumberType: RoutingNumberType8Enum,
+  routingNumberType: RoutingNumberType8,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<RoutingNumberLookupRequest>>
 ```
@@ -30,7 +30,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `routingNumber` | `string` | Query, Required | The routing number that is being validated. |
-| `routingNumberType` | [`RoutingNumberType8Enum`](../../doc/models/routing-number-type-8-enum.md) | Query, Required | One of `aba`, `au_bsb`, `br_codigo`, `ca_cpa`, `cnaps`, `gb_sort_code`, `in_ifsc`, `my_branch_code`, or `swift`. In sandbox mode we currently only support `aba` and `swift` with routing numbers '123456789' and 'GRINUST0XXX' respectively. |
+| `routingNumberType` | [`RoutingNumberType8`](../../doc/models/routing-number-type-8.md) | Query, Required | One of `aba`, `au_bsb`, `br_codigo`, `ca_cpa`, `cnaps`, `gb_sort_code`, `in_ifsc`, `my_branch_code`, or `swift`. In sandbox mode we currently only support `aba` and `swift` with routing numbers '123456789' and 'GRINUST0XXX' respectively. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -44,10 +44,10 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 ```ts
 const routingNumber = 'routing_number4';
 
-const routingNumberType = RoutingNumberType8Enum.MyBranchCode;
+const routingNumberType = RoutingNumberType8.MyBranchCode;
 
 try {
-  const response = await validationController.validateRoutingNumber(
+  const response = await validationApi.validateRoutingNumber(
     routingNumber,
     routingNumberType
   );

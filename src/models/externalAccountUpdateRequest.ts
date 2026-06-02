@@ -8,20 +8,21 @@ import {
   dict,
   lazy,
   nullable,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
-import { AccountTypeEnum, accountTypeEnumSchema } from './accountTypeEnum.js';
+import { AccountType, accountTypeSchema } from './accountType.js';
 import { AddressRequest, addressRequestSchema } from './addressRequest.js';
-import { PartyTypeEnum, partyTypeEnumSchema } from './partyTypeEnum.js';
+import { PartyType, partyTypeSchema } from './partyType.js';
 
 export interface ExternalAccountUpdateRequest {
   /** Either `individual` or `business`. */
-  partyType?: PartyTypeEnum | null;
+  partyType?: PartyType | null;
   /** Can be `checking`, `savings` or `other`. */
-  accountType?: AccountTypeEnum;
+  accountType?: AccountType;
   counterpartyId?: string | null;
   /** A nickname for the external account. This is only for internal usage and won't affect any payments */
   name?: string | null;
@@ -30,17 +31,22 @@ export interface ExternalAccountUpdateRequest {
   partyAddress?: AddressRequest;
   /** Additional data in the form of key-value pairs. Pairs can be removed by passing an empty string or `null` as the value. */
   metadata?: Record<string, string>;
+  additionalProperties?: Record<string, unknown>;
 }
 
 export const externalAccountUpdateRequestSchema: Schema<ExternalAccountUpdateRequest> = lazy(
   () =>
-    object({
-      partyType: ['party_type', optional(nullable(partyTypeEnumSchema))],
-      accountType: ['account_type', optional(accountTypeEnumSchema)],
-      counterpartyId: ['counterparty_id', optional(nullable(string()))],
-      name: ['name', optional(nullable(string()))],
-      partyName: ['party_name', optional(string())],
-      partyAddress: ['party_address', optional(addressRequestSchema)],
-      metadata: ['metadata', optional(dict(string()))],
-    })
+    typedExpandoObject(
+      {
+        partyType: ['party_type', optional(nullable(partyTypeSchema))],
+        accountType: ['account_type', optional(accountTypeSchema)],
+        counterpartyId: ['counterparty_id', optional(nullable(string()))],
+        name: ['name', optional(nullable(string()))],
+        partyName: ['party_name', optional(string())],
+        partyAddress: ['party_address', optional(addressRequestSchema)],
+        metadata: ['metadata', optional(dict(string()))],
+      },
+      'additionalProperties',
+      optional(unknown())
+    )
 );

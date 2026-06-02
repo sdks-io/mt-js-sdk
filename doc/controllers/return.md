@@ -1,12 +1,12 @@
 # Return
 
 ```ts
-const returnController = new ReturnController(client);
+const returnApi = new ReturnApi(client);
 ```
 
 ## Class Name
 
-`ReturnController`
+`ReturnApi`
 
 ## Methods
 
@@ -26,7 +26,7 @@ async listReturns(
   internalAccountId?: string,
   counterpartyId?: string,
   returnableId?: string,
-  returnableType?: ReturnableType1Enum,
+  returnableType?: ReturnableType1,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<Return[]>>
 ```
@@ -44,7 +44,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 | `internalAccountId` | `string \| undefined` | Query, Optional | Specify `internal_account_id` if you wish to see returns to/from a specific account. |
 | `counterpartyId` | `string \| undefined` | Query, Optional | Specify `counterparty_id` if you wish to see returns that occurred with a specific counterparty. |
 | `returnableId` | `string \| undefined` | Query, Optional | The ID of a valid returnable. Must be accompanied by `returnable_type`. |
-| `returnableType` | [`ReturnableType1Enum \| undefined`](../../doc/models/returnable-type-1-enum.md) | Query, Optional | One of `payment_order`, `paper_item`, `reversal`, or `incoming_payment_detail`. Must be accompanied by `returnable_id`. |
+| `returnableType` | [`ReturnableType1 \| undefined`](../../doc/models/returnable-type-1.md) | Query, Optional | One of `payment_order`, `paper_item`, `reversal`, or `incoming_payment_detail`. Must be accompanied by `returnable_id`. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -57,7 +57,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await returnController.listReturns();
+  const response = await returnApi.listReturns();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -129,7 +129,7 @@ const body: ReturnCreateRequest = {
 };
 
 try {
-  const response = await returnController.createReturn(
+  const response = await returnApi.createReturn(
     undefined,
     body
   );
@@ -200,7 +200,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await returnController.getReturn(id);
+  const response = await returnApi.getReturn(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

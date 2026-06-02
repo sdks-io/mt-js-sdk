@@ -16,8 +16,12 @@ import { Configuration, Environment } from './configuration.js';
 import {
   DEFAULT_CONFIGURATION,
   DEFAULT_RETRY_CONFIG,
+  DEFAULT_LOGGING_OPTIONS,
 } from './defaultConfiguration.js';
+import { ApiLogger, LoggingOptions, mergeLoggingOptions } from './core.js';
 import { ApiError } from './core.js';
+import { setHeader } from './core.js';
+import { updateUserAgent } from './core.js';
 import {
   AbortError,
   AuthenticatorInterface,
@@ -27,13 +31,13 @@ import {
 } from './core.js';
 import { HttpClient } from './clientAdapter.js';
 
-const USER_AGENT = 'APIMATIC 3.0';
-
 export class Client implements ClientInterface {
   private _config: Readonly<Configuration>;
   private _timeout: number;
   private _retryConfig: RetryConfiguration;
+  private _loggingOp: LoggingOptions;
   private _requestBuilderFactory: SdkRequestBuilderFactory;
+  private _userAgent: string;
 
   constructor(config?: Partial<Configuration>) {
     this._config = {
@@ -44,21 +48,22 @@ export class Client implements ClientInterface {
       ...DEFAULT_RETRY_CONFIG,
       ...this._config.httpClientOptions?.retryConfig,
     };
+    this._loggingOp = this._config.logging
+      ? mergeLoggingOptions(this._config.logging ?? {})
+      : mergeLoggingOptions(
+          this._config.logging ?? {},
+          DEFAULT_LOGGING_OPTIONS
+        );
     this._timeout =
       typeof this._config.httpClientOptions?.timeout != 'undefined'
         ? this._config.httpClientOptions.timeout
         : this._config.timeout;
-    const clonedConfig = {
-      ...this._config,
-      basicAuthCredentials: this._config.basicAuthCredentials || {
-        username: this._config.basicAuthUserName || '',
-        password: this._config.basicAuthPassword || '',
-      },
-    };
-
+    this._userAgent = updateUserAgent(
+      'TypeScript-SDK/0.0.2 (OS: {os-info}, Engine: {engine}/{engine-version})'
+    );
     this._requestBuilderFactory = createRequestHandlerFactory(
       (server) => getBaseUri(server, this._config),
-      createAuthProviderFromConfig(clonedConfig),
+      createAuthProviderFromConfig(this._config),
       new HttpClient(AbortError, {
         timeout: this._timeout,
         clientConfigOverrides: this._config.unstable_httpClientOptions,
@@ -66,8 +71,13 @@ export class Client implements ClientInterface {
         httpsAgent: this._config.httpClientOptions?.httpsAgent,
         proxySettings: this._config.httpClientOptions?.proxySettings,
       }),
-      [withErrorHandlers, withUserAgent, withAuthenticationByDefault],
-      this._retryConfig
+      [
+        withErrorHandlers,
+        withUserAgent(this._userAgent),
+        withAuthenticationByDefault,
+      ],
+      this._retryConfig,
+      this._loggingOp
     );
   }
 
@@ -130,14 +140,17 @@ function createRequestHandlerFactory(
   authProvider: AuthenticatorInterface<AuthParams>,
   httpClient: HttpClient,
   addons: ((rb: SdkRequestBuilder) => void)[],
-  retryConfig: RetryConfiguration
+  retryConfig: RetryConfiguration,
+  loggingOptions: LoggingOptions
 ): SdkRequestBuilderFactory {
   const requestBuilderFactory = createRequestBuilderFactory(
     createHttpClientAdapter(httpClient),
     baseUrlProvider,
     ApiError,
     authProvider,
-    retryConfig
+    retryConfig,
+    undefined,
+    new ApiLogger(loggingOptions)
   );
 
   return tap(requestBuilderFactory, ...addons);
@@ -158,8 +171,14 @@ function withErrorHandlers(rb: SdkRequestBuilder) {
   rb.defaultToError(ApiError);
 }
 
-function withUserAgent(rb: SdkRequestBuilder) {
-  rb.header('user-agent', USER_AGENT);
+function withUserAgent(userAgent: string) {
+  return (rb: SdkRequestBuilder) => {
+    rb.interceptRequest((request) => {
+      const headers = request.headers ?? {};
+      setHeader(headers, 'user-agent', userAgent);
+      return { ...request, headers };
+    });
+  };
 }
 
 function withAuthenticationByDefault(rb: SdkRequestBuilder) {

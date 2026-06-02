@@ -15,15 +15,12 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import {
-  LedgerableType2Enum,
-  ledgerableType2EnumSchema,
-} from './ledgerableType2Enum.js';
+import { LedgerableType2, ledgerableType2Schema } from './ledgerableType2.js';
 import {
   LedgerEntryOfTransactionVersion,
   ledgerEntryOfTransactionVersionSchema,
 } from './ledgerEntryOfTransactionVersion.js';
-import { Status12Enum, status12EnumSchema } from './status12Enum.js';
+import { Status12, status12Schema } from './status12.js';
 
 export interface LedgerTransactionVersion {
   id: string;
@@ -36,7 +33,7 @@ export interface LedgerTransactionVersion {
   /** An optional description for internal use. */
   description: string | null;
   /** One of `pending`, `posted`, or `archived` */
-  status: Status12Enum;
+  status: Status12;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata: Record<string, string>;
   /** The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes. */
@@ -50,7 +47,7 @@ export interface LedgerTransactionVersion {
   /** The ID of the ledger this ledger transaction belongs to. */
   ledgerId: string;
   /** If the ledger transaction can be reconciled to another object in Modern Treasury, the type will be populated here, otherwise null. This can be one of payment_order, incoming_payment_detail, expected_payment, return, or reversal. */
-  ledgerableType: LedgerableType2Enum | null;
+  ledgerableType: LedgerableType2 | null;
   /** If the ledger transaction can be reconciled to another object in Modern Treasury, the id will be populated here, otherwise null. */
   ledgerableId: string | null;
   /** A unique string to represent the ledger transaction. Only one pending or posted ledger transaction may have this ID in the ledger. */
@@ -68,7 +65,7 @@ export const ledgerTransactionVersionSchema: Schema<LedgerTransactionVersion> = 
       createdAt: ['created_at', string()],
       ledgerTransactionId: ['ledger_transaction_id', string()],
       description: ['description', nullable(string())],
-      status: ['status', status12EnumSchema],
+      status: ['status', status12Schema],
       metadata: ['metadata', dict(string())],
       effectiveAt: ['effective_at', string()],
       effectiveDate: ['effective_date', string()],
@@ -78,7 +75,7 @@ export const ledgerTransactionVersionSchema: Schema<LedgerTransactionVersion> = 
       ],
       postedAt: ['posted_at', nullable(string())],
       ledgerId: ['ledger_id', string()],
-      ledgerableType: ['ledgerable_type', nullable(ledgerableType2EnumSchema)],
+      ledgerableType: ['ledgerable_type', nullable(ledgerableType2Schema)],
       ledgerableId: ['ledgerable_id', nullable(string())],
       externalId: ['external_id', nullable(string())],
       version: ['version', number()],

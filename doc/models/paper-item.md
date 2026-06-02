@@ -16,11 +16,11 @@
 | `updatedAt` | `string` | Required | - |
 | `transactionLineItemId` | `string \| null` | Required | The ID of the reconciled Transaction Line Item or `null`. |
 | `transactionId` | `string \| null` | Required | The ID of the reconciled Transaction or `null`. |
-| `status` | [`Status16Enum`](../../doc/models/status-16-enum.md) | Required | The current status of the paper item. One of `pending`, `completed`, or `returned`. |
+| `status` | [`Status16`](../../doc/models/status-16.md) | Required | The current status of the paper item. One of `pending`, `completed`, or `returned`. |
 | `lockboxNumber` | `string` | Required | The identifier for the lockbox assigned by the bank. |
 | `depositDate` | `string` | Required | The date the paper item was deposited into your organization's bank account. |
 | `amount` | `number` | Required | The amount of the paper item. |
-| `currency` | [`CurrencyEnum`](../../doc/models/currency-enum.md) | Required | Three-letter ISO currency code. |
+| `currency` | [`Currency`](../../doc/models/currency.md) | Required | Three-letter ISO currency code. |
 | `accountNumber` | `string \| null` | Required | The account number on the paper item. |
 | `accountNumberSafe` | `string \| null` | Required | The last 4 digits of the account_number. |
 | `routingNumber` | `string \| null` | Required | The routing number on the paper item. |

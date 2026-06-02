@@ -8,18 +8,19 @@ import {
   boolean,
   dict,
   nullable,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
-import { Status7Enum, status7EnumSchema } from './status7Enum.js';
+import { Status7, status7Schema } from './status7.js';
 
 export interface LedgerAccountPayoutCreateRequest {
   /** The description of the ledger account payout. */
   description?: string | null;
   /** The status of the ledger account payout. It is set to `pending` by default. To post a ledger account payout at creation, use `posted`. */
-  status?: Status7Enum | null;
+  status?: Status7 | null;
   /** The id of the payout ledger account whose ledger entries are queried against, and its balance is reduced as a result. */
   payoutLedgerAccountId: string;
   /** The id of the funding ledger account that sends to or receives funds from the payout ledger account. */
@@ -30,12 +31,13 @@ export interface LedgerAccountPayoutCreateRequest {
   metadata?: Record<string, string>;
   /** It is set to `false` by default. It should be set to `true` when migrating existing payouts. */
   skipPayoutLedgerTransaction?: boolean | null;
+  additionalProperties?: Record<string, unknown>;
 }
 
-export const ledgerAccountPayoutCreateRequestSchema: Schema<LedgerAccountPayoutCreateRequest> = object(
+export const ledgerAccountPayoutCreateRequestSchema: Schema<LedgerAccountPayoutCreateRequest> = typedExpandoObject(
   {
     description: ['description', optional(nullable(string()))],
-    status: ['status', optional(nullable(status7EnumSchema))],
+    status: ['status', optional(nullable(status7Schema))],
     payoutLedgerAccountId: ['payout_ledger_account_id', string()],
     fundingLedgerAccountId: ['funding_ledger_account_id', string()],
     effectiveAtUpperBound: [
@@ -47,5 +49,7 @@ export const ledgerAccountPayoutCreateRequestSchema: Schema<LedgerAccountPayoutC
       'skip_payout_ledger_transaction',
       optional(nullable(boolean())),
     ],
-  }
+  },
+  'additionalProperties',
+  optional(unknown())
 );

@@ -9,18 +9,19 @@ import {
   dict,
   nullable,
   number,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
-import { Direction5Enum, direction5EnumSchema } from './direction5Enum.js';
+import { Direction5, direction5Schema } from './direction5.js';
 
 export interface LedgerEntryCreateRequest {
   /** Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits. */
   amount: number;
   /** One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`. */
-  direction: Direction5Enum;
+  direction: Direction5;
   /** The ledger account that this ledger entry is associated with. */
   ledgerAccountId: string;
   /** Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details. */
@@ -35,12 +36,13 @@ export interface LedgerEntryCreateRequest {
   showResultingLedgerAccountBalances?: boolean | null;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata?: Record<string, string>;
+  additionalProperties?: Record<string, unknown>;
 }
 
-export const ledgerEntryCreateRequestSchema: Schema<LedgerEntryCreateRequest> = object(
+export const ledgerEntryCreateRequestSchema: Schema<LedgerEntryCreateRequest> = typedExpandoObject(
   {
     amount: ['amount', number()],
-    direction: ['direction', direction5EnumSchema],
+    direction: ['direction', direction5Schema],
     ledgerAccountId: ['ledger_account_id', string()],
     lockVersion: ['lock_version', optional(nullable(number()))],
     pendingBalanceAmount: [
@@ -60,5 +62,7 @@ export const ledgerEntryCreateRequestSchema: Schema<LedgerEntryCreateRequest> = 
       optional(nullable(boolean())),
     ],
     metadata: ['metadata', optional(dict(string()))],
-  }
+  },
+  'additionalProperties',
+  optional(unknown())
 );

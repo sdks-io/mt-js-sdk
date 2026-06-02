@@ -1,6 +1,8 @@
 
 # Virtual Account Create Request
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `VirtualAccountCreateRequest`
@@ -18,6 +20,7 @@
 | `debitLedgerAccountId` | `string \| undefined` | Optional | The ID of a debit normal ledger account. When money enters the virtual account, this ledger account will be debited. Must be accompanied by a credit_ledger_account_id if present. |
 | `creditLedgerAccountId` | `string \| undefined` | Optional | The ID of a credit normal ledger account. When money leaves the virtual account, this ledger account will be credited. Must be accompanied by a debit_ledger_account_id if present. |
 | `metadata` | `Record<string, string> \| undefined` | Optional | Additional data represented as key-value pairs. Both the key and value must be strings. |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -30,26 +33,46 @@
   "account_details": [
     {
       "account_number": "account_number6",
-      "account_number_type": "other"
+      "account_number_type": "other",
+      "exampleAdditionalProperty": {
+        "key1": "val1",
+        "key2": "val2"
+      }
     },
     {
       "account_number": "account_number6",
-      "account_number_type": "other"
+      "account_number_type": "other",
+      "exampleAdditionalProperty": {
+        "key1": "val1",
+        "key2": "val2"
+      }
     }
   ],
   "routing_details": [
     {
       "routing_number": "routing_number6",
       "routing_number_type": "gb_sort_code",
-      "payment_type": "eft"
+      "payment_type": "eft",
+      "exampleAdditionalProperty": {
+        "key1": "val1",
+        "key2": "val2"
+      }
     },
     {
       "routing_number": "routing_number6",
       "routing_number_type": "gb_sort_code",
-      "payment_type": "eft"
+      "payment_type": "eft",
+      "exampleAdditionalProperty": {
+        "key1": "val1",
+        "key2": "val2"
+      }
     }
   ],
-  "debit_ledger_account_id": "00000d18-0000-0000-0000-000000000000"
+  "debit_ledger_account_id": "00000d18-0000-0000-0000-000000000000",
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

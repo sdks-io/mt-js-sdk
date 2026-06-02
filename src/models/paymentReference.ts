@@ -6,9 +6,9 @@
 
 import { boolean, object, Schema, string } from '../schema.js';
 import {
-  ReferenceNumberTypeEnum,
-  referenceNumberTypeEnumSchema,
-} from './referenceNumberTypeEnum.js';
+  ReferenceNumberType,
+  referenceNumberTypeSchema,
+} from './referenceNumberType.js';
 
 export interface PaymentReference {
   id: string;
@@ -20,7 +20,7 @@ export interface PaymentReference {
   /** The vendor reference number. */
   referenceNumber: string;
   /** The type of the reference number. Referring to the vendor payment id. */
-  referenceNumberType: ReferenceNumberTypeEnum;
+  referenceNumberType: ReferenceNumberType;
 }
 
 export const paymentReferenceSchema: Schema<PaymentReference> = object({
@@ -30,5 +30,5 @@ export const paymentReferenceSchema: Schema<PaymentReference> = object({
   createdAt: ['created_at', string()],
   updatedAt: ['updated_at', string()],
   referenceNumber: ['reference_number', string()],
-  referenceNumberType: ['reference_number_type', referenceNumberTypeEnumSchema],
+  referenceNumberType: ['reference_number_type', referenceNumberTypeSchema],
 });

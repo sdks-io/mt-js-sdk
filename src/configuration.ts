@@ -5,6 +5,7 @@
  */
 
 import { HttpClientOptions } from './clientAdapter.js';
+import { LogLevel, PartialLoggingOptions } from './core.js';
 import {
   anyOf,
   array,
@@ -23,16 +24,13 @@ import {
 export interface Configuration {
   timeout: number;
   environment: Environment;
-  /** @deprecated use basicAuthCredentials field instead */
-  basicAuthUserName?: string;
-  /** @deprecated use basicAuthCredentials field instead */
-  basicAuthPassword?: string;
   basicAuthCredentials?: {
     username: string;
     password: string;
   };
   httpClientOptions?: Partial<HttpClientOptions>;
   unstable_httpClientOptions?: any;
+  logging?: PartialLoggingOptions;
 }
 
 /** Environments available for API */
@@ -105,6 +103,38 @@ export namespace Configuration {
       }
     }
 
+    config.logging = {
+      logLevel: envVariables.LOG_LEVEL,
+      maskSensitiveHeaders: envVariables.MASK_SENSITIVE_HEADERS,
+      logRequest: {
+        logBody: envVariables.REQUEST_LOG_BODY,
+        logHeaders: envVariables.REQUEST_LOG_HEADERS,
+        includeQueryInPath: envVariables.REQUEST_INCLUDE_QUERY_IN_PATH,
+        headersToInclude: envVariables.REQUEST_HEADERS_TO_INCLUDE?.split(
+          ','
+        ).map((s) => s.trim()),
+        headersToExclude: envVariables.REQUEST_HEADERS_TO_EXCLUDE?.split(
+          ','
+        ).map((s) => s.trim()),
+        headersToWhitelist: envVariables.REQUEST_HEADERS_TO_WHITELIST?.split(
+          ','
+        ).map((s) => s.trim()),
+      },
+      logResponse: {
+        logBody: envVariables.RESPONSE_LOG_BODY,
+        logHeaders: envVariables.RESPONSE_LOG_HEADERS,
+        headersToInclude: envVariables.RESPONSE_HEADERS_TO_INCLUDE?.split(
+          ','
+        ).map((s) => s.trim()),
+        headersToExclude: envVariables.RESPONSE_HEADERS_TO_EXCLUDE?.split(
+          ','
+        ).map((s) => s.trim()),
+        headersToWhitelist: envVariables.RESPONSE_HEADERS_TO_WHITELIST?.split(
+          ','
+        ).map((s) => s.trim()),
+      },
+    };
+
     const result = validateAndMap(config, configurationSchema);
 
     if (result.errors) {
@@ -121,8 +151,6 @@ export namespace Configuration {
 const configurationSchema: Schema<Partial<Configuration>> = object({
   timeout: ['timeout', optional(number())],
   environment: ['environment', optional(stringEnum(Environment))],
-  basicAuthUserName: ['basicAuthUserName', optional(string())],
-  basicAuthPassword: ['basicAuthPassword', optional(string())],
   basicAuthCredentials: [
     'basicAuthCredentials',
     optional(
@@ -188,6 +216,49 @@ const configurationSchema: Schema<Partial<Configuration>> = object({
                     password: ['password', string()],
                   })
                 ),
+              ],
+            })
+          ),
+        ],
+      })
+    ),
+  ],
+  logging: [
+    'logging',
+    optional(
+      object({
+        logLevel: ['logLevel', optional(stringEnum(LogLevel))],
+        logRequest: [
+          'logRequest',
+          optional(
+            object({
+              logBody: ['logBody', optional(boolean())],
+              logHeaders: ['logHeaders', optional(boolean())],
+              headersToExclude: ['headersToExclude', optional(array(string()))],
+              headersToInclude: ['headersToInclude', optional(array(string()))],
+              headersToWhiteList: [
+                'headersToWhiteList',
+                optional(array(string())),
+              ],
+              includeQueryInPath: ['includeQueryInPath', optional(boolean())],
+            })
+          ),
+        ],
+        logResponse: [
+          'logResponse',
+          optional(
+            object({
+              logBody: ['logBody', optional(boolean())],
+              logHeaders: ['logHeaders', optional(boolean())],
+              headersToExclude: ['headersToExclude', optional(array(string()))],
+              headersToInclude: ['headersToInclude', optional(array(string()))],
+              headersToWhiteList: [
+                'headersToWhiteList',
+                optional(array(string())),
+              ],
+              makeSensitiveHeaders: [
+                'makeSensitiveHeaders',
+                optional(boolean()),
               ],
             })
           ),

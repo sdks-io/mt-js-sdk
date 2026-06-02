@@ -15,10 +15,10 @@
 | `createdAt` | `string \| undefined` | Optional | - |
 | `updatedAt` | `string \| undefined` | Optional | - |
 | `clientToken` | `string \| undefined` | Optional | The client token of the account collection flow.  This token can be used to embed account collection in your client-side application. |
-| `status` | [`StatusEnum \| undefined`](../../doc/models/status-enum.md) | Optional | The current status of the account collection flow. One of `pending`, `completed`, `expired`, or `cancelled`. |
+| `status` | [`Status \| undefined`](../../doc/models/status.md) | Optional | The current status of the account collection flow. One of `pending`, `completed`, `expired`, or `cancelled`. |
 | `counterpartyId` | `string` | Required | The ID of a counterparty. An external account created with this flow will be associated with this counterparty. |
 | `externalAccountId` | `string \| null \| undefined` | Optional | If present, the ID of the external account created using this flow. |
-| `paymentTypes` | [`PaymentTypeEnum[]`](../../doc/models/payment-type-enum.md) | Required | - |
+| `paymentTypes` | [`PaymentType[]`](../../doc/models/payment-type.md) | Required | - |
 
 ## Example (as JSON)
 

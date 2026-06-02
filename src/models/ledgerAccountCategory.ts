@@ -14,10 +14,7 @@ import {
   string,
 } from '../schema.js';
 import { LedgerBalances, ledgerBalancesSchema } from './ledgerBalances.js';
-import {
-  NormalBalance2Enum,
-  normalBalance2EnumSchema,
-} from './normalBalance2Enum.js';
+import { NormalBalance2, normalBalance2Schema } from './normalBalance2.js';
 
 export interface LedgerAccountCategory {
   id: string;
@@ -36,7 +33,7 @@ export interface LedgerAccountCategory {
   /** The id of the ledger that this account category belongs to. */
   ledgerId: string;
   /** The normal balance of the ledger account category. */
-  normalBalance: NormalBalance2Enum;
+  normalBalance: NormalBalance2;
   balances: LedgerBalances;
 }
 
@@ -53,7 +50,7 @@ export const ledgerAccountCategorySchema: Schema<LedgerAccountCategory> = lazy(
       description: ['description', nullable(string())],
       metadata: ['metadata', dict(string())],
       ledgerId: ['ledger_id', string()],
-      normalBalance: ['normal_balance', normalBalance2EnumSchema],
+      normalBalance: ['normal_balance', normalBalance2Schema],
       balances: ['balances', ledgerBalancesSchema],
     })
 );

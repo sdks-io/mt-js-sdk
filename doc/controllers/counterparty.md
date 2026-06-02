@@ -1,12 +1,12 @@
 # Counterparty
 
 ```ts
-const counterpartyController = new CounterpartyController(client);
+const counterpartyApi = new CounterpartyApi(client);
 ```
 
 ## Class Name
 
-`CounterpartyController`
+`CounterpartyApi`
 
 ## Methods
 
@@ -56,7 +56,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await counterpartyController.collectAccountDetails(id);
+  const response = await counterpartyApi.collectAccountDetails(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -133,7 +133,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await counterpartyController.listCounterparties();
+  const response = await counterpartyApi.listCounterparties();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -210,7 +210,7 @@ const body: CounterpartyCreateRequest = {
 };
 
 try {
-  const response = await counterpartyController.createCounterparty(
+  const response = await counterpartyApi.createCounterparty(
     undefined,
     body
   );
@@ -281,7 +281,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await counterpartyController.getCounterparty(id);
+  const response = await counterpartyApi.getCounterparty(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -350,7 +350,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await counterpartyController.updateCounterparty(id);
+  const response = await counterpartyApi.updateCounterparty(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -417,7 +417,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const id = 'id0';
 
 try {
-  const response = await counterpartyController.deleteCounterparty(id);
+  const response = await counterpartyApi.deleteCounterparty(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

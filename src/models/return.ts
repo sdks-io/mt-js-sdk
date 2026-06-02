@@ -14,19 +14,16 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import { Code1Enum, code1EnumSchema } from './code1Enum.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
+import { Code1, code1Schema } from './code1.js';
+import { Currency, currencySchema } from './currency.js';
 import {
   PaymentReference,
   paymentReferenceSchema,
 } from './paymentReference.js';
-import {
-  ReturnableTypeEnum,
-  returnableTypeEnumSchema,
-} from './returnableTypeEnum.js';
-import { RoleEnum, roleEnumSchema } from './roleEnum.js';
-import { Status4Enum, status4EnumSchema } from './status4Enum.js';
-import { Type6Enum, type6EnumSchema } from './type6Enum.js';
+import { ReturnableType, returnableTypeSchema } from './returnableType.js';
+import { Role, roleSchema } from './role.js';
+import { Status4, status4Schema } from './status4.js';
+import { Type6, type6Schema } from './type6.js';
 
 export interface Return {
   id: string;
@@ -38,9 +35,9 @@ export interface Return {
   /** The ID of the object being returned or `null`. */
   returnableId: string | null;
   /** The type of object being returned or `null`. */
-  returnableType: ReturnableTypeEnum | null;
+  returnableType: ReturnableType | null;
   /** The return code. For ACH returns, this is the required ACH return code. */
-  code: Code1Enum | null;
+  code: Code1 | null;
   /** Often the bank will provide an explanation for the return, which is a short human readable string. */
   reason: string | null;
   /** If the return code is `R14` or `R15` this is the date the deceased counterparty passed away. */
@@ -48,7 +45,7 @@ export interface Return {
   /** Some returns may include additional information from the bank. In these cases, this string will be present. */
   additionalInformation: string | null;
   /** The current status of the return. */
-  status: Status4Enum;
+  status: Status4;
   /** The ID of the relevant Transaction Line Item or `null`. */
   transactionLineItemId: string | null;
   /** The ID of the relevant Transaction or `null`. */
@@ -56,15 +53,15 @@ export interface Return {
   /** The ID of the relevant Internal Account. */
   internalAccountId: string | null;
   /** The type of return. Can be one of: `ach`, `ach_noc`, `au_becs`, `bacs`, `eft`, `interac`, `manual`, `paper_item`, `wire`. */
-  type: Type6Enum;
+  type: Type6;
   /** Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. */
   amount: number;
   /** Three-letter ISO currency code. */
-  currency: CurrencyEnum;
+  currency: Currency;
   /** If an originating return failed to be processed by the bank, a description of the failure reason will be available. */
   failureReason: string | null;
   /** The role of the return, can be `originating` or `receiving`. */
-  role: RoleEnum;
+  role: Role;
   currentReturn: Return;
   /** An array of Payment Reference objects. */
   referenceNumbers: PaymentReference[];
@@ -80,20 +77,20 @@ export const returnSchema: Schema<Return> = lazy(() =>
     createdAt: ['created_at', string()],
     updatedAt: ['updated_at', string()],
     returnableId: ['returnable_id', nullable(string())],
-    returnableType: ['returnable_type', nullable(returnableTypeEnumSchema)],
-    code: ['code', nullable(code1EnumSchema)],
+    returnableType: ['returnable_type', nullable(returnableTypeSchema)],
+    code: ['code', nullable(code1Schema)],
     reason: ['reason', nullable(string())],
     dateOfDeath: ['date_of_death', nullable(string())],
     additionalInformation: ['additional_information', nullable(string())],
-    status: ['status', status4EnumSchema],
+    status: ['status', status4Schema],
     transactionLineItemId: ['transaction_line_item_id', nullable(string())],
     transactionId: ['transaction_id', nullable(string())],
     internalAccountId: ['internal_account_id', nullable(string())],
-    type: ['type', type6EnumSchema],
+    type: ['type', type6Schema],
     amount: ['amount', number()],
-    currency: ['currency', currencyEnumSchema],
+    currency: ['currency', currencySchema],
     failureReason: ['failure_reason', nullable(string())],
-    role: ['role', roleEnumSchema],
+    role: ['role', roleSchema],
     currentReturn: ['current_return', returnSchema],
     referenceNumbers: ['reference_numbers', array(paymentReferenceSchema)],
     ledgerTransactionId: ['ledger_transaction_id', nullable(string())],

@@ -14,9 +14,9 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import { Direction5Enum, direction5EnumSchema } from './direction5Enum.js';
+import { Direction5, direction5Schema } from './direction5.js';
 import { LedgerBalances, ledgerBalancesSchema } from './ledgerBalances.js';
-import { Status9Enum, status9EnumSchema } from './status9Enum.js';
+import { Status9, status9Schema } from './status9.js';
 
 export interface LedgerEntryOfTransactionVersion {
   id: string;
@@ -27,9 +27,9 @@ export interface LedgerEntryOfTransactionVersion {
   /** Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. Can be any integer up to 36 digits. */
   amount: number;
   /** One of `credit`, `debit`. Describes the direction money is flowing in the transaction. A `credit` moves money from your account to someone else's. A `debit` pulls money from someone else's account to your own. Note that wire, rtp, and check payments will always be `credit`. */
-  direction: Direction5Enum;
+  direction: Direction5;
   /** Equal to the state of the ledger transaction when the ledger entry was created. One of `pending`, `posted`, or `archived`. */
-  status: Status9Enum;
+  status: Status9;
   /** The ledger account that this ledger entry is associated with. */
   ledgerAccountId: string;
   /** Lock version of the ledger account. This can be passed when creating a ledger transaction to only succeed if no ledger transactions have posted since the given version. See our post about Designing the Ledgers API with Optimistic Locking for more details. */
@@ -53,8 +53,8 @@ export const ledgerEntryOfTransactionVersionSchema: Schema<LedgerEntryOfTransact
       liveMode: ['live_mode', boolean()],
       createdAt: ['created_at', string()],
       amount: ['amount', number()],
-      direction: ['direction', direction5EnumSchema],
-      status: ['status', status9EnumSchema],
+      direction: ['direction', direction5Schema],
+      status: ['status', status9Schema],
       ledgerAccountId: ['ledger_account_id', string()],
       ledgerAccountLockVersion: [
         'ledger_account_lock_version',

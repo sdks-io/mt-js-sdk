@@ -1,12 +1,12 @@
 # Ledger Transaction
 
 ```ts
-const ledgerTransactionController = new LedgerTransactionController(client);
+const ledgerTransactionApi = new LedgerTransactionApi(client);
 ```
 
 ## Class Name
 
-`LedgerTransactionController`
+`LedgerTransactionApi`
 
 ## Methods
 
@@ -63,7 +63,7 @@ const body: LedgerTransactionReversalCreateRequest = {
 };
 
 try {
-  const response = await ledgerTransactionController.createLedgerTransactionReversal(
+  const response = await ledgerTransactionApi.createLedgerTransactionReversal(
     id,
     body
   );
@@ -142,7 +142,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerTransactionController.listLedgerTransactionVersions();
+  const response = await ledgerTransactionApi.listLedgerTransactionVersions();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -192,13 +192,13 @@ async listLedgerTransactions(
   postedAt?: Record<string, string>,
   updatedAt?: Record<string, string>,
   orderBy?: OrderBy,
-  status?: Status22Enum,
+  status?: Status22,
   externalId?: string,
   ledgerAccountCategoryId?: string,
   ledgerAccountPayoutId?: string,
   reversesLedgerTransactionId?: string,
   ledgerableId?: string,
-  ledgerableType?: LedgerableType6Enum,
+  ledgerableType?: LedgerableType6,
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<LedgerTransaction[]>>
 ```
@@ -222,13 +222,13 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 | `postedAt` | `Record<string, string> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For example, for all times after Jan 1 2000 12:00 UTC, use posted_at%5Bgt%5D=2000-01-01T12:00:00Z. |
 | `updatedAt` | `Record<string, string> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For example, for all times after Jan 1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z. |
 | `orderBy` | [`OrderBy \| undefined`](../../doc/models/order-by.md) | Query, Optional | Order by `created_at` or `effective_at` in `asc` or `desc` order. For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`. Ordering by only one field at a time is supported. |
-| `status` | [`Status22Enum \| undefined`](../../doc/models/status-22-enum.md) | Query, Optional | - |
+| `status` | [`Status22 \| undefined`](../../doc/models/status-22.md) | Query, Optional | - |
 | `externalId` | `string \| undefined` | Query, Optional | - |
 | `ledgerAccountCategoryId` | `string \| undefined` | Query, Optional | - |
 | `ledgerAccountPayoutId` | `string \| undefined` | Query, Optional | - |
 | `reversesLedgerTransactionId` | `string \| undefined` | Query, Optional | - |
 | `ledgerableId` | `string \| undefined` | Query, Optional | - |
-| `ledgerableType` | [`LedgerableType6Enum \| undefined`](../../doc/models/ledgerable-type-6-enum.md) | Query, Optional | - |
+| `ledgerableType` | [`LedgerableType6 \| undefined`](../../doc/models/ledgerable-type-6.md) | Query, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
@@ -241,7 +241,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerTransactionController.listLedgerTransactions();
+  const response = await ledgerTransactionApi.listLedgerTransactions();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -311,7 +311,7 @@ const body: LedgerTransactionCreateRequest = {
   ledgerEntries: [
     {
       amount: 60,
-      direction: Direction5Enum.Credit,
+      direction: Direction5.Credit,
       ledgerAccountId: '00002600-0000-0000-0000-000000000000',
       metadata: {
         'key': 'value',
@@ -328,7 +328,7 @@ const body: LedgerTransactionCreateRequest = {
 };
 
 try {
-  const response = await ledgerTransactionController.createLedgerTransaction(
+  const response = await ledgerTransactionApi.createLedgerTransaction(
     undefined,
     body
   );
@@ -401,7 +401,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerTransactionController.getLedgerTransaction(id);
+  const response = await ledgerTransactionApi.getLedgerTransaction(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -478,7 +478,7 @@ const body: LedgerTransactionUpdateRequest = {
 };
 
 try {
-  const response = await ledgerTransactionController.updateLedgerTransaction(
+  const response = await ledgerTransactionApi.updateLedgerTransaction(
     id,
     body
   );
@@ -560,7 +560,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerTransactionController.listLedgerTransactionVersions1(id);
+  const response = await ledgerTransactionApi.listLedgerTransactionVersions1(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

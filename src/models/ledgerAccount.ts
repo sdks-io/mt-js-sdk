@@ -14,18 +14,12 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import {
-  LedgerableTypeEnum,
-  ledgerableTypeEnumSchema,
-} from './ledgerableTypeEnum.js';
+import { LedgerableType, ledgerableTypeSchema } from './ledgerableType.js';
 import {
   LedgerBalancesWithEffectiveAt,
   ledgerBalancesWithEffectiveAtSchema,
 } from './ledgerBalancesWithEffectiveAt.js';
-import {
-  NormalBalanceEnum,
-  normalBalanceEnumSchema,
-} from './normalBalanceEnum.js';
+import { NormalBalance, normalBalanceSchema } from './normalBalance.js';
 
 export interface LedgerAccount {
   id: string;
@@ -40,7 +34,7 @@ export interface LedgerAccount {
   /** The description of the ledger account. */
   description: string | null;
   /** The normal balance of the ledger account. */
-  normalBalance: NormalBalanceEnum;
+  normalBalance: NormalBalance;
   balances: LedgerBalancesWithEffectiveAt;
   /** Lock version of the ledger account. */
   lockVersion: number;
@@ -49,7 +43,7 @@ export interface LedgerAccount {
   /** If the ledger account links to another object in Modern Treasury, the id will be populated here, otherwise null. */
   ledgerableId: string | null;
   /** If the ledger account links to another object in Modern Treasury, the type will be populated here, otherwise null. The value is one of internal_account or external_account. */
-  ledgerableType: LedgerableTypeEnum | null;
+  ledgerableType: LedgerableType | null;
   /** Additional data represented as key-value pairs. Both the key and value must be strings. */
   metadata: Record<string, string>;
 }
@@ -64,12 +58,12 @@ export const ledgerAccountSchema: Schema<LedgerAccount> = lazy(() =>
     discardedAt: ['discarded_at', nullable(string())],
     name: ['name', string()],
     description: ['description', nullable(string())],
-    normalBalance: ['normal_balance', normalBalanceEnumSchema],
+    normalBalance: ['normal_balance', normalBalanceSchema],
     balances: ['balances', ledgerBalancesWithEffectiveAtSchema],
     lockVersion: ['lock_version', number()],
     ledgerId: ['ledger_id', string()],
     ledgerableId: ['ledgerable_id', nullable(string())],
-    ledgerableType: ['ledgerable_type', nullable(ledgerableTypeEnumSchema)],
+    ledgerableType: ['ledgerable_type', nullable(ledgerableTypeSchema)],
     metadata: ['metadata', dict(string())],
   })
 );

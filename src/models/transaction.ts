@@ -13,12 +13,9 @@ import {
   Schema,
   string,
 } from '../schema.js';
-import { CurrencyEnum, currencyEnumSchema } from './currencyEnum.js';
-import { Type11Enum, type11EnumSchema } from './type11Enum.js';
-import {
-  VendorCodeType1Enum,
-  vendorCodeType1EnumSchema,
-} from './vendorCodeType1Enum.js';
+import { Currency, currencySchema } from './currency.js';
+import { Type11, type11Schema } from './type11.js';
+import { VendorCodeType1, vendorCodeType1Schema } from './vendorCodeType1.js';
 
 export interface Transaction {
   id: string;
@@ -31,7 +28,7 @@ export interface Transaction {
   /** Value in specified currency's smallest unit. e.g. $10 would be represented as 1000. */
   amount: number;
   /** Three-letter ISO currency code. */
-  currency: CurrencyEnum;
+  currency: Currency;
   /** Either `credit` or `debit`. */
   direction: string;
   /** The transaction detail text that often appears in on your bank statement and in your banking portal. */
@@ -39,7 +36,7 @@ export interface Transaction {
   /** When applicable, the bank-given code that determines the transaction's category. For most banks this is the BAI2/BTRS transaction code. */
   vendorCode: string | null;
   /** The type of `vendor_code` being reported. Can be one of `bai2`, `bankprov`, `bnk_dev`, `cleartouch`, `currencycloud`, `cross_river`, `dc_bank`, `dwolla`, `evolve`, `goldman_sachs`, `iso20022`, `jpmc`, `mx`, `signet`, `silvergate`, `swift`, or `us_bank`. */
-  vendorCodeType: VendorCodeType1Enum | null;
+  vendorCodeType: VendorCodeType1 | null;
   /** An identifier given to this transaction by the bank. */
   vendorId: string | null;
   /** The date on which the transaction occurred. */
@@ -59,7 +56,7 @@ export interface Transaction {
   /** This field contains additional information that the bank provided about the transaction. This is structured data. Some of the data in here might overlap with what is in the `vendor_description`. For example, the OBI could be a part of the vendor description, and it would also be included in here. The attributes that are passed through the details field will vary based on your banking partner. Currently, the following keys may be in the details object: `originator_name`, `originator_to_beneficiary_information`. */
   details: Record<string, string>;
   /** The type of the transaction. Can be one of `ach`, `wire`, `check`, `rtp`, `book`, or `sen`. */
-  type: Type11Enum;
+  type: Type11;
 }
 
 export const transactionSchema: Schema<Transaction> = object({
@@ -70,11 +67,11 @@ export const transactionSchema: Schema<Transaction> = object({
   updatedAt: ['updated_at', string()],
   discardedAt: ['discarded_at', nullable(string())],
   amount: ['amount', number()],
-  currency: ['currency', currencyEnumSchema],
+  currency: ['currency', currencySchema],
   direction: ['direction', string()],
   vendorDescription: ['vendor_description', nullable(string())],
   vendorCode: ['vendor_code', nullable(string())],
-  vendorCodeType: ['vendor_code_type', nullable(vendorCodeType1EnumSchema)],
+  vendorCodeType: ['vendor_code_type', nullable(vendorCodeType1Schema)],
   vendorId: ['vendor_id', nullable(string())],
   asOfDate: ['as_of_date', nullable(string())],
   asOfTime: ['as_of_time', nullable(string())],
@@ -84,5 +81,5 @@ export const transactionSchema: Schema<Transaction> = object({
   vendorCustomerId: ['vendor_customer_id', nullable(string())],
   reconciled: ['reconciled', boolean()],
   details: ['details', dict(string())],
-  type: ['type', type11EnumSchema],
+  type: ['type', type11Schema],
 });

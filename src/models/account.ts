@@ -16,15 +16,15 @@ import {
   string,
 } from '../schema.js';
 import { AccountDetail, accountDetailSchema } from './accountDetail.js';
-import { AccountTypeEnum, accountTypeEnumSchema } from './accountTypeEnum.js';
+import { AccountType, accountTypeSchema } from './accountType.js';
 import { Address, addressSchema } from './address.js';
 import { ContactDetail, contactDetailSchema } from './contactDetail.js';
-import { PartyTypeEnum, partyTypeEnumSchema } from './partyTypeEnum.js';
+import { PartyType, partyTypeSchema } from './partyType.js';
 import { RoutingDetail, routingDetailSchema } from './routingDetail.js';
 import {
-  VerificationStatusEnum,
-  verificationStatusEnumSchema,
-} from './verificationStatusEnum.js';
+  VerificationStatus,
+  verificationStatusSchema,
+} from './verificationStatus.js';
 
 export interface Account {
   id?: string;
@@ -35,9 +35,9 @@ export interface Account {
   updatedAt?: string;
   discardedAt?: string | null;
   /** Can be `checking`, `savings` or `other`. */
-  accountType?: AccountTypeEnum;
+  accountType?: AccountType;
   /** Either `individual` or `business`. */
-  partyType?: PartyTypeEnum | null;
+  partyType?: PartyType | null;
   partyAddress?: Address | null;
   /** A nickname for the external account. This is only for internal usage and won't affect any payments */
   name?: string | null;
@@ -50,7 +50,7 @@ export interface Account {
   contactDetails?: ContactDetail[];
   /** If the external account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here. */
   ledgerAccountId?: string | null;
-  verificationStatus?: VerificationStatusEnum;
+  verificationStatus?: VerificationStatus;
 }
 
 export const accountSchema: Schema<Account> = lazy(() =>
@@ -61,8 +61,8 @@ export const accountSchema: Schema<Account> = lazy(() =>
     createdAt: ['created_at', optional(string())],
     updatedAt: ['updated_at', optional(string())],
     discardedAt: ['discarded_at', optional(nullable(string()))],
-    accountType: ['account_type', optional(accountTypeEnumSchema)],
-    partyType: ['party_type', optional(nullable(partyTypeEnumSchema))],
+    accountType: ['account_type', optional(accountTypeSchema)],
+    partyType: ['party_type', optional(nullable(partyTypeSchema))],
     partyAddress: ['party_address', optional(nullable(addressSchema))],
     name: ['name', optional(nullable(string()))],
     accountDetails: ['account_details', optional(array(accountDetailSchema))],
@@ -73,7 +73,7 @@ export const accountSchema: Schema<Account> = lazy(() =>
     ledgerAccountId: ['ledger_account_id', optional(nullable(string()))],
     verificationStatus: [
       'verification_status',
-      optional(verificationStatusEnumSchema),
+      optional(verificationStatusSchema),
     ],
   })
 );

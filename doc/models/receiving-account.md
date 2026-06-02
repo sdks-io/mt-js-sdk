@@ -1,6 +1,8 @@
 
 # Receiving Account
 
+*This model accepts additional fields of type unknown.*
+
 ## Structure
 
 `ReceivingAccount`
@@ -15,8 +17,8 @@
 | `createdAt` | `string \| undefined` | Optional | - |
 | `updatedAt` | `string \| undefined` | Optional | - |
 | `discardedAt` | `string \| null \| undefined` | Optional | - |
-| `accountType` | [`AccountTypeEnum \| undefined`](../../doc/models/account-type-enum.md) | Optional | Can be `checking`, `savings` or `other`. |
-| `partyType` | [`PartyTypeEnum \| null \| undefined`](../../doc/models/party-type-enum.md) | Optional | Either `individual` or `business`. |
+| `accountType` | [`AccountType \| undefined`](../../doc/models/account-type.md) | Optional | Can be `checking`, `savings` or `other`. |
+| `partyType` | [`PartyType \| null \| undefined`](../../doc/models/party-type.md) | Optional | Either `individual` or `business`. |
 | `partyAddress` | [`Address \| null \| undefined`](../../doc/models/address.md) | Optional | - |
 | `name` | `string \| null \| undefined` | Optional | A nickname for the external account. This is only for internal usage and won't affect any payments |
 | `accountDetails` | [`AccountDetail[] \| undefined`](../../doc/models/account-detail.md) | Optional | - |
@@ -25,7 +27,8 @@
 | `partyName` | `string \| undefined` | Optional | The legal name of the entity which owns the account. |
 | `contactDetails` | [`ContactDetail[] \| undefined`](../../doc/models/contact-detail.md) | Optional | - |
 | `ledgerAccountId` | `string \| null \| undefined` | Optional | If the external account links to a ledger account in Modern Treasury, the id of the ledger account will be populated here. |
-| `verificationStatus` | [`VerificationStatusEnum \| undefined`](../../doc/models/verification-status-enum.md) | Optional | - |
+| `verificationStatus` | [`VerificationStatus \| undefined`](../../doc/models/verification-status.md) | Optional | - |
+| `additionalProperties` | `Record<string, unknown>` | Optional | - |
 
 ## Example (as JSON)
 
@@ -40,7 +43,11 @@
   "object": "object4",
   "live_mode": false,
   "created_at": "2016-03-13T12:52:32.123Z",
-  "updated_at": "2016-03-13T12:52:32.123Z"
+  "updated_at": "2016-03-13T12:52:32.123Z",
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

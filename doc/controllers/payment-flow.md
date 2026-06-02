@@ -1,12 +1,12 @@
 # Payment Flow
 
 ```ts
-const paymentFlowController = new PaymentFlowController(client);
+const paymentFlowApi = new PaymentFlowApi(client);
 ```
 
 ## Class Name
 
-`PaymentFlowController`
+`PaymentFlowApi`
 
 ## Methods
 
@@ -60,7 +60,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await paymentFlowController.listPaymentFlows();
+  const response = await paymentFlowApi.listPaymentFlows();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -116,7 +116,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await paymentFlowController.createPaymentFlow();
+  const response = await paymentFlowApi.createPaymentFlow();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -183,7 +183,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await paymentFlowController.getPaymentFlow(id);
+  const response = await paymentFlowApi.getPaymentFlow(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -247,7 +247,7 @@ const body: PaymentFlowUpdateRequest = {
 };
 
 try {
-  const response = await paymentFlowController.updatePaymentFlow(
+  const response = await paymentFlowApi.updatePaymentFlow(
     id,
     undefined,
     body

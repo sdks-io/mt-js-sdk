@@ -10,18 +10,19 @@ import {
   dict,
   lazy,
   nullable,
-  object,
   optional,
   Schema,
   string,
+  typedExpandoObject,
+  unknown,
 } from '../schema.js';
 import { Account1, account1Schema } from './account1.js';
 import { Accounting1, accounting1Schema } from './accounting1.js';
-import { LedgerTypeEnum, ledgerTypeEnumSchema } from './ledgerTypeEnum.js';
+import { LedgerType, ledgerTypeSchema } from './ledgerType.js';
 import {
-  VerificationStatus1Enum,
-  verificationStatus1EnumSchema,
-} from './verificationStatus1Enum.js';
+  VerificationStatus1,
+  verificationStatus1Schema,
+} from './verificationStatus1.js';
 
 export interface CounterpartyCreateRequest {
   /** A human friendly name for this counterparty. */
@@ -35,28 +36,33 @@ export interface CounterpartyCreateRequest {
   /** Send an email to the counterparty whenever an associated payment order is sent to the bank. */
   sendRemittanceAdvice?: boolean;
   /** The verification status of the counterparty. */
-  verificationStatus?: VerificationStatus1Enum;
+  verificationStatus?: VerificationStatus1;
   accounting?: Accounting1;
   /** An optional type to auto-sync the counterparty to your ledger. Either `customer` or `vendor`. */
-  ledgerType?: LedgerTypeEnum;
+  ledgerType?: LedgerType;
   /** Either a valid SSN or EIN. */
   taxpayerIdentifier?: string;
+  additionalProperties?: Record<string, unknown>;
 }
 
 export const counterpartyCreateRequestSchema: Schema<CounterpartyCreateRequest> = lazy(
   () =>
-    object({
-      name: ['name', nullable(string())],
-      accounts: ['accounts', optional(array(account1Schema))],
-      email: ['email', optional(nullable(string()))],
-      metadata: ['metadata', optional(dict(string()))],
-      sendRemittanceAdvice: ['send_remittance_advice', optional(boolean())],
-      verificationStatus: [
-        'verification_status',
-        optional(verificationStatus1EnumSchema),
-      ],
-      accounting: ['accounting', optional(accounting1Schema)],
-      ledgerType: ['ledger_type', optional(ledgerTypeEnumSchema)],
-      taxpayerIdentifier: ['taxpayer_identifier', optional(string())],
-    })
+    typedExpandoObject(
+      {
+        name: ['name', nullable(string())],
+        accounts: ['accounts', optional(array(account1Schema))],
+        email: ['email', optional(nullable(string()))],
+        metadata: ['metadata', optional(dict(string()))],
+        sendRemittanceAdvice: ['send_remittance_advice', optional(boolean())],
+        verificationStatus: [
+          'verification_status',
+          optional(verificationStatus1Schema),
+        ],
+        accounting: ['accounting', optional(accounting1Schema)],
+        ledgerType: ['ledger_type', optional(ledgerTypeSchema)],
+        taxpayerIdentifier: ['taxpayer_identifier', optional(string())],
+      },
+      'additionalProperties',
+      optional(unknown())
+    )
 );

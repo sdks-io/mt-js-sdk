@@ -1,12 +1,12 @@
 # Ping
 
 ```ts
-const pingController = new PingController(client);
+const pingApi = new PingApi(client);
 ```
 
 ## Class Name
 
-`PingController`
+`PingApi`
 
 
 # Ping API
@@ -14,7 +14,7 @@ const pingController = new PingController(client);
 A test endpoint often used to confirm credentials and headers are being passed in correctly.
 
 ```ts
-async pingAPI(
+async pingApi(
   requestOptions?: RequestOptions
 ): Promise<ApiResponse<PingResponse>>
 ```
@@ -39,7 +39,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await pingController.pingAPI();
+  const response = await pingApi.pingApi();
 
   // Extracting fully parsed response body.
   console.log(response.result);

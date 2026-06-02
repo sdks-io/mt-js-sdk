@@ -1,12 +1,12 @@
 # Balance Report
 
 ```ts
-const balanceReportController = new BalanceReportController(client);
+const balanceReportApi = new BalanceReportApi(client);
 ```
 
 ## Class Name
 
-`BalanceReportController`
+`BalanceReportApi`
 
 ## Methods
 
@@ -22,7 +22,7 @@ Get all balance reports for a given internal account.
 async listBalanceReports(
   internalAccountId: string,
   asOfDate?: string,
-  balanceReportType?: BalanceReportType1Enum,
+  balanceReportType?: BalanceReportType1,
   afterCursor?: string | null,
   perPage?: number,
   requestOptions?: RequestOptions
@@ -39,7 +39,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `internalAccountId` | `string` | Template, Required | - |
 | `asOfDate` | `string \| undefined` | Query, Optional | The date of the balance report in local time. |
-| `balanceReportType` | [`BalanceReportType1Enum \| undefined`](../../doc/models/balance-report-type-1-enum.md) | Query, Optional | The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`. |
+| `balanceReportType` | [`BalanceReportType1 \| undefined`](../../doc/models/balance-report-type-1.md) | Query, Optional | The specific type of balance report. One of `intraday`, `previous_day`, `real_time`, or `other`. |
 | `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
 | `perPage` | `number \| undefined` | Query, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -56,7 +56,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const internalAccountId = 'internal_account_id4';
 
 try {
-  const response = await balanceReportController.listBalanceReports(internalAccountId);
+  const response = await balanceReportApi.listBalanceReports(internalAccountId);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -127,7 +127,7 @@ const internalAccountId = 'internal_account_id4';
 const id = 'id0';
 
 try {
-  const response = await balanceReportController.getBalanceReport(
+  const response = await balanceReportApi.getBalanceReport(
     internalAccountId,
     id
   );
