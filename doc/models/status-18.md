@@ -1,7 +1,7 @@
 
 # Status 18
 
-To cancel a payment order, use `cancelled`. To redraft a returned payment order, use `approved`. To undo approval on a denied or approved payment order, use `needs_approval`.
+The current status of the payment flow. One of `pending`, `completed`, `expired`, or `cancelled`.
 
 ## Enumeration
 
@@ -11,15 +11,8 @@ To cancel a payment order, use `cancelled`. To redraft a returned payment order,
 
 | Name |
 |  --- |
-| `Approved` |
 | `Cancelled` |
 | `Completed` |
-| `Denied` |
-| `Failed` |
-| `NeedsApproval` |
+| `Expired` |
 | `Pending` |
-| `Processing` |
-| `Returned` |
-| `Reversed` |
-| `Sent` |
 

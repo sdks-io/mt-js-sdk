@@ -6,7 +6,7 @@ The following parameters are configurable for the API Client:
 | Parameter | Type | Description |
 |  --- | --- | --- |
 | environment | [`Environment`](../README.md#environments) | The API environment. <br> **Default: `Environment.Production`** |
-| timeout | `number` | Timeout for API calls.<br>*Default*: `30000` |
+| timeout | `number` | Timeout for API calls.<br>*Default*: `60000` |
 | httpClientOptions | [`Partial<HttpClientOptions>`](../doc/http-client-options.md) | Stable configurable http client options. |
 | unstableHttpClientOptions | `any` | Unstable configurable http client options. |
 | logging | [`PartialLoggingOptions`](../doc/partial-logging-options.md) | Logging Configuration to enable logging |
@@ -24,7 +24,7 @@ const client = new Client({
     username: 'BasicAuthUserName',
     password: 'BasicAuthPassword'
   },
-  timeout: 30000,
+  timeout: 60000,
   environment: Environment.Production,
   logging: {
     logLevel: LogLevel.Info,

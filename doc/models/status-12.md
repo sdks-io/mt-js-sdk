@@ -1,7 +1,7 @@
 
 # Status 12
 
-One of `pending`, `posted`, or `archived`
+To post a ledger transaction at creation, use `posted`.
 
 ## Enumeration
 

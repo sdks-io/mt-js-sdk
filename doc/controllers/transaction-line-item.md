@@ -1,12 +1,12 @@
 # Transaction Line Item
 
 ```ts
-const transactionLineItemController = new TransactionLineItemController(client);
+const transactionLineItemApi = new TransactionLineItemApi(client);
 ```
 
 ## Class Name
 
-`TransactionLineItemController`
+`TransactionLineItemApi`
 
 
 # List Transaction Line Items
@@ -47,7 +47,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const transactionId = 'transaction_id8';
 
 try {
-  const response = await transactionLineItemController.listTransactionLineItems(transactionId);
+  const response = await transactionLineItemApi.listTransactionLineItems(transactionId);
 
   // Extracting fully parsed response body.
   console.log(response.result);

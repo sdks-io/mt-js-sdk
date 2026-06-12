@@ -1,12 +1,12 @@
 # Connection
 
 ```ts
-const connectionController = new ConnectionController(client);
+const connectionApi = new ConnectionApi(client);
 ```
 
 ## Class Name
 
-`ConnectionController`
+`ConnectionApi`
 
 
 # List Connections
@@ -47,7 +47,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await connectionController.listConnections();
+  const response = await connectionApi.listConnections();
 
   // Extracting fully parsed response body.
   console.log(response.result);

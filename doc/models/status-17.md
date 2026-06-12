@@ -1,7 +1,7 @@
 
 # Status 17
 
-The current status of the payment flow. One of `pending`, `completed`, `expired`, or `cancelled`.
+The current status of the paper item. One of `pending`, `completed`, or `returned`.
 
 ## Enumeration
 
@@ -11,8 +11,7 @@ The current status of the payment flow. One of `pending`, `completed`, `expired`
 
 | Name |
 |  --- |
-| `Cancelled` |
 | `Completed` |
-| `Expired` |
 | `Pending` |
+| `Returned` |
 

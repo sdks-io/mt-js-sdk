@@ -1,7 +1,7 @@
 
 # Status 8
 
-To post a pending ledger account payout, use `posted`. To archive a pending ledger transaction, use `archived`.
+The status of the ledger account payout. It is set to `pending` by default. To post a ledger account payout at creation, use `posted`.
 
 ## Enumeration
 
@@ -11,6 +11,6 @@ To post a pending ledger account payout, use `posted`. To archive a pending ledg
 
 | Name |
 |  --- |
+| `Pending` |
 | `Posted` |
-| `Archived` |
 

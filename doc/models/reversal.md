@@ -14,7 +14,7 @@
 | `liveMode` | `boolean` | Required | This field will be true if this object exists in the live environment or false if it exists in the test environment. |
 | `createdAt` | `string` | Required | - |
 | `updatedAt` | `string` | Required | - |
-| `status` | [`Status19`](../../doc/models/status-19.md) | Required | The current status of the reversal. |
+| `status` | [`Status20`](../../doc/models/status-20.md) | Required | The current status of the reversal. |
 | `paymentOrderId` | `string \| null` | Required | The ID of the relevant Payment Order. |
 | `metadata` | `Record<string, string>` | Required | Additional data represented as key-value pairs. Both the key and value must be strings. |
 | `reason` | [`Reason`](../../doc/models/reason.md) | Required | The reason for the reversal. |

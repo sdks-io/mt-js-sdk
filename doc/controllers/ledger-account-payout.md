@@ -1,18 +1,18 @@
 # Ledger Account Payout
 
 ```ts
-const ledgerAccountPayoutController = new LedgerAccountPayoutController(client);
+const ledgerAccountPayoutApi = new LedgerAccountPayoutApi(client);
 ```
 
 ## Class Name
 
-`LedgerAccountPayoutController`
+`LedgerAccountPayoutApi`
 
 ## Methods
 
 * [Create Ledger Account Payout](../../doc/controllers/ledger-account-payout.md#create-ledger-account-payout)
-* [List Ledger Account Payouts](../../doc/controllers/ledger-account-payout.md#list-ledger-account-payouts)
 * [Get Ledger Account Payout](../../doc/controllers/ledger-account-payout.md#get-ledger-account-payout)
+* [List Ledger Account Payouts](../../doc/controllers/ledger-account-payout.md#list-ledger-account-payouts)
 * [Update Ledger Account Payout](../../doc/controllers/ledger-account-payout.md#update-ledger-account-payout)
 
 
@@ -60,7 +60,7 @@ const body: LedgerAccountPayoutCreateRequest = {
 };
 
 try {
-  const response = await ledgerAccountPayoutController.createLedgerAccountPayout(
+  const response = await ledgerAccountPayoutApi.createLedgerAccountPayout(
     undefined,
     body
   );
@@ -95,6 +95,73 @@ try {
 |  --- | --- | --- |
 | 403 | forbidden | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 | 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
+# Get Ledger Account Payout
+
+Get details on a single ledger account payout.
+
+```ts
+async getLedgerAccountPayout(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<LedgerAccountPayout>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Template, Required | id |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`LedgerAccountPayout`](../../doc/models/ledger-account-payout.md).
+
+## Example Usage
+
+```ts
+const id = 'id0';
+
+try {
+  const response = await ledgerAccountPayoutApi.getLedgerAccountPayout(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorMessageError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 
 
 # List Ledger Account Payouts
@@ -135,7 +202,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerAccountPayoutController.listLedgerAccountPayouts();
+  const response = await ledgerAccountPayoutApi.listLedgerAccountPayouts();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -157,73 +224,6 @@ try {
   }
 }
 ```
-
-
-# Get Ledger Account Payout
-
-Get details on a single ledger account payout.
-
-```ts
-async getLedgerAccountPayout(
-  id: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<LedgerAccountPayout>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | id |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`LedgerAccountPayout`](../../doc/models/ledger-account-payout.md).
-
-## Example Usage
-
-```ts
-const id = 'id0';
-
-try {
-  const response = await ledgerAccountPayoutController.getLedgerAccountPayout(id);
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorMessageError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 
 
 # Update Ledger Account Payout
@@ -270,7 +270,7 @@ const body: LedgerAccountPayoutUpdateRequest = {
 };
 
 try {
-  const response = await ledgerAccountPayoutController.updateLedgerAccountPayout(
+  const response = await ledgerAccountPayoutApi.updateLedgerAccountPayout(
     id,
     body
   );

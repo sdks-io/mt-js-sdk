@@ -1,12 +1,12 @@
 # Validation
 
 ```ts
-const validationController = new ValidationController(client);
+const validationApi = new ValidationApi(client);
 ```
 
 ## Class Name
 
-`ValidationController`
+`ValidationApi`
 
 
 # Validate Routing Number
@@ -47,7 +47,7 @@ const routingNumber = 'routing_number4';
 const routingNumberType = RoutingNumberType8.MyBranchCode;
 
 try {
-  const response = await validationController.validateRoutingNumber(
+  const response = await validationApi.validateRoutingNumber(
     routingNumber,
     routingNumberType
   );

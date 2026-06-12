@@ -1,87 +1,19 @@
 # Payment Flow
 
 ```ts
-const paymentFlowController = new PaymentFlowController(client);
+const paymentFlowApi = new PaymentFlowApi(client);
 ```
 
 ## Class Name
 
-`PaymentFlowController`
+`PaymentFlowApi`
 
 ## Methods
 
-* [List Payment Flows](../../doc/controllers/payment-flow.md#list-payment-flows)
 * [Create Payment Flow](../../doc/controllers/payment-flow.md#create-payment-flow)
 * [Get Payment Flow](../../doc/controllers/payment-flow.md#get-payment-flow)
+* [List Payment Flows](../../doc/controllers/payment-flow.md#list-payment-flows)
 * [Update Payment Flow](../../doc/controllers/payment-flow.md#update-payment-flow)
-
-
-# List Payment Flows
-
-```ts
-async listPaymentFlows(
-  afterCursor?: string | null,
-  perPage?: number,
-  clientToken?: string,
-  status?: string,
-  counterpartyId?: string,
-  receivingAccountId?: string,
-  originatingAccountId?: string,
-  paymentOrderId?: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<PaymentFlow[]>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
-| `perPage` | `number \| undefined` | Query, Optional | - |
-| `clientToken` | `string \| undefined` | Query, Optional | - |
-| `status` | `string \| undefined` | Query, Optional | - |
-| `counterpartyId` | `string \| undefined` | Query, Optional | - |
-| `receivingAccountId` | `string \| undefined` | Query, Optional | - |
-| `originatingAccountId` | `string \| undefined` | Query, Optional | - |
-| `paymentOrderId` | `string \| undefined` | Query, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentFlow[]`](../../doc/models/payment-flow.md).
-
-## Example Usage
-
-```ts
-try {
-  const response = await paymentFlowController.listPaymentFlows();
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-  }
-}
-```
 
 
 # Create Payment Flow
@@ -116,7 +48,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await paymentFlowController.createPaymentFlow();
+  const response = await paymentFlowApi.createPaymentFlow();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -183,7 +115,75 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await paymentFlowController.getPaymentFlow(id);
+  const response = await paymentFlowApi.getPaymentFlow(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+  }
+}
+```
+
+
+# List Payment Flows
+
+```ts
+async listPaymentFlows(
+  afterCursor?: string | null,
+  perPage?: number,
+  clientToken?: string,
+  status?: string,
+  counterpartyId?: string,
+  receivingAccountId?: string,
+  originatingAccountId?: string,
+  paymentOrderId?: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentFlow[]>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
+| `perPage` | `number \| undefined` | Query, Optional | - |
+| `clientToken` | `string \| undefined` | Query, Optional | - |
+| `status` | `string \| undefined` | Query, Optional | - |
+| `counterpartyId` | `string \| undefined` | Query, Optional | - |
+| `receivingAccountId` | `string \| undefined` | Query, Optional | - |
+| `originatingAccountId` | `string \| undefined` | Query, Optional | - |
+| `paymentOrderId` | `string \| undefined` | Query, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentFlow[]`](../../doc/models/payment-flow.md).
+
+## Example Usage
+
+```ts
+try {
+  const response = await paymentFlowApi.listPaymentFlows();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -247,7 +247,7 @@ const body: PaymentFlowUpdateRequest = {
 };
 
 try {
-  const response = await paymentFlowController.updatePaymentFlow(
+  const response = await paymentFlowApi.updatePaymentFlow(
     id,
     undefined,
     body

@@ -31,7 +31,7 @@
 | `number` | `string` | Required | A unique record number assigned to each invoice that is issued. |
 | `paymentOrders` | [`PaymentOrder[]`](../../doc/models/payment-order.md) | Required | The payment orders created for paying the invoice through the invoice payment UI. |
 | `pdfUrl` | `string \| null` | Required | The URL where the invoice PDF can be downloaded. |
-| `status` | [`Status5`](../../doc/models/status-5.md) | Required | The status of the invoice. |
+| `status` | [`Status6`](../../doc/models/status-6.md) | Required | The status of the invoice. |
 | `totalAmount` | `number` | Required | Total amount due in specified currency's smallest unit, e.g., $10 USD would be represented as 1000. |
 
 ## Example (as JSON)
@@ -199,44 +199,7 @@
           "object": "object4",
           "live_mode": false,
           "created_at": "2016-03-13T12:52:32.123Z",
-          "updated_at": "2016-03-13T12:52:32.123Z",
-          "returnable_id": "00000a82-0000-0000-0000-000000000000",
-          "returnable_type": "reversal",
-          "code": "R31",
-          "reason": "reason6",
-          "date_of_death": "2016-03-13T12:52:32.123Z",
-          "additional_information": "additional_information8",
-          "status": "returned",
-          "transaction_line_item_id": "0000011a-0000-0000-0000-000000000000",
-          "transaction_id": "000008da-0000-0000-0000-000000000000",
-          "internal_account_id": "000018bc-0000-0000-0000-000000000000",
-          "type": "book",
-          "amount": 12,
-          "currency": "MDL",
-          "failure_reason": "failure_reason2",
-          "role": "originating",
-          "current_return": {},
-          "reference_numbers": [
-            {
-              "id": "000016a4-0000-0000-0000-000000000000",
-              "object": "object4",
-              "live_mode": false,
-              "created_at": "2016-03-13T12:52:32.123Z",
-              "updated_at": "2016-03-13T12:52:32.123Z",
-              "reference_number": "reference_number2",
-              "reference_number_type": "jpmc_customer_reference_id"
-            },
-            {
-              "id": "000016a4-0000-0000-0000-000000000000",
-              "object": "object4",
-              "live_mode": false,
-              "created_at": "2016-03-13T12:52:32.123Z",
-              "updated_at": "2016-03-13T12:52:32.123Z",
-              "reference_number": "reference_number2",
-              "reference_number_type": "jpmc_customer_reference_id"
-            }
-          ],
-          "ledger_transaction_id": "00001548-0000-0000-0000-000000000000"
+          "updated_at": "2016-03-13T12:52:32.123Z"
         },
         "reference_numbers": [
           {

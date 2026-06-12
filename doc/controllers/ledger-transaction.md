@@ -1,22 +1,115 @@
 # Ledger Transaction
 
 ```ts
-const ledgerTransactionController = new LedgerTransactionController(client);
+const ledgerTransactionApi = new LedgerTransactionApi(client);
 ```
 
 ## Class Name
 
-`LedgerTransactionController`
+`LedgerTransactionApi`
 
 ## Methods
 
+* [Create Ledger Transaction](../../doc/controllers/ledger-transaction.md#create-ledger-transaction)
 * [Create Ledger Transaction Reversal](../../doc/controllers/ledger-transaction.md#create-ledger-transaction-reversal)
+* [Get Ledger Transaction](../../doc/controllers/ledger-transaction.md#get-ledger-transaction)
+* [Get Ledger Transaction Versions](../../doc/controllers/ledger-transaction.md#get-ledger-transaction-versions)
 * [List Ledger Transaction Versions](../../doc/controllers/ledger-transaction.md#list-ledger-transaction-versions)
 * [List Ledger Transactions](../../doc/controllers/ledger-transaction.md#list-ledger-transactions)
-* [Create Ledger Transaction](../../doc/controllers/ledger-transaction.md#create-ledger-transaction)
-* [Get Ledger Transaction](../../doc/controllers/ledger-transaction.md#get-ledger-transaction)
 * [Update Ledger Transaction](../../doc/controllers/ledger-transaction.md#update-ledger-transaction)
-* [List Ledger Transaction Versions 1](../../doc/controllers/ledger-transaction.md#list-ledger-transaction-versions-1)
+
+
+# Create Ledger Transaction
+
+Create a ledger transaction.
+
+```ts
+async createLedgerTransaction(
+  idempotencyKey?: string,
+  body?: LedgerTransactionCreateRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<LedgerTransaction>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `idempotencyKey` | `string \| undefined` | Header, Optional | This key should be something unique, preferably something like an UUID. |
+| `body` | [`LedgerTransactionCreateRequest \| undefined`](../../doc/models/ledger-transaction-create-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**201**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`LedgerTransaction`](../../doc/models/ledger-transaction.md).
+
+## Example Usage
+
+```ts
+const body: LedgerTransactionCreateRequest = {
+  ledgerEntries: [
+    {
+      amount: 60,
+      direction: Direction5.Credit,
+      ledgerAccountId: '00002600-0000-0000-0000-000000000000',
+      metadata: {
+        'key': 'value',
+        'foo': 'bar',
+        'modern': 'treasury'
+      },
+    }
+  ],
+  metadata: {
+    'key': 'value',
+    'foo': 'bar',
+    'modern': 'treasury'
+  },
+};
+
+try {
+  const response = await ledgerTransactionApi.createLedgerTransaction(
+    undefined,
+    body
+  );
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorMessageError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 403 | forbidden | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+| 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+| 429 | too many requests | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 
 
 # Create Ledger Transaction Reversal
@@ -63,10 +156,153 @@ const body: LedgerTransactionReversalCreateRequest = {
 };
 
 try {
-  const response = await ledgerTransactionController.createLedgerTransactionReversal(
+  const response = await ledgerTransactionApi.createLedgerTransactionReversal(
     id,
     body
   );
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorMessageError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+| 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
+# Get Ledger Transaction
+
+Get details on a single ledger transaction.
+
+```ts
+async getLedgerTransaction(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<LedgerTransaction>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Template, Required | id |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`LedgerTransaction`](../../doc/models/ledger-transaction.md).
+
+## Example Usage
+
+```ts
+const id = 'id0';
+
+try {
+  const response = await ledgerTransactionApi.getLedgerTransaction(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorMessageError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
+# Get Ledger Transaction Versions
+
+Get a list of ledger transaction versions.
+
+```ts
+async getLedgerTransactionVersions(
+  id: string,
+  afterCursor?: string | null,
+  perPage?: number,
+  createdAt?: Record<string, string>,
+  version?: Record<string, number>,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<LedgerTransactionVersion[]>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Template, Required | id |
+| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
+| `perPage` | `number \| undefined` | Query, Optional | - |
+| `createdAt` | `Record<string, string> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created_at timestamp. For example, for all dates after Jan 1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z. |
+| `version` | `Record<string, number> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`LedgerTransactionVersion[]`](../../doc/models/ledger-transaction-version.md).
+
+## Example Usage
+
+```ts
+const id = 'id0';
+
+try {
+  const response = await ledgerTransactionApi.getLedgerTransactionVersions(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -142,7 +378,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerTransactionController.listLedgerTransactionVersions();
+  const response = await ledgerTransactionApi.listLedgerTransactionVersions();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -192,7 +428,7 @@ async listLedgerTransactions(
   postedAt?: Record<string, string>,
   updatedAt?: Record<string, string>,
   orderBy?: OrderBy,
-  status?: Status22,
+  status?: Status23,
   externalId?: string,
   ledgerAccountCategoryId?: string,
   ledgerAccountPayoutId?: string,
@@ -222,7 +458,7 @@ This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
 | `postedAt` | `Record<string, string> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For example, for all times after Jan 1 2000 12:00 UTC, use posted_at%5Bgt%5D=2000-01-01T12:00:00Z. |
 | `updatedAt` | `Record<string, string> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For example, for all times after Jan 1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z. |
 | `orderBy` | [`OrderBy \| undefined`](../../doc/models/order-by.md) | Query, Optional | Order by `created_at` or `effective_at` in `asc` or `desc` order. For example, to order by `effective_at asc`, use `order_by%5Beffective_at%5D=asc`. Ordering by only one field at a time is supported. |
-| `status` | [`Status22 \| undefined`](../../doc/models/status-22.md) | Query, Optional | - |
+| `status` | [`Status23 \| undefined`](../../doc/models/status-23.md) | Query, Optional | - |
 | `externalId` | `string \| undefined` | Query, Optional | - |
 | `ledgerAccountCategoryId` | `string \| undefined` | Query, Optional | - |
 | `ledgerAccountPayoutId` | `string \| undefined` | Query, Optional | - |
@@ -241,7 +477,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await ledgerTransactionController.listLedgerTransactions();
+  const response = await ledgerTransactionApi.listLedgerTransactions();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -272,166 +508,6 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | parameter invalid | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-
-
-# Create Ledger Transaction
-
-Create a ledger transaction.
-
-```ts
-async createLedgerTransaction(
-  idempotencyKey?: string,
-  body?: LedgerTransactionCreateRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<LedgerTransaction>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `idempotencyKey` | `string \| undefined` | Header, Optional | This key should be something unique, preferably something like an UUID. |
-| `body` | [`LedgerTransactionCreateRequest \| undefined`](../../doc/models/ledger-transaction-create-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**201**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`LedgerTransaction`](../../doc/models/ledger-transaction.md).
-
-## Example Usage
-
-```ts
-const body: LedgerTransactionCreateRequest = {
-  ledgerEntries: [
-    {
-      amount: 60,
-      direction: Direction5.Credit,
-      ledgerAccountId: '00002600-0000-0000-0000-000000000000',
-      metadata: {
-        'key': 'value',
-        'foo': 'bar',
-        'modern': 'treasury'
-      },
-    }
-  ],
-  metadata: {
-    'key': 'value',
-    'foo': 'bar',
-    'modern': 'treasury'
-  },
-};
-
-try {
-  const response = await ledgerTransactionController.createLedgerTransaction(
-    undefined,
-    body
-  );
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorMessageError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 403 | forbidden | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-| 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-| 429 | too many requests | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-
-
-# Get Ledger Transaction
-
-Get details on a single ledger transaction.
-
-```ts
-async getLedgerTransaction(
-  id: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<LedgerTransaction>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | id |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`LedgerTransaction`](../../doc/models/ledger-transaction.md).
-
-## Example Usage
-
-```ts
-const id = 'id0';
-
-try {
-  const response = await ledgerTransactionController.getLedgerTransaction(id);
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorMessageError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 
 
 # Update Ledger Transaction
@@ -478,7 +554,7 @@ const body: LedgerTransactionUpdateRequest = {
 };
 
 try {
-  const response = await ledgerTransactionController.updateLedgerTransaction(
+  const response = await ledgerTransactionApi.updateLedgerTransaction(
     id,
     body
   );
@@ -516,80 +592,4 @@ try {
 | 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 | 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 | 429 | too many requests | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-
-
-# List Ledger Transaction Versions 1
-
-Get a list of ledger transaction versions.
-
-```ts
-async listLedgerTransactionVersions1(
-  id: string,
-  afterCursor?: string | null,
-  perPage?: number,
-  createdAt?: Record<string, string>,
-  version?: Record<string, number>,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<LedgerTransactionVersion[]>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | id |
-| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
-| `perPage` | `number \| undefined` | Query, Optional | - |
-| `createdAt` | `Record<string, string> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the created_at timestamp. For example, for all dates after Jan 1 2000 12:00 UTC, use created_at%5Bgt%5D=2000-01-01T12:00:00Z. |
-| `version` | `Record<string, number> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the version. For example, for all versions after 2, use version%5Bgt%5D=2. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`LedgerTransactionVersion[]`](../../doc/models/ledger-transaction-version.md).
-
-## Example Usage
-
-```ts
-const id = 'id0';
-
-try {
-  const response = await ledgerTransactionController.listLedgerTransactionVersions1(id);
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorMessageError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-| 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 

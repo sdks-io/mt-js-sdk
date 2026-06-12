@@ -1,17 +1,73 @@
 # Payment Reference
 
 ```ts
-const paymentReferenceController = new PaymentReferenceController(client);
+const paymentReferenceApi = new PaymentReferenceApi(client);
 ```
 
 ## Class Name
 
-`PaymentReferenceController`
+`PaymentReferenceApi`
 
 ## Methods
 
-* [List Payment References](../../doc/controllers/payment-reference.md#list-payment-references)
 * [Get Payment Reference](../../doc/controllers/payment-reference.md#get-payment-reference)
+* [List Payment References](../../doc/controllers/payment-reference.md#list-payment-references)
+
+
+# Get Payment Reference
+
+```ts
+async getPaymentReference(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentReferenceObject>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Template, Required | id |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentReferenceObject`](../../doc/models/payment-reference-object.md).
+
+## Example Usage
+
+```ts
+const id = 'id0';
+
+try {
+  const response = await paymentReferenceApi.getPaymentReference(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+  }
+}
+```
 
 
 # List Payment References
@@ -52,63 +108,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await paymentReferenceController.listPaymentReferences();
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-  }
-}
-```
-
-
-# Get Payment Reference
-
-```ts
-async getPaymentReference(
-  id: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<PaymentReferenceObject>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | id |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentReferenceObject`](../../doc/models/payment-reference-object.md).
-
-## Example Usage
-
-```ts
-const id = 'id0';
-
-try {
-  const response = await paymentReferenceController.getPaymentReference(id);
+  const response = await paymentReferenceApi.listPaymentReferences();
 
   // Extracting fully parsed response body.
   console.log(response.result);

@@ -1,21 +1,21 @@
 # Counterparty
 
 ```ts
-const counterpartyController = new CounterpartyController(client);
+const counterpartyApi = new CounterpartyApi(client);
 ```
 
 ## Class Name
 
-`CounterpartyController`
+`CounterpartyApi`
 
 ## Methods
 
 * [Collect Account Details](../../doc/controllers/counterparty.md#collect-account-details)
-* [List Counterparties](../../doc/controllers/counterparty.md#list-counterparties)
 * [Create Counterparty](../../doc/controllers/counterparty.md#create-counterparty)
-* [Get Counterparty](../../doc/controllers/counterparty.md#get-counterparty)
-* [Update Counterparty](../../doc/controllers/counterparty.md#update-counterparty)
 * [Delete Counterparty](../../doc/controllers/counterparty.md#delete-counterparty)
+* [Get Counterparty](../../doc/controllers/counterparty.md#get-counterparty)
+* [List Counterparties](../../doc/controllers/counterparty.md#list-counterparties)
+* [Update Counterparty](../../doc/controllers/counterparty.md#update-counterparty)
 
 
 # Collect Account Details
@@ -56,7 +56,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await counterpartyController.collectAccountDetails(id);
+  const response = await counterpartyApi.collectAccountDetails(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -87,6 +87,211 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
+# Create Counterparty
+
+Create a new counterparty.
+
+```ts
+async createCounterparty(
+  idempotencyKey?: string,
+  body?: CounterpartyCreateRequest,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Counterparty>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `idempotencyKey` | `string \| undefined` | Header, Optional | This key should be something unique, preferably something like an UUID. |
+| `body` | [`CounterpartyCreateRequest \| undefined`](../../doc/models/counterparty-create-request.md) | Body, Optional | - |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**201**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Counterparty`](../../doc/models/counterparty.md).
+
+## Example Usage
+
+```ts
+const body: CounterpartyCreateRequest = {
+  name: 'name6',
+  metadata: {
+    'key': 'value',
+    'foo': 'bar',
+    'modern': 'treasury'
+  },
+};
+
+try {
+  const response = await counterpartyApi.createCounterparty(
+    undefined,
+    body
+  );
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorMessageError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 415 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+| 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
+# Delete Counterparty
+
+Deletes a given counterparty.
+
+```ts
+async deleteCounterparty(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Template, Required | The id of an existing counterparty. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**204**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
+
+## Example Usage
+
+```ts
+const id = 'id0';
+
+try {
+  const response = await counterpartyApi.deleteCounterparty(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+  }
+}
+```
+
+
+# Get Counterparty
+
+Get details on a single counterparty.
+
+```ts
+async getCounterparty(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Counterparty>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Template, Required | The id of an existing counterparty. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Counterparty`](../../doc/models/counterparty.md).
+
+## Example Usage
+
+```ts
+const id = 'id0';
+
+try {
+  const response = await counterpartyApi.getCounterparty(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorMessageError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 
 
 # List Counterparties
@@ -133,7 +338,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await counterpartyController.listCounterparties();
+  const response = await counterpartyApi.listCounterparties();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -165,153 +370,6 @@ try {
 |  --- | --- | --- |
 | 400 | bad_request | `ApiError` |
 | 401 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-
-
-# Create Counterparty
-
-Create a new counterparty.
-
-```ts
-async createCounterparty(
-  idempotencyKey?: string,
-  body?: CounterpartyCreateRequest,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<Counterparty>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `idempotencyKey` | `string \| undefined` | Header, Optional | This key should be something unique, preferably something like an UUID. |
-| `body` | [`CounterpartyCreateRequest \| undefined`](../../doc/models/counterparty-create-request.md) | Body, Optional | - |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**201**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Counterparty`](../../doc/models/counterparty.md).
-
-## Example Usage
-
-```ts
-const body: CounterpartyCreateRequest = {
-  name: 'name6',
-  metadata: {
-    'key': 'value',
-    'foo': 'bar',
-    'modern': 'treasury'
-  },
-};
-
-try {
-  const response = await counterpartyController.createCounterparty(
-    undefined,
-    body
-  );
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorMessageError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 415 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-| 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-
-
-# Get Counterparty
-
-Get details on a single counterparty.
-
-```ts
-async getCounterparty(
-  id: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<Counterparty>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | The id of an existing counterparty. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Counterparty`](../../doc/models/counterparty.md).
-
-## Example Usage
-
-```ts
-const id = 'id0';
-
-try {
-  const response = await counterpartyController.getCounterparty(id);
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorMessageError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 
 
 # Update Counterparty
@@ -350,7 +408,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await counterpartyController.updateCounterparty(id);
+  const response = await counterpartyApi.updateCounterparty(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -381,62 +439,4 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-
-
-# Delete Counterparty
-
-Deletes a given counterparty.
-
-```ts
-async deleteCounterparty(
-  id: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<void>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | The id of an existing counterparty. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**204**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
-
-## Example Usage
-
-```ts
-const id = 'id0';
-
-try {
-  const response = await counterpartyController.deleteCounterparty(id);
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-  }
-}
-```
 

@@ -1,7 +1,7 @@
 
 # Status 9
 
-Equal to the state of the ledger transaction when the ledger entry was created. One of `pending`, `posted`, or `archived`.
+To post a pending ledger account payout, use `posted`. To archive a pending ledger transaction, use `archived`.
 
 ## Enumeration
 
@@ -11,7 +11,6 @@ Equal to the state of the ledger transaction when the ledger entry was created. 
 
 | Name |
 |  --- |
-| `Archived` |
-| `Pending` |
 | `Posted` |
+| `Archived` |
 

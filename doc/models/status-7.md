@@ -1,7 +1,7 @@
 
 # Status 7
 
-The status of the ledger account payout. It is set to `pending` by default. To post a ledger account payout at creation, use `posted`.
+The status of the ledger account payout. One of `processing`, `pending`, `posted`, `archiving` or `archived`.
 
 ## Enumeration
 
@@ -11,6 +11,9 @@ The status of the ledger account payout. It is set to `pending` by default. To p
 
 | Name |
 |  --- |
+| `Archived` |
+| `Archiving` |
 | `Pending` |
 | `Posted` |
+| `Processing` |
 

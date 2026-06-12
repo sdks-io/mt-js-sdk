@@ -1,6 +1,8 @@
 
 # Status 20
 
+The current status of the reversal.
+
 ## Enumeration
 
 `Status20`
@@ -9,7 +11,10 @@
 
 | Name |
 |  --- |
-| `Archived` |
-| `Reconciled` |
-| `Unreconciled` |
+| `Completed` |
+| `Failed` |
+| `Pending` |
+| `Processing` |
+| `Returned` |
+| `Sent` |
 

@@ -15,7 +15,7 @@
 | `createdAt` | `string` | Required | - |
 | `updatedAt` | `string` | Required | - |
 | `description` | `string \| null` | Required | An optional description for internal use. |
-| `status` | [`Status11`](../../doc/models/status-11.md) | Required | To post a ledger transaction at creation, use `posted`. |
+| `status` | [`Status12`](../../doc/models/status-12.md) | Required | To post a ledger transaction at creation, use `posted`. |
 | `metadata` | `Record<string, string>` | Required | Additional data represented as key-value pairs. Both the key and value must be strings. |
 | `effectiveAt` | `string` | Required | The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes. |
 | `effectiveDate` | `string` | Required | The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes. |

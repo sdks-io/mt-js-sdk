@@ -9,7 +9,7 @@
 
 | Name |
 |  --- |
+| `Completed` |
 | `Pending` |
-| `Posted` |
-| `Archived` |
+| `Returned` |
 

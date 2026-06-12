@@ -1,7 +1,7 @@
 
 # Status 16
 
-The current status of the paper item. One of `pending`, `completed`, or `returned`.
+Status of the reversal ledger transaction. It defaults to `posted` if not provided.
 
 ## Enumeration
 
@@ -11,7 +11,7 @@ The current status of the paper item. One of `pending`, `completed`, or `returne
 
 | Name |
 |  --- |
-| `Completed` |
+| `Archived` |
 | `Pending` |
-| `Returned` |
+| `Posted` |
 

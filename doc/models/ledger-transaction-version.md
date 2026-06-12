@@ -15,7 +15,7 @@
 | `createdAt` | `string` | Required | - |
 | `ledgerTransactionId` | `string` | Required | The ID of the ledger transaction |
 | `description` | `string \| null` | Required | An optional description for internal use. |
-| `status` | [`Status12`](../../doc/models/status-12.md) | Required | One of `pending`, `posted`, or `archived` |
+| `status` | [`Status13`](../../doc/models/status-13.md) | Required | One of `pending`, `posted`, or `archived` |
 | `metadata` | `Record<string, string>` | Required | Additional data represented as key-value pairs. Both the key and value must be strings. |
 | `effectiveAt` | `string` | Required | The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes. |
 | `effectiveDate` | `string` | Required | The date (YYYY-MM-DD) on which the ledger transaction happened for reporting purposes. |

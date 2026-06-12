@@ -12,7 +12,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `description` | `string \| undefined` | Optional | An optional free-form description for the reversal ledger transaction. Maximum of 1000 characters allowed. |
-| `status` | [`Status15 \| undefined`](../../doc/models/status-15.md) | Optional | Status of the reversal ledger transaction. It defaults to `posted` if not provided. |
+| `status` | [`Status16 \| undefined`](../../doc/models/status-16.md) | Optional | Status of the reversal ledger transaction. It defaults to `posted` if not provided. |
 | `metadata` | `Record<string, string> \| undefined` | Optional | Additional data to be added to the reversal ledger transaction as key-value pairs. Both the key and value must be strings. |
 | `effectiveAt` | `string \| null \| undefined` | Optional | The timestamp (ISO8601 format) at which the reversal ledger transaction happened for reporting purposes. It defaults to the `effective_at` of the original ledger transaction if not provided. |
 | `externalId` | `string \| undefined` | Optional | Must be unique within the ledger. |

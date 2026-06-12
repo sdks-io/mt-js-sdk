@@ -9,7 +9,7 @@
 
 | Name |
 |  --- |
-| `Completed` |
-| `Pending` |
-| `Returned` |
+| `Archived` |
+| `Reconciled` |
+| `Unreconciled` |
 

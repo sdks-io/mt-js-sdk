@@ -12,7 +12,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `description` | `string \| null \| undefined` | Optional | An optional description for internal use. |
-| `status` | [`Status11 \| undefined`](../../doc/models/status-11.md) | Optional | To post a ledger transaction at creation, use `posted`. |
+| `status` | [`Status12 \| undefined`](../../doc/models/status-12.md) | Optional | To post a ledger transaction at creation, use `posted`. |
 | `metadata` | `Record<string, string> \| undefined` | Optional | Additional data represented as key-value pairs. Both the key and value must be strings. |
 | `effectiveAt` | `string \| undefined` | Optional | The timestamp (ISO8601 format) at which the ledger transaction happened for reporting purposes. |
 | `ledgerEntries` | [`LedgerEntryCreateRequest[] \| undefined`](../../doc/models/ledger-entry-create-request.md) | Optional | An array of ledger entry objects. |

@@ -1,82 +1,20 @@
 # Ledger
 
 ```ts
-const ledgerController = new LedgerController(client);
+const ledgerApi = new LedgerApi(client);
 ```
 
 ## Class Name
 
-`LedgerController`
+`LedgerApi`
 
 ## Methods
 
-* [List Ledgers](../../doc/controllers/ledger.md#list-ledgers)
 * [Create Ledger](../../doc/controllers/ledger.md#create-ledger)
-* [Get Ledger](../../doc/controllers/ledger.md#get-ledger)
-* [Update Ledger](../../doc/controllers/ledger.md#update-ledger)
 * [Delete Ledger](../../doc/controllers/ledger.md#delete-ledger)
-
-
-# List Ledgers
-
-Get a list of ledgers.
-
-```ts
-async listLedgers(
-  afterCursor?: string | null,
-  perPage?: number,
-  metadata?: Record<string, string>,
-  updatedAt?: Record<string, string>,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<Ledger[]>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
-| `perPage` | `number \| undefined` | Query, Optional | - |
-| `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
-| `updatedAt` | `Record<string, string> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For example, for all times after Jan 1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Ledger[]`](../../doc/models/ledger.md).
-
-## Example Usage
-
-```ts
-try {
-  const response = await ledgerController.listLedgers();
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-  }
-}
-```
+* [Get Ledger](../../doc/controllers/ledger.md#get-ledger)
+* [List Ledgers](../../doc/controllers/ledger.md#list-ledgers)
+* [Update Ledger](../../doc/controllers/ledger.md#update-ledger)
 
 
 # Create Ledger
@@ -122,7 +60,7 @@ const body: LedgerCreateRequest = {
 };
 
 try {
-  const response = await ledgerController.createLedger(
+  const response = await ledgerApi.createLedger(
     undefined,
     body
   );
@@ -159,6 +97,74 @@ try {
 | 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 
 
+# Delete Ledger
+
+Delete a ledger.
+
+```ts
+async deleteLedger(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Ledger>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Template, Required | id |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Ledger`](../../doc/models/ledger.md).
+
+## Example Usage
+
+```ts
+const id = 'id0';
+
+try {
+  const response = await ledgerApi.deleteLedger(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorMessageError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 403 | forbidden | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
 # Get Ledger
 
 Get details on a single ledger.
@@ -193,7 +199,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerController.getLedger(id);
+  const response = await ledgerApi.getLedger(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -224,6 +230,68 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
+# List Ledgers
+
+Get a list of ledgers.
+
+```ts
+async listLedgers(
+  afterCursor?: string | null,
+  perPage?: number,
+  metadata?: Record<string, string>,
+  updatedAt?: Record<string, string>,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Ledger[]>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
+| `perPage` | `number \| undefined` | Query, Optional | - |
+| `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
+| `updatedAt` | `Record<string, string> \| undefined` | Query, Optional | Use `gt` (>), `gte` (>=), `lt` (<), `lte` (<=), or `eq` (=) to filter by the posted at timestamp. For example, for all times after Jan 1 2000 12:00 UTC, use updated_at%5Bgt%5D=2000-01-01T12:00:00Z. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Ledger[]`](../../doc/models/ledger.md).
+
+## Example Usage
+
+```ts
+try {
+  const response = await ledgerApi.listLedgers();
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+  }
+}
+```
 
 
 # Update Ledger
@@ -270,7 +338,7 @@ const body: LedgerUpdateRequest = {
 };
 
 try {
-  const response = await ledgerController.updateLedger(
+  const response = await ledgerApi.updateLedger(
     id,
     body
   );
@@ -306,72 +374,4 @@ try {
 | 403 | forbidden | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 | 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 | 422 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-
-
-# Delete Ledger
-
-Delete a ledger.
-
-```ts
-async deleteLedger(
-  id: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<Ledger>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | id |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Ledger`](../../doc/models/ledger.md).
-
-## Example Usage
-
-```ts
-const id = 'id0';
-
-try {
-  const response = await ledgerController.deleteLedger(id);
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorMessageError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 403 | forbidden | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 

@@ -1,85 +1,19 @@
 # Internal Account
 
 ```ts
-const internalAccountController = new InternalAccountController(client);
+const internalAccountApi = new InternalAccountApi(client);
 ```
 
 ## Class Name
 
-`InternalAccountController`
+`InternalAccountApi`
 
 ## Methods
 
-* [List Internal Accounts](../../doc/controllers/internal-account.md#list-internal-accounts)
 * [Create Internal Account](../../doc/controllers/internal-account.md#create-internal-account)
 * [Get Internal Account](../../doc/controllers/internal-account.md#get-internal-account)
+* [List Internal Accounts](../../doc/controllers/internal-account.md#list-internal-accounts)
 * [Update Internal Account](../../doc/controllers/internal-account.md#update-internal-account)
-
-
-# List Internal Accounts
-
-```ts
-async listInternalAccounts(
-  afterCursor?: string | null,
-  perPage?: number,
-  currency?: Currency,
-  counterpartyId?: string,
-  paymentType?: PaymentType13,
-  paymentDirection?: PaymentDirection,
-  metadata?: Record<string, string>,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<InternalAccount[]>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
-| `perPage` | `number \| undefined` | Query, Optional | - |
-| `currency` | [`Currency \| undefined`](../../doc/models/currency.md) | Query, Optional | The currency associated with the internal account. |
-| `counterpartyId` | `string \| undefined` | Query, Optional | The counterparty associated with the internal account. |
-| `paymentType` | [`PaymentType13 \| undefined`](../../doc/models/payment-type-13.md) | Query, Optional | The type of payment that can be made by the internal account. |
-| `paymentDirection` | [`PaymentDirection \| undefined`](../../doc/models/payment-direction.md) | Query, Optional | The direction of payments that can be made by internal account. |
-| `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`InternalAccount[]`](../../doc/models/internal-account.md).
-
-## Example Usage
-
-```ts
-try {
-  const response = await internalAccountController.listInternalAccounts();
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-  }
-}
-```
 
 
 # Create Internal Account
@@ -126,7 +60,7 @@ const body: InternalAccountCreateRequest = {
 };
 
 try {
-  const response = await internalAccountController.createInternalAccount(
+  const response = await internalAccountApi.createInternalAccount(
     undefined,
     body
   );
@@ -195,7 +129,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await internalAccountController.getInternalAccount(id);
+  const response = await internalAccountApi.getInternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -226,6 +160,72 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
+# List Internal Accounts
+
+```ts
+async listInternalAccounts(
+  afterCursor?: string | null,
+  perPage?: number,
+  currency?: Currency,
+  counterpartyId?: string,
+  paymentType?: PaymentType13,
+  paymentDirection?: PaymentDirection,
+  metadata?: Record<string, string>,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<InternalAccount[]>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
+| `perPage` | `number \| undefined` | Query, Optional | - |
+| `currency` | [`Currency \| undefined`](../../doc/models/currency.md) | Query, Optional | The currency associated with the internal account. |
+| `counterpartyId` | `string \| undefined` | Query, Optional | The counterparty associated with the internal account. |
+| `paymentType` | [`PaymentType13 \| undefined`](../../doc/models/payment-type-13.md) | Query, Optional | The type of payment that can be made by the internal account. |
+| `paymentDirection` | [`PaymentDirection \| undefined`](../../doc/models/payment-direction.md) | Query, Optional | The direction of payments that can be made by internal account. |
+| `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`InternalAccount[]`](../../doc/models/internal-account.md).
+
+## Example Usage
+
+```ts
+try {
+  const response = await internalAccountApi.listInternalAccounts();
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+  }
+}
+```
 
 
 # Update Internal Account
@@ -262,7 +262,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await internalAccountController.updateInternalAccount(id);
+  const response = await internalAccountApi.updateInternalAccount(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

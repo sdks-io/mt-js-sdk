@@ -29,7 +29,7 @@
 | `currency` | [`Currency`](../../doc/models/currency.md) | Required | Three-letter ISO currency code. |
 | `failureReason` | `string \| null` | Required | If an originating return failed to be processed by the bank, a description of the failure reason will be available. |
 | `role` | [`Role`](../../doc/models/role.md) | Required | The role of the return, can be `originating` or `receiving`. |
-| `currentReturn` | [`Return`](../../doc/models/return.md) | Required | - |
+| `currentReturn` | [`CurrentReturn \| null`](../../doc/models/current-return.md) | Required | If the return's status is `returned`, this will include the return object's data that is returning this return. |
 | `referenceNumbers` | [`PaymentReference[]`](../../doc/models/payment-reference.md) | Required | An array of Payment Reference objects. |
 | `ledgerTransactionId` | `string \| null` | Required | The ID of the ledger transaction linked to the return. |
 
@@ -62,78 +62,7 @@
     "object": "object4",
     "live_mode": false,
     "created_at": "2016-03-13T12:52:32.123Z",
-    "updated_at": "2016-03-13T12:52:32.123Z",
-    "returnable_id": "00000a82-0000-0000-0000-000000000000",
-    "returnable_type": "reversal",
-    "code": "R31",
-    "reason": "reason6",
-    "date_of_death": "2016-03-13T12:52:32.123Z",
-    "additional_information": "additional_information8",
-    "status": "returned",
-    "transaction_line_item_id": "0000011a-0000-0000-0000-000000000000",
-    "transaction_id": "000008da-0000-0000-0000-000000000000",
-    "internal_account_id": "000018bc-0000-0000-0000-000000000000",
-    "type": "book",
-    "amount": 12,
-    "currency": "MDL",
-    "failure_reason": "failure_reason2",
-    "role": "originating",
-    "current_return": {
-      "id": "0000058a-0000-0000-0000-000000000000",
-      "object": "object4",
-      "live_mode": false,
-      "created_at": "2016-03-13T12:52:32.123Z",
-      "updated_at": "2016-03-13T12:52:32.123Z",
-      "returnable_id": "00000a82-0000-0000-0000-000000000000",
-      "returnable_type": "reversal",
-      "code": "R31",
-      "reason": "reason6",
-      "date_of_death": "2016-03-13T12:52:32.123Z",
-      "additional_information": "additional_information8",
-      "status": "returned",
-      "transaction_line_item_id": "0000011a-0000-0000-0000-000000000000",
-      "transaction_id": "000008da-0000-0000-0000-000000000000",
-      "internal_account_id": "000018bc-0000-0000-0000-000000000000",
-      "type": "book",
-      "amount": 12,
-      "currency": "MDL",
-      "failure_reason": "failure_reason2",
-      "role": "originating",
-      "current_return": {},
-      "reference_numbers": [
-        {
-          "id": "000016a4-0000-0000-0000-000000000000",
-          "object": "object4",
-          "live_mode": false,
-          "created_at": "2016-03-13T12:52:32.123Z",
-          "updated_at": "2016-03-13T12:52:32.123Z",
-          "reference_number": "reference_number2",
-          "reference_number_type": "jpmc_customer_reference_id"
-        },
-        {
-          "id": "000016a4-0000-0000-0000-000000000000",
-          "object": "object4",
-          "live_mode": false,
-          "created_at": "2016-03-13T12:52:32.123Z",
-          "updated_at": "2016-03-13T12:52:32.123Z",
-          "reference_number": "reference_number2",
-          "reference_number_type": "jpmc_customer_reference_id"
-        }
-      ],
-      "ledger_transaction_id": "00001548-0000-0000-0000-000000000000"
-    },
-    "reference_numbers": [
-      {
-        "id": "000016a4-0000-0000-0000-000000000000",
-        "object": "object4",
-        "live_mode": false,
-        "created_at": "2016-03-13T12:52:32.123Z",
-        "updated_at": "2016-03-13T12:52:32.123Z",
-        "reference_number": "reference_number2",
-        "reference_number_type": "jpmc_customer_reference_id"
-      }
-    ],
-    "ledger_transaction_id": "00001548-0000-0000-0000-000000000000"
+    "updated_at": "2016-03-13T12:52:32.123Z"
   },
   "reference_numbers": [
     {

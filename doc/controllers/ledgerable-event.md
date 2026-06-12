@@ -1,12 +1,12 @@
 # Ledgerable Event
 
 ```ts
-const ledgerableEventController = new LedgerableEventController(client);
+const ledgerableEventApi = new LedgerableEventApi(client);
 ```
 
 ## Class Name
 
-`LedgerableEventController`
+`LedgerableEventApi`
 
 ## Methods
 
@@ -58,7 +58,7 @@ const body: LedgerableEventCreateRequest = {
 };
 
 try {
-  const response = await ledgerableEventController.createLedgerableEvent(
+  const response = await ledgerableEventApi.createLedgerableEvent(
     undefined,
     body
   );
@@ -129,7 +129,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await ledgerableEventController.getLedgerableEvent(id);
+  const response = await ledgerableEventApi.getLedgerableEvent(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

@@ -1,18 +1,85 @@
 # Transaction
 
 ```ts
-const transactionController = new TransactionController(client);
+const transactionApi = new TransactionApi(client);
 ```
 
 ## Class Name
 
-`TransactionController`
+`TransactionApi`
 
 ## Methods
 
-* [List Transactions](../../doc/controllers/transaction.md#list-transactions)
 * [Get Transaction](../../doc/controllers/transaction.md#get-transaction)
+* [List Transactions](../../doc/controllers/transaction.md#list-transactions)
 * [Update Transaction](../../doc/controllers/transaction.md#update-transaction)
+
+
+# Get Transaction
+
+Get details on a single transaction.
+
+```ts
+async getTransaction(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Transaction>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `string` | Template, Required | Transaction ID |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Transaction`](../../doc/models/transaction.md).
+
+## Example Usage
+
+```ts
+const id = 'id0';
+
+try {
+  const response = await transactionApi.getTransaction(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorMessageError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 
 
 # List Transactions
@@ -73,7 +140,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 
 ```ts
 try {
-  const response = await transactionController.listTransactions();
+  const response = await transactionApi.listTransactions();
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -95,73 +162,6 @@ try {
   }
 }
 ```
-
-
-# Get Transaction
-
-Get details on a single transaction.
-
-```ts
-async getTransaction(
-  id: string,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<Transaction>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | Transaction ID |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Transaction`](../../doc/models/transaction.md).
-
-## Example Usage
-
-```ts
-const id = 'id0';
-
-try {
-  const response = await transactionController.getTransaction(id);
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorMessageError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 
 
 # Update Transaction
@@ -200,7 +200,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await transactionController.updateTransaction(id);
+  const response = await transactionApi.updateTransaction(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);

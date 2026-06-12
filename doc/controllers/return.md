@@ -1,93 +1,18 @@
 # Return
 
 ```ts
-const returnController = new ReturnController(client);
+const returnApi = new ReturnApi(client);
 ```
 
 ## Class Name
 
-`ReturnController`
+`ReturnApi`
 
 ## Methods
 
-* [List Returns](../../doc/controllers/return.md#list-returns)
 * [Create Return](../../doc/controllers/return.md#create-return)
 * [Get Return](../../doc/controllers/return.md#get-return)
-
-
-# List Returns
-
-Get a list of returns.
-
-```ts
-async listReturns(
-  afterCursor?: string | null,
-  perPage?: number,
-  internalAccountId?: string,
-  counterpartyId?: string,
-  returnableId?: string,
-  returnableType?: ReturnableType1,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<Return[]>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
-| `perPage` | `number \| undefined` | Query, Optional | - |
-| `internalAccountId` | `string \| undefined` | Query, Optional | Specify `internal_account_id` if you wish to see returns to/from a specific account. |
-| `counterpartyId` | `string \| undefined` | Query, Optional | Specify `counterparty_id` if you wish to see returns that occurred with a specific counterparty. |
-| `returnableId` | `string \| undefined` | Query, Optional | The ID of a valid returnable. Must be accompanied by `returnable_type`. |
-| `returnableType` | [`ReturnableType1 \| undefined`](../../doc/models/returnable-type-1.md) | Query, Optional | One of `payment_order`, `paper_item`, `reversal`, or `incoming_payment_detail`. Must be accompanied by `returnable_id`. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Return[]`](../../doc/models/return.md).
-
-## Example Usage
-
-```ts
-try {
-  const response = await returnController.listReturns();
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-    if (error instanceof ErrorMessageError) {
-      console.log(error.result);
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 401 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+* [List Returns](../../doc/controllers/return.md#list-returns)
 
 
 # Create Return
@@ -129,7 +54,7 @@ const body: ReturnCreateRequest = {
 };
 
 try {
-  const response = await returnController.createReturn(
+  const response = await returnApi.createReturn(
     undefined,
     body
   );
@@ -200,7 +125,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await returnController.getReturn(id);
+  const response = await returnApi.getReturn(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -231,4 +156,79 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
+# List Returns
+
+Get a list of returns.
+
+```ts
+async listReturns(
+  afterCursor?: string | null,
+  perPage?: number,
+  internalAccountId?: string,
+  counterpartyId?: string,
+  returnableId?: string,
+  returnableType?: ReturnableType2,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<Return[]>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
+| `perPage` | `number \| undefined` | Query, Optional | - |
+| `internalAccountId` | `string \| undefined` | Query, Optional | Specify `internal_account_id` if you wish to see returns to/from a specific account. |
+| `counterpartyId` | `string \| undefined` | Query, Optional | Specify `counterparty_id` if you wish to see returns that occurred with a specific counterparty. |
+| `returnableId` | `string \| undefined` | Query, Optional | The ID of a valid returnable. Must be accompanied by `returnable_type`. |
+| `returnableType` | [`ReturnableType2 \| undefined`](../../doc/models/returnable-type-2.md) | Query, Optional | One of `payment_order`, `paper_item`, `reversal`, or `incoming_payment_detail`. Must be accompanied by `returnable_id`. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Return[]`](../../doc/models/return.md).
+
+## Example Usage
+
+```ts
+try {
+  const response = await returnApi.listReturns();
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+    if (error instanceof ErrorMessageError) {
+      console.log(error.result);
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 401 | unsuccessful | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
 

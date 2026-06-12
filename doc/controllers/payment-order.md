@@ -1,19 +1,19 @@
 # Payment Order
 
 ```ts
-const paymentOrderController = new PaymentOrderController(client);
+const paymentOrderApi = new PaymentOrderApi(client);
 ```
 
 ## Class Name
 
-`PaymentOrderController`
+`PaymentOrderApi`
 
 ## Methods
 
 * [Create Async Payment Order](../../doc/controllers/payment-order.md#create-async-payment-order)
-* [List Payment Orders](../../doc/controllers/payment-order.md#list-payment-orders)
 * [Create Payment Order](../../doc/controllers/payment-order.md#create-payment-order)
 * [Get Payment Order](../../doc/controllers/payment-order.md#get-payment-order)
+* [List Payment Orders](../../doc/controllers/payment-order.md#list-payment-orders)
 * [Update Payment Order](../../doc/controllers/payment-order.md#update-payment-order)
 
 
@@ -63,7 +63,7 @@ const body: PaymentOrderAsyncCreateRequest = {
 };
 
 try {
-  const response = await paymentOrderController.createAsyncPaymentOrder(
+  const response = await paymentOrderApi.createAsyncPaymentOrder(
     undefined,
     body
   );
@@ -97,86 +97,6 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 403 | forbidden | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
-
-
-# List Payment Orders
-
-Get a list of all payment orders
-
-```ts
-async listPaymentOrders(
-  afterCursor?: string | null,
-  perPage?: number,
-  type?: Type13,
-  priority?: Priority4,
-  counterpartyId?: string,
-  originatingAccountId?: string,
-  transactionId?: string,
-  status?: Status24,
-  direction?: Direction15,
-  referenceNumber?: string,
-  effectiveDateStart?: string,
-  effectiveDateEnd?: string,
-  metadata?: Record<string, string>,
-  requestOptions?: RequestOptions
-): Promise<ApiResponse<PaymentOrder[]>>
-```
-
-## Authentication
-
-This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
-| `perPage` | `number \| undefined` | Query, Optional | - |
-| `type` | [`Type13 \| undefined`](../../doc/models/type-13.md) | Query, Optional | - |
-| `priority` | [`Priority4 \| undefined`](../../doc/models/priority-4.md) | Query, Optional | Either `normal` or `high`. For ACH and EFT payments, `high` represents a same-day ACH or EFT transfer, respectively. For check payments, `high` can mean an overnight check rather than standard mail. |
-| `counterpartyId` | `string \| undefined` | Query, Optional | - |
-| `originatingAccountId` | `string \| undefined` | Query, Optional | - |
-| `transactionId` | `string \| undefined` | Query, Optional | The ID of a transaction that the payment order has been reconciled to. |
-| `status` | [`Status24 \| undefined`](../../doc/models/status-24.md) | Query, Optional | - |
-| `direction` | [`Direction15 \| undefined`](../../doc/models/direction-15.md) | Query, Optional | - |
-| `referenceNumber` | `string \| undefined` | Query, Optional | Query for records with the provided reference number |
-| `effectiveDateStart` | `string \| undefined` | Query, Optional | An inclusive lower bound for searching effective_date |
-| `effectiveDateEnd` | `string \| undefined` | Query, Optional | An inclusive upper bound for searching effective_date |
-| `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-**200**: successful
-
-This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentOrder[]`](../../doc/models/payment-order.md).
-
-## Example Usage
-
-```ts
-try {
-  const response = await paymentOrderController.listPaymentOrders();
-
-  // Extracting fully parsed response body.
-  console.log(response.result);
-
-  // Extracting response status code.
-  console.log(response.statusCode);
-  // Extracting response headers.
-  console.log(response.headers);
-  // Extracting response body of type `string | Stream`
-  console.log(response.body);
-} catch (error) {
-  if (error instanceof ApiError) {
-    // Extracting response error status code.
-    console.log(error.statusCode);
-    // Extracting response error headers.
-    console.log(error.headers);
-    // Extracting response error body of type `string | Stream`.
-    console.log(error.body);
-  }
-}
-```
 
 
 # Create Payment Order
@@ -336,7 +256,7 @@ const documents: DocumentCreateRequest[] = [
 ];
 
 try {
-  const response = await paymentOrderController.createPaymentOrder(
+  const response = await paymentOrderApi.createPaymentOrder(
     type,
     amount,
     direction,
@@ -443,7 +363,7 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const response = await paymentOrderController.getPaymentOrder(id);
+  const response = await paymentOrderApi.getPaymentOrder(id);
 
   // Extracting fully parsed response body.
   console.log(response.result);
@@ -474,6 +394,86 @@ try {
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | not found | [`ErrorMessageError`](../../doc/models/error-message-error.md) |
+
+
+# List Payment Orders
+
+Get a list of all payment orders
+
+```ts
+async listPaymentOrders(
+  afterCursor?: string | null,
+  perPage?: number,
+  type?: Type13,
+  priority?: Priority4,
+  counterpartyId?: string,
+  originatingAccountId?: string,
+  transactionId?: string,
+  status?: Status25,
+  direction?: Direction15,
+  referenceNumber?: string,
+  effectiveDateStart?: string,
+  effectiveDateEnd?: string,
+  metadata?: Record<string, string>,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentOrder[]>>
+```
+
+## Authentication
+
+This endpoint requires [basic_auth](../../doc/auth/basic-authentication.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `afterCursor` | `string \| null \| undefined` | Query, Optional | - |
+| `perPage` | `number \| undefined` | Query, Optional | - |
+| `type` | [`Type13 \| undefined`](../../doc/models/type-13.md) | Query, Optional | - |
+| `priority` | [`Priority4 \| undefined`](../../doc/models/priority-4.md) | Query, Optional | Either `normal` or `high`. For ACH and EFT payments, `high` represents a same-day ACH or EFT transfer, respectively. For check payments, `high` can mean an overnight check rather than standard mail. |
+| `counterpartyId` | `string \| undefined` | Query, Optional | - |
+| `originatingAccountId` | `string \| undefined` | Query, Optional | - |
+| `transactionId` | `string \| undefined` | Query, Optional | The ID of a transaction that the payment order has been reconciled to. |
+| `status` | [`Status25 \| undefined`](../../doc/models/status-25.md) | Query, Optional | - |
+| `direction` | [`Direction15 \| undefined`](../../doc/models/direction-15.md) | Query, Optional | - |
+| `referenceNumber` | `string \| undefined` | Query, Optional | Query for records with the provided reference number |
+| `effectiveDateStart` | `string \| undefined` | Query, Optional | An inclusive lower bound for searching effective_date |
+| `effectiveDateEnd` | `string \| undefined` | Query, Optional | An inclusive upper bound for searching effective_date |
+| `metadata` | `Record<string, string> \| undefined` | Query, Optional | For example, if you want to query for records with metadata key `Type` and value `Loan`, the query would be `metadata%5BType%5D=Loan`. This encodes the query parameters. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+**200**: successful
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentOrder[]`](../../doc/models/payment-order.md).
+
+## Example Usage
+
+```ts
+try {
+  const response = await paymentOrderApi.listPaymentOrders();
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
+} catch (error) {
+  if (error instanceof ApiError) {
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
+  }
+}
+```
 
 
 # Update Payment Order
@@ -520,7 +520,7 @@ const body: PaymentOrderUpdateRequest = {
 };
 
 try {
-  const response = await paymentOrderController.updatePaymentOrder(
+  const response = await paymentOrderApi.updatePaymentOrder(
     id,
     body
   );

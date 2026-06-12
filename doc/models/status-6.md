@@ -1,7 +1,7 @@
 
 # Status 6
 
-The status of the ledger account payout. One of `processing`, `pending`, `posted`, `archiving` or `archived`.
+The status of the invoice.
 
 ## Enumeration
 
@@ -11,9 +11,9 @@ The status of the ledger account payout. One of `processing`, `pending`, `posted
 
 | Name |
 |  --- |
-| `Archived` |
-| `Archiving` |
-| `Pending` |
-| `Posted` |
-| `Processing` |
+| `Draft` |
+| `Paid` |
+| `PaymentPending` |
+| `Unpaid` |
+| `Voided` |
 

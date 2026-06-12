@@ -1,0 +1,42 @@
+/**
+ * Modern Treasury — façade barrel (Tier 2, hand-authored).
+ */
+export { ModernTreasury } from './ModernTreasury.js';
+export type { ModernTreasuryOptions } from './ModernTreasury.js';
+export { Page, paginate } from './pagination.js';
+export type { Body, ElemOf, FacadeRoot } from './resource.js';
+export { AccountCollectionFlows } from './resources/accountCollectionFlows.js';
+export { AccountDetails } from './resources/accountDetails.js';
+export { Connections } from './resources/connections.js';
+export { Counterparties } from './resources/counterparties.js';
+export { Documents } from './resources/documents.js';
+export { Events } from './resources/events.js';
+export { ExpectedPayments } from './resources/expectedPayments.js';
+export { ExternalAccounts } from './resources/externalAccounts.js';
+export { IncomingPaymentDetails } from './resources/incomingPaymentDetails.js';
+export { InternalAccounts } from './resources/internalAccounts.js';
+export { Invoices } from './resources/invoices.js';
+export { LedgerableEvents } from './resources/ledgerableEvents.js';
+export { LedgerAccounts } from './resources/ledgerAccounts.js';
+export { LedgerAccountCategories } from './resources/ledgerAccountCategories.js';
+export { LedgerAccountPayouts } from './resources/ledgerAccountPayouts.js';
+export { LedgerAccountStatements } from './resources/ledgerAccountStatements.js';
+export { Ledgers } from './resources/ledgers.js';
+export { LedgerEntries } from './resources/ledgerEntries.js';
+export { LedgerEventHandlers } from './resources/ledgerEventHandlers.js';
+export { LedgerTransactions } from './resources/ledgerTransactions.js';
+export { LineItems } from './resources/lineItems.js';
+export { PaperItems } from './resources/paperItems.js';
+export { PaymentFlows } from './resources/paymentFlows.js';
+export { PaymentOrders } from './resources/paymentOrders.js';
+export { PaymentReferences } from './resources/paymentReferences.js';
+export { Pings } from './resources/pings.js';
+export { Returns } from './resources/returns.js';
+export { RoutingDetails } from './resources/routingDetails.js';
+export { Transactions } from './resources/transactions.js';
+export { Validations } from './resources/validations.js';
+export { VirtualAccounts } from './resources/virtualAccounts.js';
+export { InvoiceLineItems } from './resources/invoiceLineItems.js';
+export { TransactionLineItems } from './resources/transactionLineItems.js';
+export { Reversals } from './resources/reversals.js';
+export { BalanceReports } from './resources/balanceReports.js';
